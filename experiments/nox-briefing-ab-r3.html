@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX briefing — Round 3 (temporal density)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16);
+} .page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border);
+}
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3);
+}
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em;
+}
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6;
+}
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start;
+} .option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border);
+}
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px;
+}
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); } .option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch;
+}
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55;
+}
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; } .mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); position: relative; overflow: hidden; display: flex; flex-direction: column;
+} .db-head { padding: 18px 22px 12px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline;
+}
+.db-head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase;
+}
+.db-head__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #FCFCFA; margin-top: 3px; font-weight: 500;
+}
+.db-head__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right;
+}
+.db-head__counts strong { color: #FCFCFA; font-weight: 500; }
+.db-head__counts em { color: #FFD866; font-style: normal; }
+.db-head__counts .err { color: #FF6188; } .twin__legend { display: grid; grid-template-columns: 56px 1fr 1fr; border-bottom: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #939293;
+}
+.twin__legend .empty-cell { border-right: 1px solid #4a474b; }
+.twin__legend .col-name { padding: 8px 14px; border-right: 1px solid #4a474b; }
+.twin__legend .col-name:last-child { border-right: 0; }
+.twin__legend .col-name strong { color: #FCFCFA; font-weight: 500; margin-right: 8px; letter-spacing: 0.18em; } /* Shared rail base */
+.rail { display: grid; grid-template-columns: 56px 1fr 1fr; position: relative;
+}
+.rail .hour { border-top: 1px solid #4a474b; padding: 6px 10px 0 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #939293; letter-spacing: 0.06em; text-align: right; border-right: 1px solid #4a474b;
+}
+.rail .hour.is-now { color: #FC9867; font-weight: 500; }
+.rail .hour.past { color: #5b5862; }
+.rail .hour.dist { color: #5b5862; }
+.rail .cell { border-top: 1px solid #4a474b; border-right: 1px solid #4a474b; padding: 6px 14px; font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; color: #FCFCFA; overflow: hidden;
+}
+.rail .cell.sys { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
+.rail .cell:nth-child(3n) { border-right: 0; } /* last column */
+.rail .cell.empty { color: #5b5862; font-style: italic; font-size: 11px; padding-top: 8px;
+}
+.rail .item { display: grid; grid-template-columns: 12px 1fr; gap: 8px; align-items: baseline; padding: 2px 0;
+}
+.rail .item .dot { font-size: 9px; }
+.rail .item .dot.evt { color: #FCFCFA; }
+.rail .item .dot.task { color: #5b5862; }
+.rail .item .dot.read { color: #FC9867; }
+.rail .item .dot.ok { color: #A9DC76; }
+.rail .item .dot.warn { color: #FFD866; }
+.rail .item .dot.err { color: #FF6188; }
+.rail .item strong { font-weight: 500; }
+.rail .item em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; }
+.rail .item code { font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.rail .meta { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #939293; letter-spacing: 0.06em; margin-left: 20px; margin-top: 1px; line-height: 1.45;
+} .now-line { position: absolute; left: 0; right: 0; height: 1px; background: #FC9867; z-index: 4; pointer-events: none;
+}
+.now-line::before { content: "07:42 · NOW"; position: absolute; left: 8px; top: -8px; background: #FC9867; color: #2D2A2E; padding: 1px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+} /* ============================================================ A — FLAT STEP (every hour equal height) ============================================================ */
+.rail.flat .hour,
+.rail.flat .cell { min-height: 64px;
+} /* ============================================================ B — FOCAL STEP (past compresses, near-future expands, far compresses) The pattern: every hour row is a grid contour from the current moment. ============================================================ */
+.rail.focal .row { display: contents;
+}
+.rail.focal .hour,
+.rail.focal .cell { /* height set by row-data */
+}
+.rail.focal .h-past { min-height: 26px; padding-top: 2px; padding-bottom: 2px; }
+.rail.focal .h-past.cell { padding-top: 2px; padding-bottom: 2px; font-size: 11px; color: #939293; }
+.rail.focal .h-now { min-height: 130px; }
+.rail.focal .h-near { min-height: 96px; }
+.rail.focal .h-mid { min-height: 64px; }
+.rail.focal .h-dist { min-height: 38px; padding-top: 4px; padding-bottom: 4px; font-size: 11px; }
+.rail.focal .h-end { min-height: 26px; padding-top: 2px; padding-bottom: 2px; font-size: 11px; color: #939293; }
+.rail.focal .h-near.hour, .rail.focal .h-now.hour { color: #FCFCFA; }
+.rail.focal .h-dist.hour, .rail.focal .h-past.hour, .rail.focal .h-end.hour { color: #5b5862; } /* Optional: a small inflection indicator on the rail */
+.rail.focal .h-now.hour { position: relative; font-weight: 500;
+} /* The notice */
+.notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+}
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); }
+}
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"> <span class="back"><a href="nox-briefing-ab-r2.html">← R2 · two rails chosen</a></span> <span>Champion · A/B · Round 3</span> </div> <h1>Two days, one hour — every hour equal, or zoomed on now?</h1> </div> <div class="note"> Same two-rail structure.<br> Same content.<br> <strong>What changes is row height.</strong> <em>← that's the question.</em> </div>
+</header> <div class="versus"> <!-- ============================================================ A — FLAT STEP
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">Flat step <em>— every hour the same height.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">Predictable grid: the hour-axis is uniform top-to-bottom. <strong>06 is the same size as 09 is the same size as 17.</strong> The empty hours are doing work too — they show the <em>shape</em> of the day, the quiet bits between the busy bits.</p> <p class="option__refuses"><strong>Strength:</strong> scannable as a list; "where in the day are we?" is answered by vertical position alone. <strong>Weakness:</strong> a lot of space spent on hours you're not in yet.</p> <div class="mockup"> <header class="db-head"> <div> <div class="db-head__eye">Briefing · Mon 12 May 2026 · 07:42</div> <div class="db-head__title">Flat step — every hour equal.</div> </div> <div class="db-head__counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </header> <div class="twin__legend"> <div class="empty-cell"></div> <div class="col-name"><strong>my day</strong></div> <div class="col-name"><strong>the system</strong></div> </div> <div class="rail flat"> <div class="hour past">06</div> <div class="cell empty">—</div> <div class="cell sys empty">overnight · 14 svc · 12 ok</div> <div class="hour">07</div> <div class="cell"> <div class="item"><span class="dot read">·</span><span>3 new arxiv-sanity in spatial-ml</span></div> </div> <div class="cell sys" style="position: relative;"> <div class="item"><span class="dot err">●</span><span><strong>backup.cold</strong> · failed <em>· 09:42 last</em></span></div> <div class="meta">timeout 10s · retry 3/3 · acked 06:14</div> <div class="now-line" style="bottom: 12px;"></div> </div> <div class="hour is-now">08</div> <div class="cell empty">free hour · read paper</div> <div class="cell sys empty">all green · P99 ingest 182ms</div> <div class="hour">09</div> <div class="cell"> <div class="item"><span class="dot evt">▸</span><span><strong>standup</strong> <em>· 6 · zoom · 30m</em></span></div> </div> <div class="cell sys"> <div class="item"><span class="dot warn">●</span><span><code>etl.briefing</code> slow · <strong>2.1s</strong></span></div> <div class="meta">09:42 · 4× baseline</div> </div> <div class="hour">10</div> <div class="cell"> <div class="item"><span class="dot evt">▸</span><span><strong>1:1 w/ EM</strong> <em>· 10:30 · in person</em></span></div> </div> <div class="cell sys empty">all green · scheduler tick</div> <div class="hour">12</div> <div class="cell empty">lunch · walk</div> <div class="cell sys empty">edge cache 98.2%</div> <div class="hour">15</div> <div class="cell"> <div class="item"><span class="dot evt">▸</span><span><strong>design review</strong> <em>· 60m</em></span></div> </div> <div class="cell sys empty">ml.calibrate · 0 errors</div> <div class="hour">17</div> <div class="cell"> <div class="item"><span class="dot task">☐</span><span>review incident report <em>· P2</em></span></div> <div class="item"><span class="dot task">☐</span><span>ship v2·1 to staging <em>· P1 · EOD</em></span></div> </div> <div class="cell sys empty">ingest.weather · ok</div> <div class="hour dist">20</div> <div class="cell empty">off-duty unless paged</div> <div class="cell sys empty">retry window opens 22:00</div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">The day has a <em>shape</em>. You can see the quiet block of 12-15, the busy hour at 09, end-of-day at 17. <em>06 = 20 in vertical space.</em></span> </div> </div>
+</section> <!-- ============================================================ B — FOCAL STEP
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Focal step <em>— past compresses, near-future expands.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">The vertical scale is a <strong>fish-eye in time</strong>. Past hours collapse to thin strips (you know they happened, you can scan them). The current hour and the next two or three are full-height. Far-future compresses again to a horizon strip. <em>The briefing zooms on what's coming.</em></p> <p class="option__refuses"><strong>Strength:</strong> the rendering matches the question being asked at 07:42 — "what's next?" <strong>Weakness:</strong> the grid is no longer a clock; lookups by exact time take a beat longer.</p> <div class="mockup"> <header class="db-head"> <div> <div class="db-head__eye">Briefing · Mon 12 May 2026 · 07:42</div> <div class="db-head__title">Focal step — the day, zoomed on now.</div> </div> <div class="db-head__counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </header> <div class="twin__legend"> <div class="empty-cell"></div> <div class="col-name"><strong>my day</strong></div> <div class="col-name"><strong>the system</strong></div> </div> <div class="rail focal"> <div class="hour h-past">06</div> <div class="cell h-past empty">overnight quiet</div> <div class="cell h-past sys empty">14 svc · 12 ok · 1 warn · 1 fail</div> <div class="hour h-now is-now">07</div> <div class="cell h-now"> <div class="item"><span class="dot read">·</span><span><strong>3 new arxiv-sanity</strong> in spatial-ml <em>· queued</em></span></div> <div class="meta">calibration drift in ensembles · 14p · 9 min read</div> <div class="item" style="margin-top:8px;"><span class="dot">▸</span><span>weather window 12–13 · 13° dry</span></div> </div> <div class="cell h-now sys" style="position: relative;"> <div class="item"><span class="dot err">●</span><span><strong>backup.cold</strong> · failed (overnight) <em>· 09:42 last</em></span></div> <div class="meta">timeout 10s to s3.eu-west-1 · retry 3/3 exhausted · acked at 06:14</div> <div class="item" style="margin-top:8px;"><span class="dot ok">●</span><span>14 svc · all P99 nominal · ingest 182 · ml 94 · auth 12</span></div> <div class="now-line" style="bottom: 10px;"></div> </div> <div class="hour h-near">08</div> <div class="cell h-near empty">free hour · read the paper · coffee</div> <div class="cell h-near sys empty">scheduler tick · 0 jobs dispatched</div> <div class="hour h-near">09</div> <div class="cell h-near"> <div class="item"><span class="dot evt">▸</span><span><strong>standup</strong> <em>· 6 ppl · zoom · 09:00 · 30m</em></span></div> <div class="meta">prep: v2·1 ships today; backup incident</div> </div> <div class="cell h-near sys"> <div class="item"><span class="dot warn">●</span><span><code>etl.briefing</code> slow · <strong>2.1s</strong> (4× baseline)</span></div> <div class="meta">09:42 · slow feeds-query · not paging</div> </div> <div class="hour h-near">10</div> <div class="cell h-near"> <div class="item"><span class="dot evt">▸</span><span><strong>1:1 w/ EM</strong> <em>· 10:30 · in person · 45m</em></span></div> <div class="meta">Q3 staffing · v2·1 retro · H2 line</div> </div> <div class="cell h-near sys empty">all green · ingest.weather · 288 runs</div> <div class="hour h-mid">12</div> <div class="cell h-mid empty">lunch · walk · 13° dry window</div> <div class="cell h-mid sys empty">edge cache 98·2% hit rate</div> <div class="hour h-mid">15</div> <div class="cell h-mid"> <div class="item"><span class="dot evt">▸</span><span><strong>design review</strong> · parcel-risk v2·1 <em>· 60m</em></span></div> </div> <div class="cell h-mid sys empty">ml.calibrate.nightly · 0 errors</div> <div class="hour h-dist">17</div> <div class="cell h-dist"> <div class="item"><span class="dot task">☐</span><span>review incident report · P2 · ship v2·1 · P1</span></div> </div> <div class="cell h-dist sys empty">scheduler · jobs queued</div> <div class="hour h-end">20</div> <div class="cell h-end empty">off-duty unless paged</div> <div class="cell h-end sys empty">retry window opens 22:00 · ∎</div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">07 (now) and 08–10 are dominant. 17 is small — it'll grow as the day moves. <em>The fish-eye walks down the page with you.</em></span> </div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-briefing-r3', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-briefing-r3'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

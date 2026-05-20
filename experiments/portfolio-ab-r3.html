@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-mode="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · Portfolio — Round 3 (recency weight)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #efece6; font-family: 'DM Sans', sans-serif; color: #1a1916; margin: 0; padding: 48px 32px 80px; }
+.page-head { max-width: 1480px; margin: 0 auto 48px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; padding-bottom: 16px; border-bottom: 1px solid #d8d5cf; }
+.page-head .eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #6b6760; margin-bottom: 12px; }
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid #d8d5cf; padding-right: 12px; }
+.page-head .eye a { color: #6b6760; text-decoration: none; }
+.page-head .eye a:hover { color: #1a4fd6; }
+.page-head h1 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.015em; }
+.page-head h1 em { font-style: italic; color: #6b6760; font-weight: 400; }
+.page-head .note { font-family: 'DM Mono', monospace; font-size: 11px; color: #6b6760; letter-spacing: 0.06em; text-align: right; line-height: 1.6; max-width: 32ch; }
+.page-head .note strong { color: #1a1916; font-weight: 500; }
+.page-head .note em { color: #1a4fd6; font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.option { display: flex; flex-direction: column; gap: 12px; }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid #d8d5cf; }
+.option__letter { font-family: 'DM Mono', monospace; color: #1a4fd6; font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; letter-spacing: -0.005em; }
+.option__title em { font-style: italic; color: #6b6760; font-weight: 400; }
+.option__pick { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6760; border: 1px solid #9c9890; padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px; }
+.option__pick:hover { color: #1a4fd6; border-color: #1a4fd6; }
+.option__pick.is-picked { background: #1a4fd6; color: #ffffff; border-color: #1a4fd6; }
+.option__sub { font-family: 'Lora', serif; font-size: 14.5px; line-height: 1.55; color: #6b6760; max-width: 56ch; }
+.option__sub strong { color: #1a1916; font-weight: 500; }
+.option__sub em { font-style: italic; color: #1a1916; }
+.option__refuses { font-family: 'DM Mono', monospace; font-size: 11px; color: #9c9890; line-height: 1.55; }
+.option__refuses strong { color: #6b6760; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.mockup { background: #f8f7f4; border: 1px solid #d8d5cf; margin-top: 8px; display: flex; flex-direction: column; min-height: 820px; }
+.notice { border-top: 1px solid #d8d5cf; padding: 10px 22px; background: rgba(26, 79, 214, 0.04); font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.notice .lbl { color: #1a4fd6; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.notice .body { color: #1a1916; line-height: 1.5; }
+.notice .body em { color: #6b6760; font-style: italic; } .brand { display:flex; align-items: baseline; gap: 8px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; color: #1a1916; padding: 22px 32px 16px; border-bottom: 1px solid #d8d5cf; }
+.brand .crest { display:inline-block; width:14px; height:16px; background-color:#1a1916; -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; vertical-align: -2px; margin-right: 4px; }
+.brand .meta { margin-left: auto; font-family: 'DM Mono', monospace; font-weight: 400; font-size: 10.5px; letter-spacing: 0.14em; color: #6b6760; text-transform: uppercase; } .bd { padding: 28px 48px 32px; }
+.preamble { padding-bottom: 22px; border-bottom: 1px solid #d8d5cf; }
+.preamble__eye { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b6760; margin-bottom: 10px; }
+.preamble__title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; color: #1a1916; margin: 0 0 14px; }
+.preamble__title em { font-style: italic; color: #6b6760; font-weight: 400; }
+.preamble__body { font-family: 'Lora', serif; font-size: 16px; line-height: 1.6; color: #1a1916; max-width: 60ch; }
+.preamble__body p { margin: 0 0 10px; }
+.preamble__statement { font-family: 'Fraunces', serif; font-style: italic; font-size: 16.5px; line-height: 1.4; color: #1a1916; border-left: 2px solid #1a4fd6; padding-left: 14px; margin: 12px 0; max-width: 42ch; }
+.preamble__statement strong { color: #1a4fd6; font-style: normal; font-weight: 500; } .ship-year { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.2em; color: #1a4fd6; text-transform: uppercase; margin: 22px 0 4px; padding-bottom: 4px; border-bottom: 1px solid #d8d5cf; } /* === A: flat ship === */
+.ship { display: grid; grid-template-columns: 76px 1fr 110px 18px; gap: 16px; padding: 14px 0; border-bottom: 1px solid #eeecea; align-items: baseline; }
+.ship .when { font-family: 'DM Mono', monospace; font-size: 11px; color: #6b6760; letter-spacing: 0.04em; }
+.ship .title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; color: #1a1916; }
+.ship .title em { font-style: italic; color: #6b6760; font-weight: 400; }
+.ship .summary { font-family: 'Lora', serif; font-size: 13.5px; line-height: 1.5; color: #6b6760; margin-top: 4px; }
+.ship .summary strong { color: #1a1916; font-weight: 500; }
+.ship .tag { font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.12em; text-transform: uppercase; text-align: right; }
+.ship .arrow { color: #9c9890; font-family: 'Fraunces', serif; }
+.ship:hover { background: rgba(26, 79, 214, 0.025); cursor: pointer; }
+.ship:hover .arrow { color: #1a4fd6; } /* === B: tiered ships === */
+.ship-hero { display: grid; grid-template-columns: 76px 1fr 110px 18px; gap: 16px; padding: 22px 0; border-bottom: 1px solid #eeecea; align-items: baseline;
+}
+.ship-hero .when { font-family: 'DM Mono', monospace; font-size: 11px; color: #1a4fd6; letter-spacing: 0.06em; font-weight: 500; }
+.ship-hero .title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; letter-spacing: -0.018em; line-height: 1.1; color: #1a1916; }
+.ship-hero .title em { font-style: italic; color: #6b6760; font-weight: 400; }
+.ship-hero .summary { font-family: 'Lora', serif; font-size: 15.5px; line-height: 1.55; color: #1a1916; margin-top: 10px; max-width: 56ch; }
+.ship-hero .summary strong { font-weight: 500; }
+.ship-hero .results { display: flex; gap: 18px; margin-top: 12px; font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.08em; }
+.ship-hero .results strong { color: #1a4fd6; font-weight: 500; font-size: 14px; display: block; margin-bottom: 2px; font-family: 'Fraunces', serif; letter-spacing: -0.01em; }
+.ship-hero .tag { font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.12em; text-transform: uppercase; text-align: right; }
+.ship-hero .arrow { color: #9c9890; font-family: 'Fraunces', serif; font-size: 20px; }
+.ship-hero:hover { background: rgba(26, 79, 214, 0.025); cursor: pointer; }
+.ship-hero:hover .arrow { color: #1a4fd6; } .ship-mid { display: grid; grid-template-columns: 76px 1fr 110px 18px; gap: 16px; padding: 14px 0; border-bottom: 1px solid #eeecea; align-items: baseline;
+}
+.ship-mid .when { font-family: 'DM Mono', monospace; font-size: 11px; color: #6b6760; letter-spacing: 0.04em; }
+.ship-mid .title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; color: #1a1916; }
+.ship-mid .title em { font-style: italic; color: #6b6760; font-weight: 400; }
+.ship-mid .summary { font-family: 'Lora', serif; font-size: 13.5px; line-height: 1.5; color: #6b6760; margin-top: 4px; }
+.ship-mid .tag { font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.12em; text-transform: uppercase; text-align: right; }
+.ship-mid .arrow { color: #9c9890; font-family: 'Fraunces', serif; }
+.ship-mid:hover { background: rgba(26, 79, 214, 0.025); cursor: pointer; } .ship-small { display: grid; grid-template-columns: 76px 1fr 110px 18px; gap: 16px; padding: 8px 0; border-bottom: 1px solid #eeecea; align-items: baseline;
+}
+.ship-small .when { font-family: 'DM Mono', monospace; font-size: 10.5px; color: #9c9890; letter-spacing: 0.04em; }
+.ship-small .title { font-family: 'Fraunces', serif; font-size: 14.5px; font-weight: 500; letter-spacing: -0.005em; color: #1a1916; line-height: 1.3; }
+.ship-small .title em { font-style: italic; color: #9c9890; font-weight: 400; }
+.ship-small .tag { font-family: 'DM Mono', monospace; font-size: 10px; color: #9c9890; letter-spacing: 0.12em; text-transform: uppercase; text-align: right; }
+.ship-small .arrow { color: #d8d5cf; font-family: 'Fraunces', serif; }
+.ship-small:hover { background: rgba(26, 79, 214, 0.025); cursor: pointer; } .foot { margin-top: 28px; padding-top: 14px; border-top: 1px solid #d8d5cf; font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6b6760; letter-spacing: 0.12em; display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+.foot a { color: #1a4fd6; text-decoration: none; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: 48px; } }
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"><span class="back"><a href="portfolio-ab-r2.html">← R2 · voice-at-top chosen</a></span><span>Champion · Portfolio · A/B · Round 3</span></div> <h1>Manifest — every entry equal, or recent ones bigger?</h1> </div> <div class="note"> Same preamble + clean manifest.<br> <strong>What changes is how recency relates to weight.</strong><br> <em>A: flat. B: fish-eye toward today.</em> </div>
+</header> <div class="versus"> <!-- A: flat -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">Flat <em>— every ship the same size.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">Every entry gets the same row treatment: time, title, one-line summary, tag, arrow. <strong>The arc is the list, not the entries.</strong> A clean, even, scannable inventory.</p> <p class="option__refuses"><strong>Strength:</strong> consistent rhythm; nothing fights for attention; reads as one continuous thing. <strong>Weakness:</strong> the latest, most-relevant work has the same weight as a 2020 archive line.</p> <div class="mockup"> <div class="brand"> <span class="crest"></span>cody.champion <span class="meta">Dublin · open to senior IC · director</span> </div> <article class="bd"> <section class="preamble"> <div class="preamble__eye">— A portfolio, in three paragraphs</div> <h2 class="preamble__title">A decade of decisions, <em>made measurable.</em></h2> <div class="preamble__body"> <p>I lead an AI Decision Science practice in Dublin. I build <strong>production ML systems</strong> for federal, commercial, and applied-research clients.</p> <p class="preamble__statement">Building production ML systems at planetary scale <strong>requires more than engineering.</strong></p> <p>The manifest below is reverse-chronological. <em>Best by email; two-day reply window.</em></p> </div> </section> <div class="ship-year">— 2025</div> <div class="ship"> <span class="when">Jun · live</span> <div> <div class="title">Parcel-level flood-risk scoring <em>— for a federal client</em></div> <div class="summary"><strong>14× speed-up · +3pp recall</strong> · 2·1M parcels daily · P99 50ms.</div> </div> <span class="tag">federal · spatial</span><span class="arrow">→</span> </div> <div class="ship"> <span class="when">Feb · shipped</span> <div><div class="title">Calibration-drift monitor</div><div class="summary">Model-to-data drift on monthly cohorts.</div></div> <span class="tag">ops · ml</span><span class="arrow">→</span> </div> <div class="ship-year">— 2024</div> <div class="ship"> <span class="when">Oct · live</span> <div><div class="title">Real-time triage for emergency dispatch</div><div class="summary">30s median · inbound call to action.</div></div> <span class="tag">commercial · ops</span><span class="arrow">→</span> </div> <div class="ship"> <span class="when">Mar · paper</span> <div><div class="title">Synthetic demographic uplift</div><div class="summary">Applied research; methods preprint.</div></div> <span class="tag">research · fairness</span><span class="arrow">→</span> </div> <div class="ship-year">— 2023</div> <div class="ship"> <span class="when">Sep · live</span> <div><div class="title">Decision intelligence for European energy markets</div><div class="summary">Forecasting + scenarios · commercial trading desk.</div></div> <span class="tag">commercial · forecast</span><span class="arrow">→</span> </div> <div class="ship-year">— 2022 and before</div> <div class="ship"> <span class="when">2022</span> <div><div class="title">Counterfactual evaluation for policy interventions</div><div class="summary">Public sector · Denmark.</div></div> <span class="tag">public · causal</span><span class="arrow">→</span> </div> <div class="ship"> <span class="when">2020</span> <div><div class="title">+ 5 earlier projects <em>— see full CV.</em></div></div> <span class="tag">archive</span><span class="arrow">→</span> </div> <footer class="foot"> <span>C·C · Dublin · MMXXVI · ◆</span> <span><a href="#">CV</a></span> </footer> </article> <div class="notice"><span class="lbl">Notice</span><span class="body">Even rhythm. <em>Tufte-true: the list is the structure; recency is just position.</em></span></div> </div>
+</section> <!-- B: fish-eye toward today -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Fish-eye toward today <em>— recent ships bigger, archive small.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">A <strong>recency-weighted manifest</strong>. The most recent ship gets a hero entry (bigger title, real summary, callout results). Recent ships get mid-sized entries. Older ships compress to one-line strips. <em>The same fish-eye logic from the obsidian Score, applied to the work.</em></p> <p class="option__refuses"><strong>Strength:</strong> a peer/recruiter lands on the work that's still warm; the page has a felt arc forward. <strong>Weakness:</strong> the system enforces "recent = important"; a 2022 paper with lasting impact is one line.</p> <div class="mockup"> <div class="brand"> <span class="crest"></span>cody.champion <span class="meta">Dublin · open to senior IC · director</span> </div> <article class="bd"> <section class="preamble"> <div class="preamble__eye">— A portfolio, in three paragraphs</div> <h2 class="preamble__title">A decade of decisions, <em>made measurable.</em></h2> <div class="preamble__body"> <p>I lead an AI Decision Science practice in Dublin. I build <strong>production ML systems</strong> for federal, commercial, and applied-research clients.</p> <p class="preamble__statement">Building production ML systems at planetary scale <strong>requires more than engineering.</strong></p> <p>The manifest below leans toward the work that's still warm. <em>Best by email; two-day reply window.</em></p> </div> </section> <div class="ship-year">— 2025 · current</div> <div class="ship-hero"> <span class="when">Jun · live</span> <div> <div class="title">Parcel-level flood-risk scoring <em>— for a federal client</em></div> <div class="summary"><strong>Fourteen times the speed of the incumbent</strong> at three percentage points better recall, with calibration that holds a full annual cycle. <em>Nine months, team of four. The most consequential ship of the year.</em></div> <div class="results"> <span><strong>14×</strong>speed-up</span> <span><strong>+3pp</strong>recall · 5% FPR</span> <span><strong>2·1M</strong>parcels/day</span> <span><strong>50ms</strong>P99 · serving</span> </div> </div> <span class="tag">federal · spatial</span><span class="arrow">→</span> </div> <div class="ship-mid"> <span class="when">Feb · shipped</span> <div><div class="title">Calibration-drift monitor</div><div class="summary">Quietly catches the thing nobody else was watching — model-to-data drift on monthly cohorts.</div></div> <span class="tag">ops · ml</span><span class="arrow">→</span> </div> <div class="ship-year">— 2024</div> <div class="ship-mid"> <span class="when">Oct · live</span> <div><div class="title">Real-time triage for emergency dispatch</div><div class="summary">30s median · inbound call to recommended action.</div></div> <span class="tag">commercial · ops</span><span class="arrow">→</span> </div> <div class="ship-mid"> <span class="when">Mar · paper</span> <div><div class="title">Synthetic demographic uplift</div><div class="summary">Applied research · methods preprint.</div></div> <span class="tag">research · fairness</span><span class="arrow">→</span> </div> <div class="ship-year">— 2023 and earlier · archive</div> <div class="ship-small"> <span class="when">2023</span> <div class="title">Decision intelligence for European energy markets</div> <span class="tag">commercial</span><span class="arrow">→</span> </div> <div class="ship-small"> <span class="when">2022</span> <div class="title">Counterfactual evaluation for policy interventions</div> <span class="tag">public · causal</span><span class="arrow">→</span> </div> <div class="ship-small"> <span class="when">2020</span> <div class="title">+ 5 earlier projects <em>— see full CV.</em></div> <span class="tag">archive</span><span class="arrow">→</span> </div> <footer class="foot"> <span>C·C · Dublin · MMXXVI · ◆</span> <span><a href="#">CV</a></span> </footer> </article> <div class="notice"><span class="lbl">Notice</span><span class="body">Recent work pulls the page; the archive compresses to one-liners. <em>Fish-eye, but in time.</em></span></div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('portfolio-r3', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('portfolio-r3'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

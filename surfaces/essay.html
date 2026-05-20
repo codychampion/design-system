@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-mode="field">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On retrieval under pressure — Field journal · entry 11</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Literata:wght@400;500&family=Karla:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { padding: 0; min-height: 100vh; position: relative; }
+/* subtle paper grain */
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(232,230,216,0.025) 1px, transparent 1px); background-size: 3px 3px; z-index: 1; opacity: 0.5;
+} .fid { position: fixed; top: 16px; right: 16px; z-index: 50; background: var(--c-bg-raised); border:1px solid var(--c-border-strong); border-radius:var(--r-sm); padding:var(--s-1); display:flex; font-family:var(--font-mono); font-size:var(--t-xs); letter-spacing:0.12em; text-transform:uppercase; box-shadow:var(--shadow-1); }
+.fid button { background:transparent; color:var(--c-text-subtle); border:0; padding:6px 12px; cursor:pointer; border-radius:2px; font-family: var(--font-mono); }
+.fid button.is-on { background:var(--c-accent); color:var(--c-accent-text); }
+.fid__label { padding:6px 10px 6px 12px; color:var(--c-text-subtle); border-right:1px solid var(--c-border); margin-right:4px; }
+.fid__theme { background: transparent; border: 0; padding: 6px 10px; cursor: pointer; color: var(--c-text-subtle); font-size: 14px; line-height: 1; border-right: 1px solid var(--c-border); margin-right: 4px;
+}
+.fid__theme:hover { color: var(--c-accent); } .wire, .lo, .real { display: none; }
+body[data-fid="wire"] .wire { display: block; }
+body[data-fid="lo"] .lo { display: block; }
+body[data-fid="hi"] .real { display: block; } .page { max-width: 1100px; margin: 0 auto; padding: var(--s-12) var(--s-12) var(--s-24); position: relative; z-index: 2; } .nav-bar { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--s-8); font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.nav-bar a { color: var(--c-text-subtle); text-decoration: none; }
+.nav-bar a:hover { color: var(--c-text); }
+.brand { display:flex; align-items: baseline; gap: var(--s-2); font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: var(--t-md); color: var(--c-text); }
+.brand .crest { display:inline-block; width:16px; height:18px; background-color:var(--c-accent); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; vertical-align: -2px; margin-right: 6px; } .entry-head { border-top: 1px solid var(--c-border-strong); padding-top: var(--s-12);
+}
+.eyebrow { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-text-subtle); display: flex; gap: var(--s-4); flex-wrap: wrap;
+}
+.eyebrow strong { color: var(--c-accent); font-weight: 500; }
+.entry-title { font-family: var(--font-display); font-style: italic; font-size: clamp(44px, 6.5vw, 88px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.0; margin-top: var(--s-6); max-width: 16ch; color: var(--c-text);
+}
+.entry-title span.amp { color: var(--c-accent); font-weight: 400; } .entry-meta { margin-top: var(--s-8); padding-top: var(--s-3); border-top: 1px solid var(--c-border); display: grid; grid-template-columns: repeat(4, auto); gap: var(--s-8); font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle);
+}
+.entry-meta dt { font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2px; }
+.entry-meta dd { margin: 0; color: var(--c-text); font-family: var(--font-body); } .body { margin-top: var(--s-16); display: grid; grid-template-columns: 1fr 220px; gap: var(--s-12);
+}
+.prose { max-width: 60ch; font-family: var(--font-body); font-size: 19px; line-height: 1.7; color: var(--c-text);
+}
+.prose p { margin: 0 0 var(--s-6); }
+.prose p:first-of-type::first-letter { font-family: var(--font-display); font-style: normal; font-size: 4.6em; line-height: 0.85; float: left; padding: 6px 12px 0 0; color: var(--c-accent); font-weight: 500;
+}
+.prose h3 { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: var(--t-lg); letter-spacing: -0.01em; margin: var(--s-12) 0 var(--s-4); color: var(--c-text);
+}
+.prose h3::before { content: "⌬"; color: var(--c-accent); margin-right: var(--s-2); font-style: normal;
+}
+.prose blockquote { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: var(--t-lg); line-height: 1.3; color: var(--c-accent); border-left: 1px solid var(--c-accent); padding-left: var(--s-6); margin: var(--s-6) 0; max-width: 38ch;
+}
+.prose em { color: var(--c-text); font-style: italic; }
+.prose strong { font-weight: 500; }
+.prose a { color: var(--c-accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; } .marginalia { font-family: var(--font-ui); font-size: var(--t-xs); line-height: 1.6; color: var(--c-text-subtle); border-top: 1px solid var(--c-border-strong); padding-top: var(--s-3); position: sticky; top: var(--s-6); align-self: start;
+}
+.marginalia h4 { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); margin: 0 0 var(--s-3); font-weight: 500;
+}
+.marginalia ol { padding-left: var(--s-4); margin: 0 0 var(--s-6); }
+.marginalia li { margin-bottom: var(--s-2); }
+.marginalia em { font-style: italic; color: var(--c-text); } .divider { font-family: var(--font-display); font-size: var(--t-xl); color: var(--c-accent); text-align: center; letter-spacing: 0.4em; margin: var(--s-12) 0; padding: var(--s-4) 0;
+} .sign-off { margin-top: var(--s-12); font-family: var(--font-display); font-style: italic; font-size: var(--t-md); color: var(--c-text);
+}
+.sign-off em { color: var(--c-text-subtle); }
+.sign-off::before { content: "⌬"; color: var(--c-accent); margin-right: var(--s-3); font-style: normal;
+} .foot { margin-top: var(--s-24); padding-top: var(--s-6); border-top: 1px solid var(--c-border-strong); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle);
+}
+.foot a { color: var(--c-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-accent); }
+.foot__crest { width: 40px; height: 46px; background-color: var(--c-accent); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; } .skel { background: var(--c-border); border-radius: 2px; } @media (max-width: 1000px) { .body { grid-template-columns: 1fr; } .marginalia { position: static; }
+}
+@media (max-width: 720px) { .page { padding: var(--s-6) var(--s-4) var(--s-12); } .entry-head { padding-top: var(--s-8); } .entry-title { font-size: clamp(32px, 8.4vw, 48px); line-height: 1.08; max-width: none; margin-top: var(--s-4); } .eyebrow { font-size: 10px; gap: var(--s-2); } .entry-meta { grid-template-columns: 1fr 1fr; gap: var(--s-4); margin-top: var(--s-6); } .fid { top: 6px; right: 6px; font-size: 8.5px; padding: 2px; } .fid button, .fid__label { padding: 3px 6px; }
+}
+@media (max-width: 480px) { .entry-meta { grid-template-columns: 1fr; gap: var(--s-3); } .entry-meta dt { display: inline; margin-right: var(--s-2); } .entry-meta dd { display: inline; }
+}
+@media (max-width: 360px) { .eyebrow span { font-size: 9px; }
+}
+</style>
+</head>
+<body data-fid="hi"> <div class="fid"> <button class="fid__theme" data-theme-toggle>☾</button> <span class="fid__label">Fidelity</span> <button data-fid="wire">Wire</button> <button data-fid="lo">Lo-fi</button> <button data-fid="hi" class="is-on">Hi-fi</button>
+</div> <div class="page"> <!-- WIRE -->
+<div class="wire"> <div class="skel" style="height:12px; width:20%;"></div> <div class="skel" style="height:60px; width:75%; margin-top: var(--s-6);"></div> <div class="skel" style="height:60px; width:55%; margin-top: var(--s-2);"></div> <div style="display:flex; gap: var(--s-6); margin-top: var(--s-4);"> <div class="skel" style="height:10px; width:100px;"></div> <div class="skel" style="height:10px; width:100px;"></div> <div class="skel" style="height:10px; width:100px;"></div> </div> <div style="display:grid; grid-template-columns: 1fr 200px; gap: var(--s-12); margin-top: var(--s-12);"> <div> <div class="skel" style="height: 10px;"></div> <div class="skel" style="height: 10px; width:96%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:92%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:94%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:80%; margin-top:6px;"></div> <br> <div class="skel" style="height: 10px; width:96%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:92%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:60%; margin-top:6px;"></div> </div> <div> <div class="skel" style="height: 10px; width:60%;"></div> <div class="skel" style="height: 10px; width:96%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:80%; margin-top:6px;"></div> <div class="skel" style="height: 10px; width:70%; margin-top:6px;"></div> </div> </div>
+</div> <!-- LO -->
+<div class="lo" style="font-family: var(--font-mono); font-size: var(--t-sm); line-height: 1.6;"> <div style="color: var(--c-text-subtle); margin-bottom: var(--s-4);">field-journal · long-form essay · entry 11</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); font-family: var(--font-mono);">[header]<br>FIELD JOURNAL · ENTRY 11 · 12 MAY 2026 · 9 MIN</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); font-family: var(--font-display); font-style: italic; font-size: var(--t-xl);">On retrieval under pressure.</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); display: grid; grid-template-columns: 1fr 200px; gap: var(--s-8);"> <div style="line-height: 1.6;"> [dropcap] The problem with most knowledge management isn't storage — it's retrieval under pressure. At 7am, with the baby crying and standup in eight minutes, search is the wrong primitive...<br><br> ⌬ Three things that survive contact with morning<br> ⌬ The Bloomberg Terminal model<br> ⌬ What "system" actually means<br> ⌬ — cc </div> <div style="font-size: var(--t-xs); color: var(--c-text-subtle);">[marginalia] footnotes, references, related entries</div> </div>
+</div> <!-- HI -->
+<div class="real"> <div class="nav-bar"> <div class="brand"><span class="crest"></span>cody champion</div> <div> <a href="reading.html">commonplace ›</a> · <a href="portfolio.html">portfolio ›</a> </div>
+</div> <header class="entry-head"> <div class="eyebrow"> <span>Field journal</span> <span><strong>Entry 11</strong></span> <span>12 May 2026</span> <span>9 min · slow read</span> </div> <h1 class="entry-title">On retrieval, <span class="amp">&amp;</span> the morning it failed me.</h1> <dl class="entry-meta"> <div><dt>By</dt><dd><em style="font-style: italic;">cc</em></dd></div> <div><dt>In</dt><dd>operations · personal-tooling</dd></div> <div><dt>Place</dt><dd>Dublin</dd></div> <div><dt>Sound</dt><dd>rain on the skylight</dd></div> </dl>
+</header> <div class="body"> <article class="prose">
+<p>The problem with most knowledge management isn't storage — it's retrieval under pressure. At seven in the morning, with the baby crying and standup in eight minutes, search is the wrong primitive. What you want is a system that already knows what you would have asked, and has surfaced the three things you actually need on the way to where you were already going. Search is for the rare case. The common case wants something else.</p> <p>This essay began as a paragraph in a different essay, about why dashboards keep failing the people who depend on them. I cut it because it deserved its own thinking. The dashboards essay was about the operator at 02:00 — too tired, too many tabs, three monitors and a paging tool. This one is about the operator at 07:42 — coffee not done, calendar not opened, the day not yet decided. <em>Different operator. Same failure mode.</em></p> <blockquote>Search is the rare case. The common case wants something else.</blockquote> <h3>Three things that survive contact with morning.</h3>
+<p>When I cleared the surface of what my own personal system tries to do, I found three things that survive contact with the actual morning: <strong>what's already on fire</strong>, <strong>what I committed to do today before I knew the day would be like this</strong>, and <strong>what I will regret not having read before the first meeting</strong>. Everything else is interruption.</p> <p>That third one is interesting. It is a reading queue, but it is filtered: not "what I might read," but "what I will regret not having read." The difference between the two is the difference between a feed reader and a briefing. Feed readers are libraries; briefings are letters. I want letters in the morning, even if I write them to myself the night before.</p> <h3>The Bloomberg Terminal model.</h3>
+<p>The reference point I keep returning to is Bloomberg, not because it is beautiful (it isn't), but because at 02:00 in a trader's life, density is a feature and not a bug. The terminal does not pretend to know what you need. It puts the world in front of you, sorted by the structures that matter for the job, and trusts that you'll use the keys you already know. It is a system that respects an expert operator. Most personal tools, including mine until recently, have the opposite shape: they assume a novice every morning.</p> <p>This is the principle that shifted the design for me. <em>Build the personal system for the operator you will be, not the one you were before you got good at this.</em> Most of my mornings, my expert self is up before my novice self. The novice self can have the rest of the day.</p> <h3>What "system" actually means.</h3>
+<p>The thing I underestimated, for years, was that the value of a personal system is not the storage at all. It is the <em>shape of the surface that meets you at 07:42</em>. The storage matters only insofar as it can produce the right surface. Which means the surface is the design problem, and the storage is an implementation detail.</p> <p>If you take that seriously, a great many of the popular knowledge tools start to look like they have solved the wrong problem competently. They have built libraries when what was needed was a desk. A library is a place to put things; a desk is a place to do work. The work, on most mornings, is making three decisions before the eighth-minute standup. The library can wait. <em>The library is always waiting.</em></p> <div class="divider">⌬ &nbsp; ⌬ &nbsp; ⌬</div> <p>The morning that started this essay, my system did not surface what was on fire. It surfaced what was new, which is a different and much weaker thing. By the time I found the failure, the standup was three minutes in and I was apologising to the wrong people for the wrong thing. That, more than any taste-level dissatisfaction, is what set me to rewriting it. The taste was for company. The forcing function was operational. The forcing function is, every time, the better forcing function.</p> <p>I am writing the new one in <em>obsidian-mode</em>, by which I mean: terminal-adjacent, monospace-dominant, dense, with everything that survives contact with morning visible without scrolling. It is not pretty, and pretty was never the point. It is correct, in the small set of moments that actually count.</p> <div class="sign-off">— cc · <em style="font-style: italic;">Dublin, on a wet morning</em></div>
+</article> <aside class="marginalia"> <h4>Footnotes</h4> <ol> <li>The dashboards essay referred to here is <em>"on the death of the dashboard"</em>, drafted but unpublished.</li> <li>The Bloomberg reference is to the unmodified Terminal, not the Web client.</li> <li>The "letters not libraries" line owes a debt to Robin Sloan; the original is more elegant.</li> </ol> <h4>Related</h4> <ol> <li><em>Entry 09</em> — on dense interfaces.</li> <li><em>Entry 07</em> — two dogs &amp; a baby.</li> <li><em>Entry 04</em> — tufte at 2am.</li> </ol> <h4>Read with</h4> <ol> <li>Tufte, <em>Beautiful Evidence</em></li> <li>Mod, "Deep notebooks, deep work"</li> <li>Dillard, <em>The Writing Life</em></li> </ol> <h4>Cite this</h4> <p style="font-family: var(--font-mono); font-size: 10px; line-height: 1.5; color: var(--c-text-subtle);"> Champion, C. (2026). On retrieval under pressure. <em>Field Journal</em>, 11. </p>
+</aside> </div> <div class="foot"> <div> <p><a href="reading.html">← commonplace</a> · <a href="#">next entry</a> · <a href="#">subscribe (email)</a></p> <p style="margin-top: var(--s-2);">— cc · field journal · ⌬ · v0·9</p> </div> <div class="foot__crest"></div>
+</div> </div> </div> <script>
+document.querySelectorAll('.fid button[data-fid]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.fid button[data-fid]').forEach(b => b.classList.remove('is-on')); btn.classList.add('is-on'); document.body.dataset.fid = btn.dataset.fid; });
+});
+</script>
+<script src="../assets/theme-toggle.js"></script>
+</body>
+</html>

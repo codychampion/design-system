@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX briefing — Round 2 (how the day reads)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: var(--font-ui); color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16);
+} .page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border);
+}
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3);
+}
+.page-head .eye .back { color: var(--c-text-subtle); margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px;
+}
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em;
+}
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6;
+}
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start;
+} .option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border);
+}
+.option__letter { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em;
+}
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; letter-spacing: -0.005em;
+}
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px;
+}
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); } .option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch;
+}
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55;
+}
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; } .mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); position: relative; overflow: hidden; display: flex; flex-direction: column; font-family: 'IBM Plex Sans', sans-serif;
+} /* Shared head */
+.db-head { padding: 20px 24px 14px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline;
+}
+.db-head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase;
+}
+.db-head__title { font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #FCFCFA; margin-top: 3px; font-weight: 500;
+}
+.db-head__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right;
+}
+.db-head__counts strong { color: #FCFCFA; font-weight: 500; }
+.db-head__counts em { color: #FFD866; font-style: normal; }
+.db-head__counts .err { color: #FF6188; } /* ============================================================ A2 — THE LOG (one stream, even hours) ============================================================ */
+.log { font-family: 'IBM Plex Mono', monospace;
+}
+.log__rail { display: grid; grid-template-columns: 56px 1fr 180px; position: relative;
+}
+.log__hour { border-top: 1px solid #4a474b; padding: 8px 10px 20px 18px; font-size: 11px; color: #939293; letter-spacing: 0.06em; text-align: right; border-right: 1px solid #4a474b; position: relative;
+}
+.log__hour.is-now { color: #FC9867; font-weight: 500; }
+.log__hour .qtr { font-size: 8.5px; color: #5b5862; letter-spacing: 0.04em; margin-top: 4px;
+}
+.log__cell { padding: 8px 16px; border-top: 1px solid #4a474b; border-right: 1px solid #4a474b; font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; color: #FCFCFA; position: relative;
+}
+.log__cell.empty { padding-top: 12px; color: #5b5862; font-style: italic;
+}
+.log__cell .item { display: grid; grid-template-columns: 14px 1fr auto; gap: 8px; align-items: baseline; padding: 3px 0;
+}
+.log__cell .item .dot { color: #A9DC76; font-size: 9px; }
+.log__cell .item .dot.warn { color: #FFD866; }
+.log__cell .item .dot.err { color: #FF6188; }
+.log__cell .item .dot.evt { color: #FCFCFA; }
+.log__cell .item .dot.task { color: #5b5862; }
+.log__cell .item .dot.ping { color: #FC9867; }
+.log__cell .item .ttl strong { font-weight: 500; }
+.log__cell .item .ttl em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; }
+.log__cell .item .meta { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #939293; letter-spacing: 0.04em; } .log__marg { padding: 8px 14px; border-top: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #939293; letter-spacing: 0.04em; line-height: 1.55;
+}
+.log__marg .l { color: #FC9867; }
+.log__marg .v { color: #FCFCFA; } .log__now { position: absolute; left: 0; right: 0; height: 1px; background: #FC9867; z-index: 4; pointer-events: none;
+}
+.log__now::before { content: "07:42 · NOW"; position: absolute; left: 8px; top: -8px; background: #FC9867; color: #2D2A2E; padding: 1px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+} /* ============================================================ B2 — TWO DAYS, ONE HOUR (two parallel rails) ============================================================ */
+.twin { font-family: 'IBM Plex Mono', monospace;
+}
+.twin__legend { display: grid; grid-template-columns: 56px 1fr 1fr; border-bottom: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #939293;
+}
+.twin__legend .empty-cell { border-right: 1px solid #4a474b; }
+.twin__legend .col-name { padding: 8px 16px; border-right: 1px solid #4a474b;
+}
+.twin__legend .col-name:last-child { border-right: 0; }
+.twin__legend .col-name strong { color: #FCFCFA; font-weight: 500; margin-right: 8px; letter-spacing: 0.18em; }
+.twin__legend .col-name em { color: #FC9867; font-style: normal; font-family: 'IBM Plex Mono', monospace; } .twin__rail { display: grid; grid-template-columns: 56px 1fr 1fr; position: relative;
+}
+.twin__hour { border-top: 1px solid #4a474b; padding: 8px 10px 20px 18px; font-size: 11px; color: #939293; letter-spacing: 0.06em; text-align: right; border-right: 1px solid #4a474b;
+}
+.twin__hour.is-now { color: #FC9867; font-weight: 500; }
+.twin__cell { padding: 8px 16px; border-top: 1px solid #4a474b; border-right: 1px solid #4a474b; font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; color: #FCFCFA; min-height: 56px;
+}
+.twin__cell.sys { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
+.twin__cell:last-child { border-right: 0; }
+.twin__cell.empty { padding-top: 12px; color: #5b5862; font-style: italic; font-size: 11px;
+}
+.twin__cell .item { display: grid; grid-template-columns: 12px 1fr; gap: 8px; padding: 3px 0; align-items: baseline;
+}
+.twin__cell .item .dot { color: #FCFCFA; font-size: 9px; }
+.twin__cell .item .dot.task { color: #5b5862; }
+.twin__cell .item .dot.read { color: #FC9867; }
+.twin__cell .item .dot.evt { color: #FCFCFA; }
+.twin__cell.sys .item .dot.ok { color: #A9DC76; }
+.twin__cell.sys .item .dot.warn { color: #FFD866; }
+.twin__cell.sys .item .dot.err { color: #FF6188; }
+.twin__cell .item strong { font-weight: 500; }
+.twin__cell .item em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; }
+.twin__cell.sys .item code { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #FCFCFA;
+}
+.twin__cell .meta { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #939293; letter-spacing: 0.06em; margin-top: 2px; margin-left: 20px; line-height: 1.4;
+} .twin__now { position: absolute; left: 0; right: 0; height: 1px; background: #FC9867; z-index: 4; pointer-events: none;
+}
+.twin__now::before { content: "07:42 · NOW"; position: absolute; left: 8px; top: -8px; background: #FC9867; color: #2D2A2E; padding: 1px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+} /* The "what to notice" callout at the bottom of each mockup */
+.notice { border-top: 1px solid #4a474b; padding: 10px 24px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+}
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); }
+}
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"> <span class="back"><a href="nox-briefing-ab-r1.html">← Round 1 · Daybook chosen</a></span> <span>Champion · A/B · Round 2</span> </div> <h1>The Daybook — does the day read as one stream, or two?</h1> </div> <div class="note"> Same time-spine in both.<br> Same content (events · tasks · alerts · pings · weather).<br> <strong>What hangs from the rail differs.</strong> <em>← that's the question.</em> </div>
+</header> <div class="versus"> <!-- ============================================================ A2 — THE LOG (one stream, mixed)
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">The Log <em>— one stream, everything interleaved.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">Every item — your meetings, your tasks, NOX's pings, the weather forecast, reading queue — flows down one column in chronological order. <strong>The day is the layout, and the day is one thing.</strong> Each row uses a small leading glyph to signal type (calendar event, system ping, task, etc) but otherwise reads as a single log.</p> <p class="option__refuses"><strong>Strength:</strong> simple, scannable, one place to look. <strong>Weakness:</strong> "what was NOX doing while I was in standup?" requires reading carefully.</p> <div class="mockup"> <header class="db-head"> <div> <div class="db-head__eye">Briefing · Mon 12 May 2026 · Dublin</div> <div class="db-head__title">The Log — one stream, by the hour.</div> </div> <div class="db-head__counts"> <strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span> </div> </header> <div class="log"> <div class="log__rail"> <div class="log__hour">06</div> <div class="log__cell empty"> <div class="item"><span class="dot">·</span><span class="ttl">overnight quiet · last sync 04:11</span><span class="meta"></span></div> </div> <div class="log__marg"><span class="l">overnight</span><br><span class="v">14 svc · 12 ok · 1 warn · 1 fail</span></div> <div class="log__hour">07</div> <div class="log__cell"> <div class="item"><span class="dot err">●</span><span class="ttl"><strong>backup.cold</strong> failed · retry exhausted <em>· 09:42 last night</em></span><span class="meta">log →</span></div> <div class="item"><span class="dot ping">▸</span><span class="ttl">weather · light rain · 11° → 14° → 10°</span><span class="meta">met.ie</span></div> <div class="item"><span class="dot read">·</span><span class="ttl">3 new arxiv-sanity in spatial-ml</span><span class="meta">queue →</span></div> </div> <div class="log__marg" style="position: relative;"><span class="l">07:42</span><br><span class="v">briefing ready</span> <div class="log__now" style="bottom: 4px;"></div> </div> <div class="log__hour is-now">08<div class="qtr"></div></div> <div class="log__cell empty"> <div class="item"><span class="dot">·</span><span class="ttl">coffee, read calibration-drift paper</span><span class="meta">9 min</span></div> </div> <div class="log__marg"><span class="l">08:00</span><br><span class="v">free hour</span></div> <div class="log__hour">09</div> <div class="log__cell"> <div class="item"><span class="dot evt">▸</span><span class="ttl"><strong>standup</strong> <em>· 6 ppl · zoom · #eng</em></span><span class="meta">09:00 · 30m</em></span></div> <div class="item"><span class="dot warn">●</span><span class="ttl">etl.briefing slow · 2.1s (4× baseline)</span><span class="meta">09:42</span></div> </div> <div class="log__marg"><span class="l">09:00</span><br><span class="v">prep two notes:</span><br><span class="v">· v2·1 ships today</span><br><span class="v">· backup incident</span></div> <div class="log__hour">10</div> <div class="log__cell"> <div class="item"><span class="dot evt">▸</span><span class="ttl"><strong>1:1 w/ EM</strong> <em>· in person</em></span><span class="meta">10:30 · 45m</span></div> </div> <div class="log__marg"><span class="l">10:30</span><br><span class="v">agenda: Q3 staffing,</span><br><span class="v">parcel-risk retro</span></div> <div class="log__hour">12</div> <div class="log__cell empty"> <div class="item"><span class="dot">·</span><span class="ttl">lunch · walk · weather window 12-13</span><span class="meta">13° dry</span></div> </div> <div class="log__marg"><span class="l">12:00</span><br><span class="v">dry · 13°</span></div> <div class="log__hour">15</div> <div class="log__cell"> <div class="item"><span class="dot evt">▸</span><span class="ttl"><strong>design review</strong> · parcel-risk v2·1 <em>· zoom</em></span><span class="meta">15:00 · 60m</span></div> </div> <div class="log__marg"><span class="l">15:00</span><br><span class="v">bring the figure</span></div> <div class="log__hour">17</div> <div class="log__cell"> <div class="item"><span class="dot task">☐</span><span class="ttl">review backup-failure incident report</span><span class="meta">17:00 · P2</span></div> <div class="item"><span class="dot task">☐</span><span class="ttl">ship parcel-risk v2·1 to staging</span><span class="meta">EOD · P1</span></div> </div> <div class="log__marg"><span class="l">tasks · 2 due</span><br><span class="v">0 overdue</span></div> <div class="log__hour">20</div> <div class="log__cell empty"> <div class="item"><span class="dot">·</span><span class="ttl">off-duty unless paged · end-of-day</span><span class="meta">∎</span></div> </div> <div class="log__marg"><span class="v">14 inbox · low pri</span></div> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">Following the day reads top-to-bottom. <em>What was NOX doing at 09:00 while you were in standup?</em> — you have to find the 09:42 ping a few lines down.</span> </div> </div>
+</section> <!-- ============================================================ B2 — TWO DAYS, ONE HOUR (parallel rails)
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Two days, one hour <em>— parallel rails for me &amp; the system.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">Same hour-axis runs down the spine. Now there are <strong>two synchronised columns</strong>: <em>my day</em> (calendar, tasks, reading) on the left, <em>the system day</em> (services, alerts, jobs, weather) on the right. The eye reads horizontally to see <em>"what was happening while I was happening."</em></p> <p class="option__refuses"><strong>Strength:</strong> sync is the design — meeting at 09:00 sits next to "etl.briefing slow 09:42" at a glance. <strong>Weakness:</strong> denser, asymmetric (one column often heavier than the other).</p> <div class="mockup"> <header class="db-head"> <div> <div class="db-head__eye">Briefing · Mon 12 May 2026 · Dublin</div> <div class="db-head__title">Two days, one hour. Mine, and the system's.</div> </div> <div class="db-head__counts"> <strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span> </div> </header> <div class="twin"> <div class="twin__legend"> <div class="empty-cell"></div> <div class="col-name"><strong>my day</strong> calendar · tasks · reading</div> <div class="col-name"><strong>the system</strong> services · jobs · weather <em>← compare across</em></div> </div> <div class="twin__rail"> <div class="twin__hour">06</div> <div class="twin__cell empty">—</div> <div class="twin__cell sys empty">overnight · sync 04:11 · 14 svc · 12 ok 1 warn 1 fail</div> <div class="twin__hour">07</div> <div class="twin__cell"> <div class="item"><span class="dot read">·</span><span><strong>3 new arxiv-sanity</strong> in spatial-ml <em>· queued</em></span></div> </div> <div class="twin__cell sys" style="position: relative;"> <div class="item"><span class="dot err">●</span><span><strong>backup.cold</strong> · failed (overnight) <em>· 09:42 last</em></span></div> <div class="meta">timeout 10s to s3.eu-west-1 · retry 3/3 exhausted · acked 06:14</div> <div class="item" style="margin-top:6px;"><span class="dot">▸</span><span>weather · light rain · 11° → 14° → 10°</span></div> <div class="twin__now" style="bottom: 6px;"></div> </div> <div class="twin__hour is-now">08</div> <div class="twin__cell empty">free hour · read calibration-drift</div> <div class="twin__cell sys empty">all green · P99 ingest 182ms · ml 94 · auth 12</div> <div class="twin__hour">09</div> <div class="twin__cell"> <div class="item"><span class="dot evt">▸</span><span><strong>standup</strong> <em>· 6 ppl · zoom · 09:00 · 30m</em></span></div> <div class="meta">prep: v2·1 ships today; backup incident</div> </div> <div class="twin__cell sys"> <div class="item"><span class="dot warn">●</span><span><code>etl.briefing</code> slow · <strong>2.1s</strong> (4× baseline)</span></div> <div class="meta">09:42 · likely slow feeds-query · not paging</div> </div> <div class="twin__hour">10</div> <div class="twin__cell"> <div class="item"><span class="dot evt">▸</span><span><strong>1:1 w/ EM</strong> <em>· 10:30 · 45m · in person</em></span></div> <div class="meta">Q3 staffing · v2·1 retro · H2 line</div> </div> <div class="twin__cell sys empty">all green · scheduler tick · 0 jobs dispatched</div> <div class="twin__hour">12</div> <div class="twin__cell empty">lunch · walk</div> <div class="twin__cell sys empty">all green · edge cache 98.2% hit rate</div> <div class="twin__hour">15</div> <div class="twin__cell"> <div class="item"><span class="dot evt">▸</span><span><strong>design review</strong> · parcel-risk v2·1 <em>· zoom · 60m</em></span></div> <div class="meta">bring the recall–FPR figure</div> </div> <div class="twin__cell sys empty">ml.calibrate.nightly · last run 7h ago · 0 errors</div> <div class="twin__hour">17</div> <div class="twin__cell"> <div class="item"><span class="dot task">☐</span><span>review backup-failure incident report <em>· 17:00 · P2</em></span></div> <div class="item"><span class="dot task">☐</span><span>ship parcel-risk v2·1 to staging <em>· EOD · P1</em></span></div> </div> <div class="twin__cell sys empty">scheduler · ingest.weather every 5m · ok</div> <div class="twin__hour">20</div> <div class="twin__cell empty">off-duty unless paged</div> <div class="twin__cell sys empty">cold backup retry window opens 22:00 · ∎</div> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body"><strong>09:00</strong> standup sits next to <strong>09:42</strong> etl.briefing slowing — same horizontal band. <em>The sync is the point.</em></span> </div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-briefing-r2', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-briefing-r2'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

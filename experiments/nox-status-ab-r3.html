@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX status — Round 3 (strip contents)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16); }
+.page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border); }
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3); }
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em; }
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 32ch; }
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; }
+.versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start; }
+.option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border); }
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px; }
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); }
+.option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch; }
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55; }
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); display: flex; flex-direction: column; min-height: 680px; }
+.notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } .m-head { padding: 20px 24px 14px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+.m-head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase; }
+.m-head__title { font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #FCFCFA; margin-top: 3px; font-weight: 500; }
+.m-head__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right; line-height: 1.55; }
+.m-head__counts strong { color: #FCFCFA; font-weight: 500; }
+.m-head__counts em { color: #FFD866; font-style: normal; }
+.m-head__counts .err { color: #FF6188; } .pulses-strip { padding: 14px 24px 18px; border-bottom: 1px solid #4a474b; }
+.pulses-strip__lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; color: #FC9867; text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between; }
+.pulses-strip__lbl span.r { color: #5b5862; }
+.pulse-cell { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; }
+.pulse-cell .name { color: #FCFCFA; display: block; margin-bottom: 4px; letter-spacing: 0.02em; }
+.pulse-cell .name.err { color: #FF6188; }
+.pulse-cell .name.warn { color: #FFD866; }
+.pulse-cell svg { width: 100%; display: block; }
+.pulse-cell .val { color: #FCFCFA; font-size: 10px; letter-spacing: 0.04em; margin-top: 2px; display: block; }
+.pulse-cell .val.warn { color: #FFD866; }
+.pulse-cell .val.err { color: #FF6188; } /* A: equal grid · all 14 */
+.grid-equal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px 14px; }
+.grid-equal .pulse-cell svg { height: 22px; } /* B: hierarchical · 1 hero + 1 sub + chip + 3 minis */
+.grid-tier { display: grid; grid-template-columns: 2fr 1.6fr 0.7fr 0.7fr 0.7fr; gap: 16px; align-items: end; }
+.grid-tier .hero .name { font-size: 13px; }
+.grid-tier .hero svg { height: 64px; }
+.grid-tier .hero .val { font-size: 12px; }
+.grid-tier .hero .ann { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; color: #939293; font-style: italic; margin-top: 6px; line-height: 1.4; }
+.grid-tier .sub svg { height: 44px; }
+.grid-tier .sub .name { font-size: 11.5px; }
+.grid-tier .sub .ann { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #5b5862; margin-top: 4px; }
+.grid-tier .mini svg { height: 22px; }
+.grid-tier .mini .name { font-size: 10px; }
+.grid-tier .chip { padding: 10px 12px; border: 1px solid #4a474b; background: rgba(169, 220, 118, 0.04); border-radius: 3px; height: fit-content;
+}
+.grid-tier .chip .count { color: #A9DC76; font-size: 24px; font-weight: 500; display: block; line-height: 1; }
+.grid-tier .chip .lbl { color: #939293; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; display: block; }
+.grid-tier .chip .browse { color: #5b5862; font-size: 9px; letter-spacing: 0.08em; margin-top: 8px; display: block; text-transform: uppercase; } /* Audit log (compact shared) */
+.audit__live { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; color: #FC9867; text-transform: uppercase; padding: 10px 24px 4px; display: flex; gap: 10px; align-items: baseline; }
+.audit__live::before { content: ""; width: 6px; height: 6px; background: #FC9867; border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+.audit__line { display: grid; grid-template-columns: 76px 56px 130px 1fr; gap: 14px; padding: 4px 24px; align-items: baseline; border-bottom: 1px solid #2a282a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.55; }
+.audit__line.is-recent { background: rgba(252, 152, 103, 0.03); }
+.audit__line .t { color: #939293; font-size: 10.5px; }
+.audit__line .lvl { font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.audit__line .lvl.info { color: #939293; }
+.audit__line .lvl.warn { color: #FFD866; }
+.audit__line .lvl.err { color: #FF6188; }
+.audit__line .lvl.ok { color: #A9DC76; }
+.audit__line .src { color: #FC9867; }
+.audit__line .msg { color: #FCFCFA; }
+.audit__line .msg .hl { color: #FC9867; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); } }
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"><span class="back"><a href="nox-status-ab-r2.html">← R2 · pulses-above chosen</a></span><span>Champion · NOX status · A/B · Round 3</span></div> <h1>The strip — show every service, or only what matters?</h1> </div> <div class="note"> Same log below.<br> <strong>What changes is who gets a pulse-line.</strong><br> <em>A: democratic, all 14. B: opinionated, the troubled few.</em> </div>
+</header> <div class="versus"> <!-- A: democratic strip -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">All vitals <em>— every service, equal-size pulse.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">A <strong>small-multiples grid</strong> of all 14 services, each with an equal-size pulse. Sorted by severity, but every service is on the page. <em>Encyclopedic; nothing is hidden.</em></p> <p class="option__refuses"><strong>Strength:</strong> nothing is filtered out; you see everything. <strong>Weakness:</strong> 12 flat-stable pulses share screen real estate with the one that's flatlined.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · live · Mon 12 May · 07:42</div> <div class="m-head__title">vitals · all services</div> </div> <div class="m-head__counts">14 services<br><em>1</em> warn · <span class="err">1</span> err · <strong>12</strong> ok</div> </header> <div class="pulses-strip"> <div class="pulses-strip__lbl"><span>vital signs · last 1h · P99 ms</span><span class="r">all 14</span></div> <div class="grid-equal"> <div class="pulse-cell"><span class="name err">backup.cold</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 40,11 50,2 55,21 60,2 70,21" fill="none" stroke="#FF6188" stroke-width="1"/></svg><span class="val err">— flat</span></div> <div class="pulse-cell"><span class="name warn">etl.briefing</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,16 20,14 40,10 60,7 80,4 100,3" fill="none" stroke="#FFD866" stroke-width="1"/></svg><span class="val warn">2,118</span></div> <div class="pulse-cell"><span class="name">ingest.geo</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 20,10 40,12 60,10 80,11 100,10" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">182</span></div> <div class="pulse-cell"><span class="name">ml.score.v3</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,12 20,11 40,13 60,11 80,12 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">94</span></div> <div class="pulse-cell"><span class="name">geocode</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,12 30,11 60,13 80,12 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">63</span></div> <div class="pulse-cell"><span class="name">auth.idp</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">12</span></div> <div class="pulse-cell"><span class="name">edge.cache</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">8</span></div> <div class="pulse-cell"><span class="name">ml.calib.nightly</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">42k</span></div> <div class="pulse-cell"><span class="name">ingest.weather</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,12 30,10 60,12 80,11 100,10" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">301</span></div> <div class="pulse-cell"><span class="name">queue.feedback</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">52</span></div> <div class="pulse-cell"><span class="name">scheduler</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">0</span></div> <div class="pulse-cell"><span class="name">notif.svc</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">22</span></div> <div class="pulse-cell"><span class="name">metrics.agg</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">15</span></div> <div class="pulse-cell"><span class="name">audit.sink</span><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg><span class="val">3</span></div> </div> </div> <div class="audit__live">live · streaming</div> <div class="audit__line is-recent"><span class="t">09:42:14</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">timeout <span class="hl">10000ms</span> · retry exhausted</span></div> <div class="audit__line"><span class="t">09:40:58</span><span class="lvl ok">OK</span><span class="src">etl.briefing</span><span class="msg">completed · <span class="hl">2118ms</span></span></div> <div class="audit__line"><span class="t">09:39:01</span><span class="lvl ok">OK</span><span class="src">ml.score.v3</span><span class="msg">batch 4112 · P99 94ms</span></div> <div class="audit__line"><span class="t">07:38:12</span><span class="lvl info">INFO</span><span class="src">ingest.geo</span><span class="msg">flushed <span class="hl">14,201</span> records</span></div> <div class="audit__line"><span class="t">06:14:00</span><span class="lvl info">INFO</span><span class="src">pager.alert</span><span class="msg">backup.cold ack by <span class="hl">cc</span></span></div> <div class="notice"><span class="lbl">Notice</span><span class="body">All 14 in the strip. <em>12 of them are flat-stable, taking the same space as the one that's flatlined.</em></span></div> </div>
+</section> <!-- B: opinionated strip -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Hero + roster <em>— the troubled, big; the calm, tallied.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">The strip is <strong>tiered</strong>. <em>Troubled service</em> gets a hero-sized pulse with notes. <em>Slow service</em> gets a sub-sized pulse. <em>Most-relevant healthy three</em> get small pulses. The remaining nine collapse into a single <strong>"9 nominal"</strong> chip you can expand. <em>The strip has the same opinion as the briefing's tiered staves.</em></p> <p class="option__refuses"><strong>Strength:</strong> screen real estate matches severity; the flatline owns the page. <strong>Weakness:</strong> the rest are one click away, not on screen.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · live · Mon 12 May · 07:42</div> <div class="m-head__title">vitals · what's not nominal</div> </div> <div class="m-head__counts">14 services<br><em>1</em> warn · <span class="err">1</span> err · <strong>12</strong> ok</div> </header> <div class="pulses-strip"> <div class="pulses-strip__lbl"><span>vital signs · last 1h</span><span class="r">2 not-nominal · 12 healthy</span></div> <div class="grid-tier"> <div class="pulse-cell hero"> <span class="name err">backup.cold</span> <svg viewBox="0 0 100 64" preserveAspectRatio="none"><polyline points="0,32 30,32 45,32 50,6 55,58 60,6 65,58 70,32 100,32" fill="none" stroke="#FF6188" stroke-width="1"/></svg> <span class="val err">— flatlined since 09:42</span> <div class="ann">timeout 10s to <code style="color:#FC9867; font-family:'IBM Plex Mono', monospace;">s3.eu-west-1</code> · retry exhausted (3/3) · paged · acked by <strong style="color:#FCFCFA;">cc</strong> 06:14.</div> </div> <div class="pulse-cell sub"> <span class="name warn">etl.briefing</span> <svg viewBox="0 0 100 44" preserveAspectRatio="none"><polyline points="0,32 20,28 40,22 60,14 80,7 100,4" fill="none" stroke="#FFD866" stroke-width="1"/></svg> <span class="val warn">2,118ms · 4× baseline</span> <div class="ann">slow feeds-query · not paging.</div> </div> <div class="pulse-cell mini"> <span class="name">ingest.geo</span> <svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 20,10 40,12 60,10 80,11 100,10" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">182</span> </div> <div class="pulse-cell mini"> <span class="name">ml.score.v3</span> <svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,12 20,11 40,13 60,11 80,12 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">94</span> </div> <div class="chip"> <span class="count">9</span> <span class="lbl">nominal · stable</span> <span class="browse">expand →</span> </div> </div> </div> <div class="audit__live">live · streaming</div> <div class="audit__line is-recent"><span class="t">09:42:14</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">timeout <span class="hl">10000ms</span> · retry exhausted</span></div> <div class="audit__line"><span class="t">09:40:58</span><span class="lvl ok">OK</span><span class="src">etl.briefing</span><span class="msg">completed · <span class="hl">2118ms</span></span></div> <div class="audit__line"><span class="t">09:39:01</span><span class="lvl ok">OK</span><span class="src">ml.score.v3</span><span class="msg">batch 4112 · P99 94ms</span></div> <div class="audit__line"><span class="t">07:38:12</span><span class="lvl info">INFO</span><span class="src">ingest.geo</span><span class="msg">flushed <span class="hl">14,201</span> records</span></div> <div class="audit__line"><span class="t">06:14:00</span><span class="lvl info">INFO</span><span class="src">pager.alert</span><span class="msg">backup.cold ack by <span class="hl">cc</span></span></div> <div class="notice"><span class="lbl">Notice</span><span class="body">backup.cold's flatline gets the page. <em>"9 nominal" is one glance, one chip.</em></span></div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-status-r3', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-status-r3'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

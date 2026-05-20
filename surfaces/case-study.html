@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-mode="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcel-level flood risk — case study · Cody Champion</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Lora:wght@400;500&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { padding: 0; min-height: 100vh; }
+.fid { position: fixed; top: 16px; right: 16px; z-index: 50; background: var(--c-bg-raised); border:1px solid var(--c-border-strong); border-radius:var(--r-sm); padding:var(--s-1); display:flex; font-family:var(--font-mono); font-size:var(--t-xs); letter-spacing:0.12em; text-transform:uppercase; box-shadow:var(--shadow-1); }
+.fid button { background:transparent; color:var(--c-text-subtle); border:0; padding:6px 12px; cursor:pointer; border-radius:2px; font-family: var(--font-mono); }
+.fid button.is-on { background:var(--c-accent); color:var(--c-accent-text); }
+.fid__label { padding:6px 10px 6px 12px; color:var(--c-text-subtle); border-right:1px solid var(--c-border); margin-right:4px; }
+.fid__theme { background: transparent; border: 0; padding: 6px 10px; cursor: pointer; color: var(--c-text-subtle); font-size: 14px; line-height: 1; border-right: 1px solid var(--c-border); margin-right: 4px;
+}
+.fid__theme:hover { color: var(--c-accent); } .wire, .lo, .real { display: none; }
+body[data-fid="wire"] .wire { display: block; }
+body[data-fid="lo"] .lo { display: block; }
+body[data-fid="hi"] .real { display: block; } .page { max-width: 1080px; margin: 0 auto; padding: var(--s-12) var(--s-12) var(--s-24); } .nav-bar { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--s-8); font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.nav-bar a { color: var(--c-text-subtle); }
+.nav-bar a:hover { color: var(--c-text); text-decoration: none; }
+.brand { display:flex; align-items: baseline; gap: var(--s-2); font-family: var(--font-display); font-weight: 600; font-size: var(--t-md); color: var(--c-text); letter-spacing: 0.04em; }
+.brand .crest { display:inline-block; width:14px; height:16px; background-color:var(--c-text); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; vertical-align: -2px; margin-right: 4px; } .hero { border-top: 1px solid var(--c-border-strong); padding-top: var(--s-12); margin-top: var(--s-4);
+}
+.hero__eye { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-text-subtle); display: flex; gap: var(--s-4); }
+.hero__title { font-family: var(--font-display); font-size: clamp(40px, 5.5vw, 72px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.0; margin-top: var(--s-6); max-width: 18ch; }
+.hero__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.hero__deck { font-family: var(--font-body); font-size: var(--t-md); color: var(--c-text-subtle); margin-top: var(--s-6); max-width: 60ch; line-height: 1.5; } .hero__byline { margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--c-border); display: grid; grid-template-columns: repeat(4, auto); gap: var(--s-8); font-family: var(--font-ui); font-size: var(--t-sm);
+}
+.hero__byline dt { font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+.hero__byline dd { margin: 0; } /* Result strip */
+.results { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-6); margin: var(--s-12) 0 var(--s-16); padding: var(--s-8) 0; border-top: 1px solid var(--c-border-strong); border-bottom: 1px solid var(--c-border-strong);
+}
+.result__num { font-family: var(--font-display); font-size: var(--t-3xl); font-weight: 500; letter-spacing: -0.04em; line-height: 0.9; color: var(--c-accent);
+}
+.result__num em { font-style: italic; font-weight: 400; color: var(--c-text-subtle); }
+.result__label { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); margin-top: var(--s-3);
+}
+.result__sub { font-family: var(--font-body); font-size: var(--t-sm); color: var(--c-text-subtle); margin-top: var(--s-2); line-height: 1.5; } /* Body */
+.cs-body { display: grid; grid-template-columns: 180px 1fr 180px; gap: var(--s-12); align-items: start;
+}
+.cs-rail { position: sticky; top: var(--s-6); align-self: start; font-family: var(--font-mono); font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.06em; border-top: 1px solid var(--c-border-strong); padding-top: var(--s-3);
+}
+.cs-rail__num { color: var(--c-accent); }
+.cs-rail__item { padding: 3px 0; display: grid; grid-template-columns: 22px 1fr; gap: var(--s-2); cursor: pointer; color: var(--c-text-subtle); }
+.cs-rail__item:hover { color: var(--c-text); }
+.cs-rail__item.is-on { color: var(--c-text); }
+.cs-rail__item.is-on::before { content: "■"; color: var(--c-accent); } .cs-main { max-width: 60ch; font-family: var(--font-body); font-size: var(--t-base); line-height: 1.6; color: var(--c-text);
+}
+.cs-main h3 { font-family: var(--font-display); font-size: var(--t-lg); font-weight: 500; letter-spacing: -0.015em; margin-top: var(--s-12); margin-bottom: var(--s-3);
+}
+.cs-main h3 .num { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: var(--s-2);
+}
+.cs-main p { margin: 0 0 var(--s-4); }
+.cs-main p strong { font-weight: 600; }
+.cs-main .pull { font-family: var(--font-display); font-size: var(--t-lg); font-style: italic; font-weight: 400; color: var(--c-accent); line-height: 1.3; border-left: 3px solid var(--c-accent); padding: var(--s-2) 0 var(--s-2) var(--s-4); margin: var(--s-6) 0; max-width: 40ch;
+}
+.cs-main figure { margin: var(--s-8) 0;
+}
+.cs-main figure img,
+.cs-main figure .figbox { width: 100%; display: block;
+}
+.cs-main figcaption { font-family: var(--font-body); font-style: italic; font-size: var(--t-sm); color: var(--c-text-subtle); margin-top: var(--s-2); line-height: 1.55;
+}
+.figbox { background: var(--c-bg-subtle); border: 1px solid var(--c-border); aspect-ratio: 16/9; border-radius: var(--r-sm); position: relative; overflow: hidden;
+} /* Chart figure: a quasi-FT line annotated inline */
+.chart-svg { width: 100%; height: auto; } .cs-margin { font-family: var(--font-mono); font-size: var(--t-xs); line-height: 1.6; color: var(--c-text-subtle); border-top: 1px solid var(--c-border-strong); padding-top: var(--s-3);
+}
+.cs-margin strong { color: var(--c-text); font-weight: 500; }
+.cs-margin p { margin-bottom: var(--s-6); } .foot { margin-top: var(--s-24); padding-top: var(--s-6); border-top: 1px solid var(--c-border-strong); display: flex; justify-content: space-between; align-items: end; font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle);
+}
+.foot a { color: var(--c-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-accent); }
+.foot__crest { width: 40px; height: 46px; background-color: var(--c-text); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; } .skel { background: var(--c-border); border-radius: 2px; } @media (max-width: 1000px) { .cs-body { grid-template-columns: 1fr; } .cs-rail { position: static; } .cs-margin { border-top: 1px dashed var(--c-border); }
+}
+@media (max-width: 720px) { .page { padding: var(--s-6) var(--s-4) var(--s-12); } .hero__title { font-size: clamp(28px, 7.4vw, 40px); line-height: 1.05; max-width: none; margin-top: var(--s-4); } .hero__deck { font-size: 15px; line-height: 1.45; margin-top: var(--s-4); } .hero__byline { grid-template-columns: 1fr 1fr; gap: var(--s-4); margin-top: var(--s-6); } .results { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); margin: var(--s-8) 0 var(--s-12); padding: var(--s-6) 0; } .result__num { font-size: 32px; } .result__label { font-size: 10px; } .fid { top: 6px; right: 6px; font-size: 8.5px; padding: 2px; } .fid button, .fid__label { padding: 3px 6px; }
+}
+@media (max-width: 480px) { .hero__byline { grid-template-columns: 1fr; gap: var(--s-3); } .results { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body data-fid="hi"> <div class="fid"> <button class="fid__theme" data-theme-toggle>☾</button> <span class="fid__label">Fidelity</span> <button data-fid="wire">Wire</button> <button data-fid="lo">Lo-fi</button> <button data-fid="hi" class="is-on">Hi-fi</button>
+</div> <div class="page"> <!-- WIRE -->
+<div class="wire"> <div class="skel" style="height:14px; width:25%;"></div> <div class="skel" style="height: 80px; margin-top: var(--s-6);"></div> <div class="skel" style="height: 16px; width: 70%; margin-top: var(--s-4);"></div> <div class="skel" style="height: 16px; width: 55%; margin-top: 8px;"></div> <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-4); margin-top: var(--s-12);"> <div class="skel" style="height:80px;"></div><div class="skel" style="height:80px;"></div><div class="skel" style="height:80px;"></div><div class="skel" style="height:80px;"></div> </div> <div class="skel" style="height: 280px; margin-top: var(--s-12);"></div> <div class="skel" style="height: 14px; width: 40%; margin-top: var(--s-6);"></div> <div class="skel" style="height: 200px; margin-top: var(--s-3);"></div>
+</div> <!-- LO -->
+<div class="lo" style="font-family: var(--font-mono); font-size: var(--t-sm); line-height: 1.6;"> <div style="color: var(--c-text-subtle); margin-bottom: var(--s-4);">case-study · hero / results / 4-section body / methods / references</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">[hero] Parcel-level flood risk for a federal client · 2025 · federal · spatial-ml</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); display:grid; grid-template-columns: repeat(4,1fr); gap: var(--s-4);"> <div>14× speed-up<br>vs incumbent</div> <div>+3pp recall<br>at fixed FPR</div> <div>2.1M parcels<br>scored daily</div> <div>50ms P99<br>per parcel</div> </div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">§ 01 — The brief · what the federal client needed and why the existing system failed</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">§ 02 — Approach · hybrid hydrological + ML, the decision points</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">[figure] before/after recall–FPR curve · annotated</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">§ 03 — What we shipped · 14× speed, recall lift, calibration</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6);">§ 04 — What I would do differently · candid post-mortem</div>
+</div> <!-- HI -->
+<div class="real"> <div class="nav-bar"> <div class="brand"><span class="crest"></span>cody.champion</div> <div><a href="portfolio.html">← Work</a></div>
+</div> <section class="hero"> <div class="hero__eye"> <span>§ 01 · Case study</span> <span>Federal · undisclosed</span> <span>2025</span> <span>9 min read</span> </div> <h1 class="hero__title">Parcel-level flood risk, <em>at federal scale.</em></h1> <p class="hero__deck">A 14× speed-up over the incumbent scoring system, with three percentage points better recall at fixed false-positive rate. Daily inference on 2·1 million parcels, P99 under 50ms. Built across nine months with a team of four.</p> <dl class="hero__byline"> <div><dt>Role</dt><dd>Lead, decision science</dd></div> <div><dt>Team</dt><dd>4 (2 ML · 2 SWE)</dd></div> <div><dt>Stack</dt><dd>PyTorch · DuckDB · Rust</dd></div> <div><dt>Status</dt><dd>Production · 2025·06 →</dd></div> </dl>
+</section> <div class="results"> <div><div class="result__num">14<em>×</em></div><div class="result__label">Speed-up</div><div class="result__sub">vs incumbent CPU pipeline</div></div> <div><div class="result__num">+3<em>pp</em></div><div class="result__label">Recall</div><div class="result__sub">at fixed 5% FPR</div></div> <div><div class="result__num">2·1<em>M</em></div><div class="result__label">Parcels</div><div class="result__sub">scored daily</div></div> <div><div class="result__num">50<em>ms</em></div><div class="result__label">P99 latency</div><div class="result__sub">per parcel · serving</div></div>
+</div> <div class="cs-body"> <aside class="cs-rail"> <div style="margin-bottom: var(--s-2);">CONTENTS</div> <div class="cs-rail__item is-on"><span class="cs-rail__num">01</span><span>The brief</span></div> <div class="cs-rail__item"><span class="cs-rail__num">02</span><span>Approach</span></div> <div class="cs-rail__item"><span class="cs-rail__num">03</span><span>What shipped</span></div> <div class="cs-rail__item"><span class="cs-rail__num">04</span><span>What I'd change</span></div> <div class="cs-rail__item"><span class="cs-rail__num">·</span><span>Methods</span></div> <div class="cs-rail__item"><span class="cs-rail__num">·</span><span>References</span></div>
+</aside> <article class="cs-main"> <h3><span class="num">§ 01 — The brief</span>An incumbent that took 20 hours to score the country.</h3>
+<p>The federal agency we were working with had been operating a flood-risk scoring pipeline built in stages over a decade. By 2024 it was scoring 2·1 million parcels in roughly twenty hours of wall time on a 64-core cluster, with calibration that drifted seasonally and recall that fell off in the very places where a flood-risk score mattered most: low-lying parcels at the coastal margin and along urban watersheds.</p>
+<p>The brief was unambitious in the way most production briefs are: <strong>match incumbent accuracy in a tenth of the time</strong>. We took it as cover to attempt the harder thing — exceed incumbent recall in a tenth of the time — because the operational pain was not the runtime, it was the false negatives.</p> <p class="pull">"The brief was unambitious in the way most production briefs are."</p> <h3><span class="num">§ 02 — Approach</span>A hybrid hydrological-plus-ML pipeline, plus a serious calibration story.</h3>
+<p>We kept the hydrological backbone — flow-accumulation, return-period reasoning, terrain-aware drainage — and replaced the parcel-level scoring head with a gradient-boosted model on engineered features, with a small neural reweighter for the long tail. The bigger surprise was infrastructure: a Rust DuckDB-based feature store, written from scratch, that took the per-parcel feature assembly from 700ms to 4ms.</p>
+<figure> <div class="figbox"> <svg class="chart-svg" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg"> <line x1="60" y1="240" x2="560" y2="240" stroke="var(--c-border)" stroke-width="1"/> <line x1="60" y1="40" x2="60" y2="240" stroke="var(--c-border)" stroke-width="1"/> <text x="60" y="25" font-family="DM Sans" font-size="11" fill="var(--c-text-subtle)">recall</text> <text x="540" y="258" font-family="DM Sans" font-size="11" fill="var(--c-text-subtle)">FPR</text> <!-- incumbent curve --> <path d="M 60 240 Q 180 230 260 170 T 540 70" fill="none" stroke="var(--c-border-strong)" stroke-width="1.5" stroke-dasharray="4 4"/> <text x="320" y="200" font-family="Fraunces" font-size="13" font-style="italic" fill="var(--c-text-subtle)">incumbent</text> <!-- ours --> <path d="M 60 240 Q 180 200 260 110 T 540 50" fill="none" stroke="var(--c-accent)" stroke-width="2"/> <text x="280" y="105" font-family="Fraunces" font-size="13" font-weight="500" fill="var(--c-accent)">ours · +3pp at 5% FPR</text> <!-- vertical 5% mark --> <line x1="240" y1="40" x2="240" y2="240" stroke="var(--c-border)" stroke-width="0.5" stroke-dasharray="2 3"/> <text x="244" y="55" font-family="DM Mono" font-size="10" fill="var(--c-text-subtle)">5% FPR</text> <!-- the gap callout --> <circle cx="240" cy="125" r="3" fill="var(--c-accent)"/> <circle cx="240" cy="155" r="3" fill="var(--c-border-strong)"/> </svg> </div> <figcaption><strong>Fig. 1.</strong> Recall–FPR curves, ours vs incumbent. The operational point — 5% FPR — is where the gap matters most. Source: held-out test set (n = 414,802); evaluation 2025·05.</figcaption>
+</figure> <h3><span class="num">§ 03 — What shipped</span>The numbers and what they cost.</h3>
+<p>The headline numbers — 14× speed, 3pp better recall — went to production in June 2025. The less visible win was calibration: the incumbent's seasonal drift meant operators routinely re-thresholded twice a year. The new system holds a stable threshold for at least one full annual cycle, which removed a recurring source of operator friction.</p>
+<p>What it cost: nine months across four people, an ugly migration period where both systems ran in shadow mode, and an honest amount of evidence-building to convince a risk-averse stakeholder that gradient boosting on top of physics was not a regression to a less defensible model.</p> <h3><span class="num">§ 04 — What I'd change</span>The thing I would not do twice.</h3>
+<p>We over-invested in a custom feature store. DuckDB had grown enough by mid-2025 that the off-the-shelf path was viable; we shipped a beautiful Rust thing that no one else can maintain. Lesson: write the boring system first and only replace it when the profiler says you must.</p>
+<p>The right model choice, second time: probably a small transformer over the spatial neighbourhood, sharing parameters across return periods. The gradient-boosted head is excellent at what it does, but it cannot transfer across geographies the way I'd want for the next deployment.</p> </article> <aside class="cs-margin"> <p><strong>Methods.</strong> Held-out test set, n=414,802 parcels. Spatial-block CV with 50km blocks to prevent leakage. Calibration evaluated by Brier score and reliability diagrams.</p> <p><strong>Data.</strong> National elevation, parcel boundaries, claims history (2002–2024), monthly precipitation, river-gauge feed.</p> <p><strong>Reproducibility.</strong> Inference deterministic given inputs; training reproducible up to GPU non-determinism (~0.05% AUC variance).</p> <p><strong>Sensitive.</strong> Identifiers stripped; outputs aggregated to parcel level for any public-facing surface.</p> <p><strong>References.</strong><br> Beven (2012), <em>Rainfall-runoff modelling</em>.<br> Bates et al. (2020), inundation models, <em>Wat. Resour. Res.</em><br> Niculescu-Mizil &amp; Caruana (2005), calibration.</p>
+</aside> </div> <div class="foot"> <div> <p><a href="portfolio.html">← All work</a> · <a href="#">PDF version</a> · <a href="#">talk slides</a></p> <p style="margin-top: var(--s-2); color: var(--c-text-subtle);">C·C ◆ · 2025·06</p> </div> <div class="foot__crest"></div>
+</div> </div>
+</div> <script>
+document.querySelectorAll('.fid button[data-fid]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.fid button[data-fid]').forEach(b => b.classList.remove('is-on')); btn.classList.add('is-on'); document.body.dataset.fid = btn.dataset.fid; });
+});
+</script>
+<script src="../assets/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX briefing — Round 5 (lens behavior)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16);
+} .page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border);
+}
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3);
+}
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em;
+}
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 28ch;
+}
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start;
+} .option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border);
+}
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px;
+}
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); } .option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch;
+}
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55;
+}
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; } .mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); position: relative; overflow: hidden; display: flex; flex-direction: column;
+} .notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+}
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } /* ============================================================ Score chrome (shared) ============================================================ */
+.score { padding: 22px 28px; display: flex; flex-direction: column; flex: 1;
+}
+.score__head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid #4a474b; margin-bottom: 18px;
+}
+.score__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase;
+}
+.score__title { font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500; color: #FCFCFA; margin-top: 3px;
+}
+.score__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right;
+}
+.score__counts strong { color: #FCFCFA; font-weight: 500; }
+.score__counts em { color: #FFD866; font-style: normal; }
+.score__counts .err { color: #FF6188; } .axis { display: grid; grid-template-columns: 100px 1fr; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; color: #939293;
+}
+.axis .lab { padding: 0 12px 4px 0; text-align: right; }
+.axis .ticks { position: relative; height: 20px; border-bottom: 1px solid #4a474b;
+}
+.axis .ticks span { position: absolute; transform: translateX(-50%); bottom: 2px;
+}
+.axis .ticks span.is-now { color: #FC9867; font-weight: 500; }
+.axis .ticks span.dim { color: #5b5862; }
+.axis .ticks .tick { position: absolute; bottom: 0; width: 1px; height: 4px; background: #4a474b; transform: translateX(-50%);
+}
+.axis .ticks .zone-band { position: absolute; top: 0; bottom: 1px; background: rgba(252, 152, 103, 0.06);
+}
+.axis .ticks .zone-rule { position: absolute; top: 0; bottom: 0; width: 1px; background: #4a474b;
+}
+.axis .ticks .zone-lbl { position: absolute; top: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; color: #5b5862; text-transform: uppercase;
+} .stave-block { position: relative; } .stave { display: grid; grid-template-columns: 100px 1fr; align-items: stretch; position: relative; border-bottom: 1px solid #3a3739;
+}
+.stave:last-of-type { border-bottom: 0; }
+.stave .lab { padding: 12px 12px 12px 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.04em; color: #939293; border-right: 1px solid #4a474b;
+}
+.stave .lab strong { color: #FCFCFA; font-weight: 500; }
+.stave .lab small { display: block; font-size: 9px; color: #5b5862; letter-spacing: 0.12em; margin-top: 2px;
+}
+.stave .track { position: relative; min-height: 54px; padding: 10px 12px;
+} /* NOW line */
+.now-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #FC9867; z-index: 5; pointer-events: none;
+}
+.now-line::before { content: "07:42"; position: absolute; top: -18px; left: -16px; background: #FC9867; color: #2D2A2E; padding: 1px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+} .ev-bar { position: absolute; height: 28px; background: rgba(252, 152, 103, 0.18); border: 1px solid #FC9867; display: flex; align-items: center; padding: 0 10px; font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; color: #FCFCFA; white-space: nowrap; overflow: hidden;
+}
+.ev-bar strong { font-weight: 500; }
+.ev-bar em { font-style: normal; color: #939293; margin-left: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; } .task-mark { position: absolute; display: flex; align-items: center; gap: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; color: #FCFCFA; white-space: nowrap;
+}
+.task-mark::before { content: "☐"; color: #5b5862; font-size: 13px; }
+.task-mark em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 10px; margin-left: 4px; } .read-mark { position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #FC9867; white-space: nowrap; letter-spacing: 0.04em;
+}
+.read-mark::before { content: "▸ "; } .sys-dot { position: absolute; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%);
+}
+.sys-dot .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.3);
+}
+.sys-dot .dot.ok { background: #A9DC76; }
+.sys-dot .dot.warn { background: #FFD866; }
+.sys-dot .dot.err { background: #FF6188; }
+.sys-dot .lbl { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #939293; white-space: nowrap; letter-spacing: 0.04em;
+}
+.sys-dot .lbl strong { color: #FCFCFA; font-weight: 500; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); }
+}
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"> <span class="back"><a href="nox-briefing-ab-r4.html">← R4 · fish-eye chosen</a></span> <span>Champion · A/B · Round 5</span> </div> <h1>The Fish-eye — does the lens follow you, or does the day have fixed zones?</h1> </div> <div class="note"> Same five staves.<br> Same non-uniform axis.<br> <strong>What changes is what the lens is shaped <em>by</em>.</strong> </div>
+</header> <div class="versus"> <!-- ============================================================ A — LENS FOLLOWS NOW
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">Lens follows now <em>— reactive, walks with you.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">The zoomed band is always centred on the current time, ±2 hours. As the morning passes, the lens slides right with you. At 14:00 the lens would be over 12–16; at 17:00 over 15–19. <em>The score is always about "the next thing."</em></p> <p class="option__refuses"><strong>Strength:</strong> the rendering is reactive to NOW; you never look at a score that's biased to a moment that's already past. <strong>Weakness:</strong> harder to develop muscle memory — the same hour sits in a different x-position depending when you look.</p> <div class="mockup"> <div class="score follow"> <div class="score__head"> <div> <div class="score__eye">Briefing · Mon 12 May 2026 · 07:42</div> <div class="score__title">Follow — the lens is centred on now.</div> </div> <div class="score__counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </div> <!-- AXIS — lens centred at 07:42, with ±2h zoom --> <!-- 06,07 fast | 07-10 ZOOM (over 50% width) | 10-15 mid | 15-20 fast --> <div class="axis"> <div class="lab">hour →<small style="display:block; font-size:9px; color:#5b5862; margin-top:2px;">lens follows</small></div> <div class="ticks"> <span class="dim" style="left: 0%;">06</span> <span class="is-now" style="left: 7%;">07</span> <span style="left: 26%;">08</span> <span style="left: 45%;">09</span> <span style="left: 64%;">10</span> <span style="left: 73%;">12</span> <span style="left: 82%;">14</span> <span style="left: 88%;">15</span> <span class="dim" style="left: 93%;">17</span> <span class="dim" style="left: 100%;">20</span> <!-- The lens band --> <div class="zone-band" style="left: 7%; right: calc(100% - 64%);"></div> <span class="tick" style="left: 0%;"></span> <span class="tick" style="left: 7%;"></span> <span class="tick" style="left: 26%;"></span> <span class="tick" style="left: 45%;"></span> <span class="tick" style="left: 64%;"></span> <span class="tick" style="left: 73%;"></span> <span class="tick" style="left: 82%;"></span> <span class="tick" style="left: 88%;"></span> <span class="tick" style="left: 93%;"></span> <span class="tick" style="left: 100%;"></span> <!-- a tiny indicator showing the lens has moved --> <div style="position:absolute; bottom: -2px; left: 7%; width: 57%; height: 2px; background: #FC9867; opacity: 0.4;"></div> </div> </div> <div class="stave-block"> <div class="now-line" style="left: calc(100px + (100% - 100px) * 0.12);"></div> <!-- calendar --> <div class="stave"> <div class="lab"><strong>calendar</strong><small>· 3 events</small></div> <div class="track"> <div class="ev-bar" style="left: 45%; width: 7%;"><strong>standup</strong><em>09:00</em></div> <div class="ev-bar" style="left: 67%; width: 5%;"><strong>1:1 · EM</strong><em>10:30</em></div> <div class="ev-bar" style="left: 88%; width: 4%;"><strong>review</strong><em>15</em></div> </div> </div> <!-- tasks --> <div class="stave"> <div class="lab"><strong>tasks</strong><small>· 2 due</small></div> <div class="track"> <div class="task-mark" style="left: 93%;">review <em>17:00</em></div> <div class="task-mark" style="left: 98%; transform: translateX(-100%);">ship v2·1 <em>EOD</em></div> </div> </div> <!-- systems --> <div class="stave"> <div class="lab"><strong>systems</strong><small>· 14 svc</small></div> <div class="track" style="min-height: 56px;"> <div class="sys-dot" style="left: 2%; top: 20px;"><span class="dot err"></span><span class="lbl"><strong>backup</strong></span></div> <div class="sys-dot" style="left: 30%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 54%; top: 20px;"><span class="dot warn"></span><span class="lbl">etl <strong>2·1s</strong></span></div> <div class="sys-dot" style="left: 70%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 80%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 88%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 96%; top: 20px;"><span class="dot ok"></span></div> </div> </div> <!-- reading --> <div class="stave"> <div class="lab"><strong>reading</strong><small>· 3 queued</small></div> <div class="track" style="min-height: 40px;"> <div class="read-mark" style="left: 12%; top: 12px;">calibration · 9m</div> <div class="read-mark" style="left: 72%; top: 12px;">deep notebooks</div> <div class="read-mark" style="left: 84%; top: 12px;">dashboard</div> </div> </div> <!-- weather --> <div class="stave"> <div class="lab"><strong>weather</strong><small>· 11° → 14° → 10°</small></div> <div class="track" style="min-height: 40px;"> <svg width="100%" height="34" viewBox="0 0 100 34" preserveAspectRatio="none" style="display:block;"> <polyline points="0,22 7,21 26,18 45,15 64,12 73,12 82,15 88,18 93,22 100,28" fill="none" stroke="#FC9867" stroke-width="1" stroke-linejoin="round"/> <line x1="0" y1="29" x2="100" y2="29" stroke="#4a474b" stroke-width="0.3"/> <text x="35" y="6" font-family="IBM Plex Mono" font-size="5" fill="#939293">dry · 12–13</text> </svg> </div> </div> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">Lens band shown with the small orange underline on the axis. <em>At 14:00 the lens slides to 12–16; same five staves, different hours under the magnifier.</em></span> </div> </div>
+</section> <!-- ============================================================ B — DAY ZONES (fixed structure)
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Day-zones <em>— the day has named regions.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">The axis has <strong>named zones</strong> with fixed widths: <em>overnight</em> · <em>morning</em> · <em>midday</em> · <em>afternoon</em> · <em>after-hours</em>. Zone sizes reflect typical importance, not where you are. 09:00 always sits in the same x-position on the page; the score develops muscle memory.</p> <p class="option__refuses"><strong>Strength:</strong> stable mental model. The 1:1 with the EM lives in <em>morning</em>, the design review in <em>afternoon</em>, every day. <strong>Weakness:</strong> the visual emphasis is set by the system's idea of a typical day, not the actual moment.</p> <div class="mockup"> <div class="score zones"> <div class="score__head"> <div> <div class="score__eye">Briefing · Mon 12 May 2026 · 07:42</div> <div class="score__title">Zones — the day has named regions.</div> </div> <div class="score__counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </div> <!-- AXIS — fixed zones: overnight 0-8% · morning 8-44% (07-11) · midday 44-62% (11-14) · afternoon 62-90% (14-18) · after 90-100% (18-20) --> <div class="axis"> <div class="lab">hour →<small style="display:block; font-size:9px; color:#5b5862; margin-top:2px;">5 zones</small></div> <div class="ticks" style="height: 28px;"> <!-- zone bands --> <div class="zone-band" style="left: 0%; width: 8%; background: rgba(74,71,75,0.3);"></div> <div class="zone-band" style="left: 8%; width: 36%;"></div> <div class="zone-band" style="left: 44%; width: 18%; background: rgba(255,255,255,0.02);"></div> <div class="zone-band" style="left: 62%; width: 28%;"></div> <div class="zone-band" style="left: 90%; width: 10%; background: rgba(74,71,75,0.3);"></div> <!-- zone rules --> <div class="zone-rule" style="left: 8%;"></div> <div class="zone-rule" style="left: 44%;"></div> <div class="zone-rule" style="left: 62%;"></div> <div class="zone-rule" style="left: 90%;"></div> <!-- zone labels --> <span class="zone-lbl" style="left: 0%;">OVERNIGHT</span> <span class="zone-lbl" style="left: 9%;">MORNING</span> <span class="zone-lbl" style="left: 45%;">MIDDAY</span> <span class="zone-lbl" style="left: 63%;">AFTERNOON</span> <span class="zone-lbl" style="left: 91%;">AFTER</span> <!-- hour ticks within zones --> <span class="dim" style="left: 4%; bottom: -2px;">06</span> <span class="is-now" style="left: 14%; bottom: -2px;">07</span> <span style="left: 23%; bottom: -2px;">08</span> <span style="left: 32%; bottom: -2px;">09</span> <span style="left: 41%; bottom: -2px;">10</span> <span style="left: 53%; bottom: -2px;">12</span> <span style="left: 76%; bottom: -2px;">15</span> <span style="left: 87%; bottom: -2px;">17</span> <span class="dim" style="left: 96%; bottom: -2px;">20</span> <span class="tick" style="left: 4%;"></span> <span class="tick" style="left: 14%;"></span> <span class="tick" style="left: 23%;"></span> <span class="tick" style="left: 32%;"></span> <span class="tick" style="left: 41%;"></span> <span class="tick" style="left: 53%;"></span> <span class="tick" style="left: 76%;"></span> <span class="tick" style="left: 87%;"></span> <span class="tick" style="left: 96%;"></span> </div> </div> <div class="stave-block"> <!-- NOW line at 07:42, inside morning zone. 07 = 14%, 08 = 23%. 42min of 60 = 0.7. So 14% + 0.7 * (23-14)% = 14% + 6.3% = ~20.3% --> <div class="now-line" style="left: calc(100px + (100% - 100px) * 0.20);"></div> <!-- calendar --> <div class="stave"> <div class="lab"><strong>calendar</strong><small>· 3 events</small></div> <div class="track"> <!-- 09:00 = 32%, 30m wide --> <div class="ev-bar" style="left: 32%; width: 5%;"><strong>standup</strong><em>09:00</em></div> <!-- 10:30 = ~36.5% (midway of 09=32 and 10=41 is 36.5; plus 30 more min = ~41) --> <div class="ev-bar" style="left: 41%; width: 5%;"><strong>1:1 · EM</strong><em>10:30</em></div> <!-- 15:00 = 76% --> <div class="ev-bar" style="left: 76%; width: 5%;"><strong>design review</strong><em>15:00</em></div> </div> </div> <!-- tasks --> <div class="stave"> <div class="lab"><strong>tasks</strong><small>· 2 due</small></div> <div class="track"> <div class="task-mark" style="left: 87%;">review incident <em>17:00</em></div> <div class="task-mark" style="left: 92%; transform: translateX(0);">ship v2·1 <em>EOD</em></div> </div> </div> <!-- systems --> <div class="stave"> <div class="lab"><strong>systems</strong><small>· 14 svc</small></div> <div class="track" style="min-height: 56px;"> <div class="sys-dot" style="left: 2%; top: 20px;"><span class="dot err"></span><span class="lbl"><strong>backup</strong> overnight</span></div> <div class="sys-dot" style="left: 14%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 36%; top: 20px;"><span class="dot warn"></span><span class="lbl">etl <strong>2·1s</strong></span></div> <div class="sys-dot" style="left: 53%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 65%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 76%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 87%; top: 20px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 96%; top: 20px;"><span class="dot ok"></span><span class="lbl">retry · 22:00</span></div> </div> </div> <!-- reading --> <div class="stave"> <div class="lab"><strong>reading</strong><small>· 3 queued</small></div> <div class="track" style="min-height: 40px;"> <div class="read-mark" style="left: 18%; top: 12px;">calibration · 9m</div> <div class="read-mark" style="left: 53%; top: 12px;">deep notebooks · 7m</div> <div class="read-mark" style="left: 66%; top: 12px;">dashboard · 4m</div> </div> </div> <!-- weather --> <div class="stave"> <div class="lab"><strong>weather</strong><small>· 11° → 14° → 10°</small></div> <div class="track" style="min-height: 40px;"> <svg width="100%" height="34" viewBox="0 0 100 34" preserveAspectRatio="none" style="display:block;"> <polyline points="0,22 14,21 23,18 32,15 41,12 53,10 76,15 87,22 100,28" fill="none" stroke="#FC9867" stroke-width="1" stroke-linejoin="round"/> <line x1="0" y1="29" x2="100" y2="29" stroke="#4a474b" stroke-width="0.3"/> <text x="48" y="6" font-family="IBM Plex Mono" font-size="5" fill="#939293">dry · 12–13</text> </svg> </div> </div> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">Zones are labelled at the axis: <strong>overnight · morning · midday · afternoon · after</strong>. <em>09:00 always lives at the same x-position. The day has a shape, not a position.</em></span> </div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-briefing-r5', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-briefing-r5'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-mode="field">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commonplace book — Cody Champion · 2026</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Literata:wght@400;500&family=Karla:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { padding: 0; min-height: 100vh; }
+.fid { position: fixed; top: 16px; right: 16px; z-index: 50; background: var(--c-bg-raised); border:1px solid var(--c-border-strong); border-radius:var(--r-sm); padding:var(--s-1); display:flex; font-family:var(--font-mono); font-size:var(--t-xs); letter-spacing:0.12em; text-transform:uppercase; box-shadow:var(--shadow-1); }
+.fid button { background:transparent; color:var(--c-text-subtle); border:0; padding:6px 12px; cursor:pointer; border-radius:2px; font-family: var(--font-mono); }
+.fid button.is-on { background:var(--c-accent); color:var(--c-accent-text); }
+.fid__label { padding:6px 10px 6px 12px; color:var(--c-text-subtle); border-right:1px solid var(--c-border); margin-right:4px; }
+.fid__theme { background: transparent; border: 0; padding: 6px 10px; cursor: pointer; color: var(--c-text-subtle); font-size: 14px; line-height: 1; border-right: 1px solid var(--c-border); margin-right: 4px;
+}
+.fid__theme:hover { color: var(--c-accent); } .wire, .lo, .real { display: none; }
+body[data-fid="wire"] .wire { display: block; }
+body[data-fid="lo"] .lo { display: block; }
+body[data-fid="hi"] .real { display: block; } .page { max-width: 1080px; margin: 0 auto; padding: var(--s-12) var(--s-12) var(--s-24); } .nav-bar { display:flex; justify-content:space-between; align-items:center; padding-bottom:var(--s-8); font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.nav-bar a { color: var(--c-text-subtle); text-decoration: none; }
+.brand { display:flex; align-items: baseline; gap: var(--s-2); font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: var(--t-md); color: var(--c-text); }
+.brand .crest { display:inline-block; width:16px; height:18px; background-color:var(--c-accent); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; vertical-align: -2px; margin-right: 6px; } .head { border-top: 1px solid var(--c-border-strong); padding-top: var(--s-12);
+}
+.eye { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-text-subtle);
+}
+.h1 { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(48px, 7vw, 88px); letter-spacing: -0.025em; line-height: 0.98; margin-top: var(--s-6); max-width: 14ch;
+}
+.h1 .amp { color: var(--c-accent); font-style: italic; }
+.deck { font-family: var(--font-body); font-size: var(--t-md); color: var(--c-text-subtle); margin-top: var(--s-6); max-width: 60ch; line-height: 1.55;
+}
+.deck em { color: var(--c-text); } /* Year strip + filter */
+.strip { display:flex; gap: var(--s-4); margin-top: var(--s-12); padding-top: var(--s-4); border-top: 1px solid var(--c-border-strong); font-family: var(--font-ui); font-size: var(--t-sm); align-items: center;
+}
+.strip__lab { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); margin-right: var(--s-4);
+}
+.chip { padding: 4px 10px; font-family: var(--font-ui); font-size: var(--t-sm); border: 1px solid var(--c-border); border-radius: var(--r-sm); color: var(--c-text-subtle); cursor: pointer;
+}
+.chip.is-on { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); } /* Stats */
+.year-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-8); padding: var(--s-8) 0; border-bottom: 1px solid var(--c-border); font-family: var(--font-display);
+}
+.year-summary .n { font-size: var(--t-3xl); font-weight: 500; color: var(--c-accent); line-height: 0.95; letter-spacing: -0.03em;
+}
+.year-summary .l { font-family: var(--font-ui); font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.14em; color: var(--c-text-subtle); margin-top: var(--s-2);
+} /* Reading list */
+.list { margin-top: var(--s-8); display: grid; grid-template-columns: 1fr;
+}
+.entry { display: grid; grid-template-columns: 28px 50px 1fr 1fr 80px 20px; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--c-border); align-items: baseline; font-family: var(--font-body); font-size: var(--t-base); line-height: 1.4;
+}
+.entry__check { font-family: var(--font-display); font-size: var(--t-md); color: var(--c-accent);
+}
+.entry__check.unread { color: var(--c-text-subtle); }
+.entry__check.now { color: var(--c-warning); }
+.entry__when { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--c-text-subtle);
+}
+.entry__title { font-family: var(--font-display); font-size: var(--t-md); font-weight: 500; letter-spacing: -0.015em;
+}
+.entry__author { color: var(--c-text); font-family: var(--font-display); font-style: italic; }
+.entry__tag { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-text-subtle); text-align: right;
+}
+.entry__arrow { color: var(--c-text-subtle); }
+.entry:hover { background: var(--c-bg-subtle); cursor: pointer; }
+.entry:hover .entry__arrow { color: var(--c-accent); } /* Excerpt under one entry — currently-reading callout */
+.callout { background: var(--c-bg-subtle); border-left: 2px solid var(--c-accent); padding: var(--s-6) var(--s-8); margin: var(--s-12) 0; font-family: var(--font-display); font-style: italic; font-size: var(--t-lg); line-height: 1.3; color: var(--c-text);
+}
+.callout::before { content: "“"; font-family: var(--font-display); font-size: 64px; line-height: 0; color: var(--c-accent); margin-right: 4px; vertical-align: -28px;
+}
+.callout cite { display: block; margin-top: var(--s-4); font-family: var(--font-ui); font-size: var(--t-xs); font-style: normal; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle);
+} /* Section heads in list */
+.sec { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-text-subtle); margin-top: var(--s-8); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border-strong); display: flex; justify-content: space-between;
+} .foot { margin-top: var(--s-24); padding-top: var(--s-6); border-top: 1px solid var(--c-border-strong); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle);
+}
+.foot a { color: var(--c-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-accent); }
+.foot__crest { width: 40px; height: 46px; background-color: var(--c-accent); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; } .skel { background: var(--c-border); border-radius: 2px; } @media (max-width: 800px) { .entry { grid-template-columns: 22px 1fr 20px; } .entry__when, .entry__author, .entry__tag { display: none; }
+}
+@media (max-width: 720px) { .page { padding: var(--s-6) var(--s-4) var(--s-12); } .head { padding-top: var(--s-8); } .h1 { font-size: clamp(36px, 9vw, 56px); line-height: 1.05; max-width: none; margin-top: var(--s-4); } .deck { font-size: 15px; margin-top: var(--s-4); } .strip { margin-top: var(--s-8); padding-top: var(--s-3); flex-wrap: wrap; gap: var(--s-2); } .year-summary { grid-template-columns: repeat(2, 1fr); gap: var(--s-3); } .fid { top: 6px; right: 6px; font-size: 8.5px; padding: 2px; } .fid button, .fid__label { padding: 3px 6px; }
+}
+@media (max-width: 480px) { .year-summary { grid-template-columns: 1fr 1fr; } .chip { font-size: 11px; padding: 3px 8px; }
+}
+</style>
+</head>
+<body data-fid="hi"> <div class="fid"> <button class="fid__theme" data-theme-toggle>☾</button> <span class="fid__label">Fidelity</span> <button data-fid="wire">Wire</button> <button data-fid="lo">Lo-fi</button> <button data-fid="hi" class="is-on">Hi-fi</button>
+</div> <div class="page"> <!-- WIRE -->
+<div class="wire"> <div class="skel" style="height: 12px; width: 18%;"></div> <div class="skel" style="height: 60px; width: 70%; margin-top: var(--s-6);"></div> <div class="skel" style="height: 14px; width: 50%; margin-top: var(--s-4);"></div> <div style="display: flex; gap: var(--s-3); margin-top: var(--s-8);"> <div class="skel" style="width:60px; height: 28px;"></div> <div class="skel" style="width:60px; height: 28px;"></div> <div class="skel" style="width:60px; height: 28px;"></div> <div class="skel" style="width:60px; height: 28px;"></div> </div> <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); margin-top: var(--s-8);"> <div class="skel" style="height:50px;"></div><div class="skel" style="height:50px;"></div><div class="skel" style="height:50px;"></div><div class="skel" style="height:50px;"></div> </div> <div style="margin-top: var(--s-8);"> <div class="skel" style="height: 28px; margin: 6px 0;"></div> <div class="skel" style="height: 28px; margin: 6px 0;"></div> <div class="skel" style="height: 28px; margin: 6px 0;"></div> <div class="skel" style="height: 28px; margin: 6px 0;"></div> <div class="skel" style="height: 28px; margin: 6px 0;"></div> <div class="skel" style="height: 28px; margin: 6px 0;"></div> </div>
+</div> <!-- LO -->
+<div class="lo" style="font-family: var(--font-mono); font-size: var(--t-sm); line-height: 1.6;"> <div style="color: var(--c-text-subtle); margin-bottom: var(--s-4);">commonplace · 2026 · books / essays / papers</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">[header] Commonplace book · 2026 · reading log</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3);">[filter] all · books · essays · papers · re-reads</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); white-space: pre-line;">
+[year summary]
+14 finished · 3 in progress · 8 queued · 2 abandoned
+</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-3); white-space: pre-line; line-height: 1.55;">
+[entries · grouped by season] SPRING
+✓ Tufte · The Visual Display of Quantitative Information · re-read · 02·26
+✓ Tufte · Beautiful Evidence · 03·26
+✓ Dillard · Pilgrim at Tinker Creek · 04·26
+◐ Mod · selected essays · ongoing
+☐ Sloan · Sourdough · queued WINTER
+✓ Baron-Cohen · The Pattern Seekers · 01·26
+✓ Iliinsky & Steele · Designing Data Visualizations · 12·25
+...
+</div>
+</div> <!-- HI -->
+<div class="real"> <div class="nav-bar"> <div class="brand"><span class="crest"></span>cody champion</div> <div><a href="essay.html">essays ›</a> · <a href="portfolio.html">portfolio ›</a></div>
+</div> <div class="head"> <div class="eye">— Commonplace book · 2026</div> <h1 class="h1">A year of reading, <span class="amp">&amp;</span> what stuck.</h1> <p class="deck">A running ledger of what I read, what I returned to, and what I gave up on. The categories matter less than the marginalia; the marginalia are the point. <em>Updated 12 May 2026.</em></p>
+</div> <div class="strip"> <span class="strip__lab">Filter</span> <span class="chip is-on">All · 27</span> <span class="chip">Books · 14</span> <span class="chip">Essays · 9</span> <span class="chip">Papers · 4</span> <span class="chip">Re-reads · 3</span> <span class="chip">Abandoned · 2</span>
+</div> <div class="year-summary"> <div><div class="n">14</div><div class="l">Finished</div></div> <div><div class="n">3</div><div class="l">In progress</div></div> <div><div class="n">8</div><div class="l">Queued</div></div> <div><div class="n">2</div><div class="l">Set down</div></div>
+</div> <div class="callout"> Dense information, well organised, respects the reader's intelligence. Sparse information, poorly organised, wastes it. <cite>— from Tufte, paraphrased; the line I keep coming back to.</cite>
+</div> <div class="sec"><span>§ Spring 2026</span><span>Mar — May</span></div>
+<div class="list"> <div class="entry"> <span class="entry__check">◐</span> <span class="entry__when">05·12</span> <span class="entry__title">Beautiful Evidence</span> <span class="entry__author">Edward Tufte</span> <span class="entry__tag">re-read</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">04·28</span> <span class="entry__title">Pilgrim at Tinker Creek</span> <span class="entry__author">Annie Dillard</span> <span class="entry__tag">essays</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">04·11</span> <span class="entry__title">Mr Penumbra's 24-Hour Bookstore</span> <span class="entry__author">Robin Sloan</span> <span class="entry__tag">novel</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">03·22</span> <span class="entry__title">The Visual Display of Quantitative Information</span> <span class="entry__author">Edward Tufte</span> <span class="entry__tag">re-read · ref</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check now">◐</span> <span class="entry__when">now</span> <span class="entry__title">Selected essays</span> <span class="entry__author">Craig Mod</span> <span class="entry__tag">essays</span> <span class="entry__arrow">→</span> </div>
+</div> <div class="sec"><span>§ Winter 2026</span><span>Dec — Feb</span></div>
+<div class="list"> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">02·14</span> <span class="entry__title">The Pattern Seekers</span> <span class="entry__author">Simon Baron-Cohen</span> <span class="entry__tag">cognition</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">01·30</span> <span class="entry__title">Designing Data Visualizations</span> <span class="entry__author">N. Iliinsky &amp; J. Steele</span> <span class="entry__tag">ref</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">×</span> <span class="entry__when">01·12</span> <span class="entry__title">Subliminal: How Your Unconscious Mind Rules Your Behaviour</span> <span class="entry__author">Leonard Mlodinow</span> <span class="entry__tag">set down · p.62</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check">✓</span> <span class="entry__when">12·30</span> <span class="entry__title">The Writing Life</span> <span class="entry__author">Annie Dillard</span> <span class="entry__tag">essays · slim</span> <span class="entry__arrow">→</span> </div>
+</div> <div class="sec"><span>§ Queued</span><span>To start</span></div>
+<div class="list"> <div class="entry"> <span class="entry__check unread">☐</span> <span class="entry__when">queue</span> <span class="entry__title">Sourdough</span> <span class="entry__author">Robin Sloan</span> <span class="entry__tag">novel</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check unread">☐</span> <span class="entry__when">queue</span> <span class="entry__title">Envisioning Information</span> <span class="entry__author">Edward Tufte</span> <span class="entry__tag">ref · re-read</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check unref">☐</span> <span class="entry__when">queue</span> <span class="entry__title">Mountains of the Mind</span> <span class="entry__author">Robert Macfarlane</span> <span class="entry__tag">essays</span> <span class="entry__arrow">→</span> </div> <div class="entry"> <span class="entry__check unread">☐</span> <span class="entry__when">queue</span> <span class="entry__title">Atlas of AI</span> <span class="entry__author">Kate Crawford</span> <span class="entry__tag">ethics</span> <span class="entry__arrow">→</span> </div>
+</div> <div class="foot"> <div> <p><a href="essay.html">← field journal</a> · <a href="#">subscribe (email)</a> · <a href="#">RSS</a></p> <p style="margin-top: var(--s-2);">— cc · commonplace · ⌬ · 2026</p> </div> <div class="foot__crest"></div>
+</div> </div> </div> <script>
+document.querySelectorAll('.fid button[data-fid]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.fid button[data-fid]').forEach(b => b.classList.remove('is-on')); btn.classList.add('is-on'); document.body.dataset.fid = btn.dataset.fid; });
+});
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { document.querySelectorAll('.chip').forEach(x => x.classList.remove('is-on')); c.classList.add('is-on');
+}));
+</script>
+<script src="../assets/theme-toggle.js"></script>
+</body>
+</html>
