@@ -1,42 +1,73 @@
-# Champion design system
+# Champion Design System
 
-A personal design system in three voices. Built for one user — me — but documented in enough detail that anyone (including any AI agent) can use it to build surfaces that fit.
+![Status](https://img.shields.io/badge/status-active-16a34a)
+![Design System](https://img.shields.io/badge/design%20system-personal-111827)
+![CSS](https://img.shields.io/badge/CSS-tokenized-264de4)
+![HTML](https://img.shields.io/badge/HTML-surfaces-e34f26)
+![AI Agents](https://img.shields.io/badge/AI%20agents-ready-7c3aed)
 
-## What's here
+A personal design system for building surfaces that feel intentional, opinionated, and recognizably mine.
 
-| Path | What it is |
+This repo is part visual language, part operating manual, part taste archive. It defines tokens, modes, surfaces, anti-patterns, and handoff instructions so both humans and AI agents can build pages, dashboards, briefs, case studies, and portfolio artifacts without drifting into generic SaaS gray.
+
+## Why this exists
+
+Most personal sites and AI-generated interfaces collapse toward the same defaults: glass cards, vague gradients, ungrounded spacing, and interchangeable typography. This system is a refusal of that drift.
+
+The goal is to make design choices portable. Instead of relying on memory or vibes, the system captures the rules: what a surface should feel like, which tokens to use, when to use each mode, what to avoid, and how to test whether the result belongs.
+
+## The three voices
+
+| Mode | Use when | Physical reference | Energy |
+|---|---|---|---|
+| `signal` | Portfolio, external presence, formal deliverables | A Stripe Press book on a clean desk | precise, credible, editorial |
+| `obsidian` | Dashboards, ops tooling, personal command surfaces | A Bloomberg Terminal at 2am | dense, alert, operational |
+| `field` | Long-form writing, notes, reflective artifacts | A naturalist's field journal on a workbench | tactile, warm, archival |
+
+Each mode has a light/dark sibling: `signal` ↔ `signal-dark`, `obsidian` ↔ `obsidian-light`, and `field` ↔ `field-light`. Surfaces can toggle theme directly or accept `?theme=light|dark`.
+
+## Start here
+
+| Path | Why it matters |
 |---|---|
-| [`index.html`](index.html) | **Start here.** The system, set as the interior of a printed volume — eight chapters, three plates, an appendix, a colophon. |
-| [`tokens.css`](tokens.css) | Source of truth for all visual tokens. Mode-scoped. |
-| [`uploads/files/design.md`](uploads/files/design.md) | The full spec, v0.9. Eight layers: philosophy, tokens, surface variants, interoperability, uniqueness mandate, anti-patterns, surface patterns, mobile honesty. |
-| [`uploads/files/design-brief.md`](uploads/files/design-brief.md) | Executive summary handoff brief for AI agents. Read Section 9 (Uniqueness Mandate). |
-| [`cody-prefs.md`](cody-prefs.md) | Running log of design picks made across A/B iterations. The "why" behind the rules. |
-| [`surfaces/`](surfaces/) | Canonical surfaces — portfolio, case study, field journal, commonplace book, NOX briefing & status. |
-| [`surfaces/gallery.html`](surfaces/gallery.html) | All three modes, light + dark, desktop + mobile, side by side. |
-| [`experiments/`](experiments/) | A/B lab — every round of every decision is preserved as its own file. |
-| [`assets/`](assets/) | The crest (recolorable PNG mask), shared theme-toggle script. |
+| [`index.html`](index.html) | The canonical entry point: the system presented as the interior of a printed volume. |
+| [`tokens.css`](tokens.css) | Source of truth for visual tokens, scoped by mode. |
+| [`uploads/files/design.md`](uploads/files/design.md) | Full design spec: philosophy, tokens, variants, uniqueness, anti-patterns, surface patterns, mobile rules. |
+| [`uploads/files/design-brief.md`](uploads/files/design-brief.md) | Short handoff brief for AI agents. Start here when generating a new surface. |
+| [`surfaces/gallery.html`](surfaces/gallery.html) | All three modes across light/dark and desktop/mobile contexts. |
+| [`surfaces/`](surfaces/) | Canonical surfaces: portfolio, case study, field journal, commonplace book, NOX briefing, and status views. |
+| [`experiments/`](experiments/) | A/B lab preserving each design iteration. |
+| [`cody-prefs.md`](cody-prefs.md) | Running log of taste decisions and the reasoning behind them. |
 
-## The three modes
+## Design principles
 
-| Mode | Use when… | Physical reference |
-|---|---|---|
-| `signal` | Portfolio, external presence, formal deliverables | A Stripe Press book on a clean desk |
-| `obsidian` | Dashboards, ops tooling, personal artifacts | A Bloomberg Terminal at 2am |
-| `field` | Long-form writing, personal brand | A naturalist's field journal on a workbench |
+1. **No generic polish.** A page can be clean without becoming anonymous.
+2. **Tokens over improvisation.** If a choice matters, it belongs in the system.
+3. **Surfaces have jobs.** A dashboard, case study, and field note should not share the same rhythm.
+4. **AI agents need constraints.** Good generated interfaces come from strong boundaries, not vague prompts.
+5. **Mobile honesty.** Small screens are not miniature desktops; they need their own rhythm.
 
-Each mode pairs with a sibling theme: `signal` (light) ↔ `signal-dark`, `obsidian` (dark) ↔ `obsidian-light`, `field` (dark) ↔ `field-light`. Toggle via the ☼/☾ button on every surface, or pass `?theme=light|dark` as a query param.
+## How to use this as an AI agent
 
-## How to use this if you're an AI agent
+1. Read [`uploads/files/design-brief.md`](uploads/files/design-brief.md) first.
+2. Read the uniqueness mandate before generating anything.
+3. Choose a mode based on the surface purpose. Default to `signal` for public-facing work.
+4. Use tokens from [`tokens.css`](tokens.css). Do not invent parallel palettes, spacing scales, or component styles.
+5. Run the smell test: if the result could belong to any startup, it is not done.
 
-1. Read [`design-brief.md`](uploads/files/design-brief.md) in full. Section 9 (Uniqueness Mandate) is mandatory before generating anything.
-2. Read [`design.md`](uploads/files/design.md) Layer 5 (Uniqueness), Layer 7 (Surface Patterns), Layer 8 (Mobile Honesty).
-3. Pick a mode from Layer 3. Default to `signal` if unsure.
-4. Don't invent tokens — use the ones in [`tokens.css`](tokens.css).
-5. Run the smell tests (§5.3 design, §12.5 mobile) before delivering.
+## How to use this as a human
 
-## How to use this if you're me
+Start with the gallery, pick the closest canonical surface, then modify through experiments rather than editing the final surface directly. Preserve alternate rounds when the choice is meaningful. Log final decisions in [`cody-prefs.md`](cody-prefs.md) so the system keeps learning.
 
-Add a new round to an existing surface as `experiments/<surface>-ab-r<n>.html`. Log the pick to [`cody-prefs.md`](cody-prefs.md). Once a surface is settled, rebuild its canonical form in [`surfaces/`](surfaces/).
+Suggested workflow:
+
+```text
+choose surface → create experiment → compare variants → log decision → update canonical surface
+```
+
+## What this is not
+
+This is not a general-purpose component library. It is not meant to be neutral, endlessly reusable, or brand-agnostic. It is a personal design language with enough structure to be reused and enough opinion to stay recognizable.
 
 ## License
 
