@@ -1,0 +1,271 @@
+/* ============================================================
+   tokens.css — Champion Design System
+   Source of truth: design.md v0.9 + design-brief.md + cody-prefs.md
+   Spec page chrome runs in `signal` mode (external-facing).
+   Per-mode scopes apply when [data-mode="…"] is present.
+   ============================================================ */
+
+:root {
+  /* ---- Type scale (base 16, 1.25 Major Third) ---- */
+  --t-xs: 10px;
+  --t-sm: 12px;
+  --t-base: 16px;
+  --t-md: 20px;
+  --t-lg: 25px;
+  --t-xl: 31px;
+  --t-2xl: 39px;
+  --t-3xl: 49px;
+  --t-4xl: 64px;
+
+  /* ---- Spacing (4px base) ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-24: 96px;
+
+  /* ---- Radius (low bias) ---- */
+  --r-sm: 3px;
+  --r-md: 6px;
+  --r-lg: 12px;
+  --r-full: 9999px;
+
+  /* ---- Motion ---- */
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 200ms;
+  --dur-comp: 350ms;
+  --dur-page: 600ms;
+
+  /* ---- Elevation ---- */
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-3: 0 16px 48px rgba(0, 0, 0, 0.24);
+
+  /* ---- Container ---- */
+  --container: 1280px;
+  --readable: 68ch;
+}
+
+/* ============================================================
+   SIGNAL — default for the spec page itself
+   ============================================================ */
+:root,
+[data-mode="signal"] {
+  --c-bg:            #f8f7f4;
+  --c-bg-subtle:     #eeecea;
+  --c-bg-raised:     #ffffff;
+  --c-border:        #d8d5cf;
+  --c-border-strong: #9c9890;
+  --c-text:          #1a1916;
+  --c-text-subtle:   #6b6760;
+  --c-text-disabled: #b8b4ae;
+  --c-accent:        #1a4fd6;
+  --c-accent-subtle: #eef2fc;
+  --c-accent-text:   #ffffff;
+  --c-success:       #1a7f4b;
+  --c-warning:       #a15f00;
+  --c-danger:        #c8342e;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Lora", Georgia, serif;
+  --font-ui:      "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-mono:    "DM Mono", ui-monospace, "SF Mono", monospace;
+
+  --lh-body: 1.55;
+  --lh-display: 1.05;
+  --symbol: "◆";
+}
+
+/* ============================================================
+   OBSIDIAN — Monokai Dusk
+   ============================================================ */
+[data-mode="obsidian"] {
+  --c-bg:            #2D2A2E;
+  --c-bg-subtle:     #221F22;
+  --c-bg-raised:     #3a3739;
+  --c-border:        #4a474b;
+  --c-border-strong: #6e6b70;
+  --c-text:          #FCFCFA;
+  --c-text-subtle:   #939293;
+  --c-text-disabled: #5b5862;
+  --c-accent:        #FC9867;
+  --c-accent-subtle: #3d2f24;
+  --c-accent-text:   #2D2A2E;
+  --c-success:       #A9DC76;
+  --c-warning:       #FFD866;
+  --c-danger:        #FF6188;
+
+  --font-display: "IBM Plex Mono", ui-monospace, monospace;
+  --font-body:    "IBM Plex Sans", system-ui, sans-serif;
+  --font-ui:      "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --lh-body: 1.4;
+  --lh-display: 1.15;
+  --symbol: "∎";
+}
+
+/* ============================================================
+   FIELD — naturalist's journal
+   ============================================================ */
+[data-mode="field"] {
+  --c-bg:            #1a1a14;
+  --c-bg-subtle:     #242418;
+  --c-bg-raised:     #2e2e22;
+  --c-border:        #3c3c2e;
+  --c-border-strong: #6a6a52;
+  --c-text:          #e8e6d8;
+  --c-text-subtle:   #9c9a82;
+  --c-text-disabled: #505040;
+  --c-accent:        #c8a84b;
+  --c-accent-subtle: #2e2814;
+  --c-accent-text:   #1a1a14;
+  --c-success:       #7ab87a;
+  --c-warning:       #d4844a;
+  --c-danger:        #c85a5a;
+
+  --font-display: "Newsreader", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body:    "Literata", "Palatino Linotype", serif;
+  --font-ui:      "Karla", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --lh-body: 1.65;
+  --lh-display: 1.1;
+  --symbol: "⌬";
+}
+
+/* ============================================================
+   THEME SIBLINGS — flipped palette per mode.
+   Each mode has a "natural" theme (signal=light, obsidian=dark,
+   field=dark). Setting [data-theme] to the opposite swaps the
+   colour role values; type stacks and structural tokens stay.
+   ============================================================ */
+
+/* signal — dark sibling: warm near-black ground, brightened blue */
+[data-mode="signal"][data-theme="dark"] {
+  --c-bg:            #1a1916;
+  --c-bg-subtle:     #232220;
+  --c-bg-raised:     #2a2825;
+  --c-border:        #3a3835;
+  --c-border-strong: #5a5754;
+  --c-text:          #f0eee9;
+  --c-text-subtle:   #a89e8e;
+  --c-text-disabled: #5a5754;
+  --c-accent:        #5d8fff;
+  --c-accent-subtle: #1f2845;
+  --c-accent-text:   #1a1916;
+  --c-success:       #5dc287;
+  --c-warning:       #d59f4a;
+  --c-danger:        #e85f5f;
+}
+
+/* obsidian — light sibling: bone ground, orange ink */
+[data-mode="obsidian"][data-theme="light"] {
+  --c-bg:            #f5f1ea;
+  --c-bg-subtle:     #ece7dd;
+  --c-bg-raised:     #ffffff;
+  --c-border:        #cfcabf;
+  --c-border-strong: #9c9890;
+  --c-text:          #2D2A2E;
+  --c-text-subtle:   #6e6b70;
+  --c-text-disabled: #b8b4ae;
+  --c-accent:        #d96b3a;
+  --c-accent-subtle: #fce8d8;
+  --c-accent-text:   #f5f1ea;
+  --c-success:       #1a7f4b;
+  --c-warning:       #a15f00;
+  --c-danger:        #c8342e;
+}
+
+/* field — light sibling: cream paper, ink gold */
+[data-mode="field"][data-theme="light"] {
+  --c-bg:            #f3eed8;
+  --c-bg-subtle:     #ebe5cd;
+  --c-bg-raised:     #f9f6e6;
+  --c-border:        #d8d2b8;
+  --c-border-strong: #a89e7a;
+  --c-text:          #1a1a14;
+  --c-text-subtle:   #5a5840;
+  --c-text-disabled: #a89e7a;
+  --c-accent:        #8a6f1f;
+  --c-accent-subtle: #f0e8c8;
+  --c-accent-text:   #f3eed8;
+  --c-success:       #4a7a48;
+  --c-warning:       #946028;
+  --c-danger:        #934040;
+}
+
+/* ============================================================
+   Resets and base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: var(--lh-body);
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: var(--lh-display);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; max-width: var(--readable); }
+a { color: var(--c-accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+code, kbd, samp { font-family: var(--font-mono); font-size: 0.92em; }
+hr { border: 0; border-top: 1px solid var(--c-border); margin: var(--s-12) 0; }
+
+/* Crest as recolorable mask */
+.crest {
+  display: inline-block;
+  background-color: var(--c-text);
+  -webkit-mask: url("assets/crest_white.png") center/contain no-repeat;
+          mask: url("assets/crest_white.png") center/contain no-repeat;
+  width: 24px;
+  height: 28px;
+}
+.crest--accent { background-color: var(--c-accent); }
+
+/* Mode chip — used to mark sections */
+.mode-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-subtle);
+}
+.mode-chip::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--c-accent);
+  display: inline-block;
+}
+
+/* Selection */
+::selection { background: var(--c-accent); color: var(--c-accent-text); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
