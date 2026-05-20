@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX status — Round 1 (structural premise)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16); }
+.page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border); }
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em; }
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 30ch; }
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start; }
+.option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border); }
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px; }
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); }
+.option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch; }
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55; }
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); display: flex; flex-direction: column; min-height: 760px; }
+.notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } /* shared head */
+.m-head { padding: 20px 24px 14px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+.m-head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase; }
+.m-head__title { font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #FCFCFA; margin-top: 3px; font-weight: 500; }
+.m-head__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right; line-height: 1.55; }
+.m-head__counts strong { color: #FCFCFA; font-weight: 500; }
+.m-head__counts em { color: #FFD866; font-style: normal; }
+.m-head__counts .err { color: #FF6188; } /* ============================================================ A — THE AUDIT LOG (reverse-chronological dense stream) ============================================================ */
+.audit { flex: 1; display: flex; flex-direction: column;
+}
+.audit__filters { display: flex; gap: 12px; padding: 10px 24px; border-bottom: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #939293; text-transform: uppercase;
+}
+.audit__filters .chip { padding: 2px 8px; border: 1px solid #4a474b; color: #939293; }
+.audit__filters .chip.is-on { color: #FC9867; border-color: #FC9867; }
+.audit__filters .chip.err.is-on { color: #FF6188; border-color: #FF6188; }
+.audit__filters .search { margin-left: auto; color: #5b5862; } .audit__list { flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.55; padding: 4px 0 12px; overflow-y: auto;
+}
+.audit__live-tag { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; color: #FC9867; text-transform: uppercase; padding: 12px 24px 4px; display: flex; gap: 10px; align-items: baseline;
+}
+.audit__live-tag::before { content: ""; width: 6px; height: 6px; background: #FC9867; border-radius: 50%; animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.3; } } .audit__line { display: grid; grid-template-columns: 76px 56px 130px 1fr; gap: 14px; padding: 4px 24px; align-items: baseline; border-bottom: 1px solid #2a282a;
+}
+.audit__line.is-recent { background: rgba(252, 152, 103, 0.03); }
+.audit__line .t { color: #939293; font-size: 11px; }
+.audit__line .lvl { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+.audit__line .lvl.info { color: #939293; }
+.audit__line .lvl.warn { color: #FFD866; }
+.audit__line .lvl.err { color: #FF6188; }
+.audit__line .lvl.ok { color: #A9DC76; }
+.audit__line .src { color: #FC9867; }
+.audit__line .msg { color: #FCFCFA; }
+.audit__line .msg .hl { color: #FC9867; }
+.audit__line .msg em { font-style: italic; color: #939293; } .audit__rule { border: 0; border-top: 1px dashed #4a474b; margin: 12px 24px; position: relative;
+}
+.audit__rule::after { content: "before 07:42 — history"; position: absolute; top: -7px; left: 0; background: #2D2A2E; padding: 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: #5b5862; text-transform: uppercase;
+} /* ============================================================ B — THE HOSPITAL CHART (services-as-rows) ============================================================ */
+.hosp { flex: 1; display: flex; flex-direction: column; }
+.hosp__sub { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; color: #939293; padding: 10px 24px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline;
+}
+.hosp__sub strong { color: #FCFCFA; font-weight: 500; }
+.hosp__sub em { color: #FFD866; font-style: normal; }
+.hosp__sub .err { color: #FF6188; } .hosp__row-head { display: grid; grid-template-columns: 24px 160px 60px 110px 70px 90px 1fr; gap: 12px; padding: 8px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; color: #5b5862; text-transform: uppercase; border-bottom: 1px solid #4a474b;
+}
+.hosp__row { display: grid; grid-template-columns: 24px 160px 60px 110px 70px 90px 1fr; gap: 12px; padding: 10px 24px; font-family: 'IBM Plex Sans', sans-serif; font-size: 12.5px; border-bottom: 1px solid #2a282a; align-items: center; color: #FCFCFA;
+}
+.hosp__row.is-critical { background: rgba(255, 97, 136, 0.06); border-left: 2px solid #FF6188; padding-left: 22px; }
+.hosp__row.is-warn { background: rgba(255, 216, 102, 0.04); border-left: 2px solid #FFD866; padding-left: 22px; }
+.hosp__row .dot { width: 8px; height: 8px; border-radius: 50%; }
+.hosp__row .dot.ok { background: #A9DC76; }
+.hosp__row .dot.warn { background: #FFD866; }
+.hosp__row .dot.err { background: #FF6188; }
+.hosp__row .name { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #FCFCFA; }
+.hosp__row .name small { color: #939293; font-size: 10px; display: block; letter-spacing: 0.04em; }
+.hosp__row .status { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+.hosp__row .status.ok { color: #A9DC76; }
+.hosp__row .status.warn { color: #FFD866; }
+.hosp__row .status.err { color: #FF6188; }
+.hosp__row .pulse { height: 22px; }
+.hosp__row .p99 { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #FCFCFA; text-align: right; }
+.hosp__row .p99.warn { color: #FFD866; }
+.hosp__row .p99.err { color: #FF6188; }
+.hosp__row .err-rate { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #FCFCFA; text-align: right; }
+.hosp__row .err-rate.warn { color: #FFD866; }
+.hosp__row .err-rate.err { color: #FF6188; }
+.hosp__row .note { font-size: 11.5px; color: #939293; font-style: italic; }
+.hosp__row .note strong { color: #FCFCFA; font-style: normal; font-weight: 500; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); } }
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye">Champion · NOX status · A/B · Round 1</div> <h1>What kind of object is the status page?</h1> </div> <div class="note"> Same data, two premises.<br> A: <strong>stream</strong> · what just happened, chronologically.<br> B: <strong>chart</strong> · how each service is doing, by row.<br> <em>Both perpendicular to the briefing's Score.</em> </div>
+</header> <div class="versus"> <!-- ============================================================ A — AUDIT LOG
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">The Audit Log <em>— a tail-f of the day.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">A <strong>reverse-chronological stream</strong>. Most recent at top, live ones pulse. The page reads as a single dense column of evidence — what just happened, in order. <em>The status is the trail, not the snapshot.</em></p> <p class="option__refuses"><strong>Strength:</strong> answers "what just happened?" instantly. Single scroll; no widgets. <strong>Weakness:</strong> "is X service healthy?" requires reading; you can't see all services at a glance.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · live · Mon 12 May 2026</div> <div class="m-head__title">tail -f / events, reverse-chronological</div> </div> <div class="m-head__counts"> <strong>312</strong> events · last 24h<br> <em>1</em> warn · <span class="err">1</span> err · <strong>310</strong> info </div> </header> <div class="audit"> <div class="audit__filters"> <span class="chip is-on">ALL · 312</span> <span class="chip">INFO · 287</span> <span class="chip is-on">WARN · 24</span> <span class="chip err is-on">ERR · 1</span> <span class="search">/ filter · ⌘k</span> </div> <div class="audit__live-tag">live · streaming</div> <div class="audit__list"> <div class="audit__line is-recent"><span class="t">09:42:14</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">connection timeout after <span class="hl">10000ms</span> to s3.eu-west-1; retry exhausted (3/3)</span></div> <div class="audit__line is-recent"><span class="t">09:42:04</span><span class="lvl info">INFO</span><span class="src">backup.cold</span><span class="msg">retry 3/3 starting; backoff 8s</span></div> <div class="audit__line is-recent"><span class="t">09:41:46</span><span class="lvl warn">WARN</span><span class="src">backup.cold</span><span class="msg">retry 2/3 failed</span></div> <div class="audit__line is-recent"><span class="t">09:41:32</span><span class="lvl warn">WARN</span><span class="src">backup.cold</span><span class="msg">retry 1/3 failed</span></div> <div class="audit__line is-recent"><span class="t">09:41:21</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">first attempt failed: timeout (10000ms)</span></div> <div class="audit__line is-recent"><span class="t">09:41:11</span><span class="lvl info">INFO</span><span class="src">backup.cold</span><span class="msg">starting snapshot <span class="hl">w20-2026</span> · 2.1TB</span></div> <div class="audit__line"><span class="t">09:40:58</span><span class="lvl ok">OK</span><span class="src">etl.briefing</span><span class="msg">completed · <span class="hl">2118ms</span> · 1,402 rows</span></div> <div class="audit__line"><span class="t">09:40:54</span><span class="lvl warn">WARN</span><span class="src">etl.briefing</span><span class="msg">slow query: <em>SELECT … FROM feeds WHERE since &gt; ?</em></span></div> <div class="audit__line"><span class="t">09:39:01</span><span class="lvl ok">OK</span><span class="src">ml.score.v3</span><span class="msg">batch 4112 · 1,024 records · P99 94ms</span></div> <hr class="audit__rule"> <div class="audit__line"><span class="t">07:38:12</span><span class="lvl info">INFO</span><span class="src">ingest.geo</span><span class="msg">flushed <span class="hl">14,201</span> records to warehouse</span></div> <div class="audit__line"><span class="t">07:36:00</span><span class="lvl info">INFO</span><span class="src">scheduler</span><span class="msg">tick · 3 jobs dispatched</span></div> <div class="audit__line"><span class="t">07:34:21</span><span class="lvl ok">OK</span><span class="src">auth.idp</span><span class="msg">key rotation complete · kid=<span class="hl">k-2026w20</span></span></div> <div class="audit__line"><span class="t">07:30:00</span><span class="lvl info">INFO</span><span class="src">scheduler</span><span class="msg">tick · 0 jobs dispatched</span></div> <div class="audit__line"><span class="t">06:28:18</span><span class="lvl ok">OK</span><span class="src">geocode.batch</span><span class="msg">resolved <span class="hl">2,402</span> addresses · 0 misses</span></div> <div class="audit__line"><span class="t">06:14:00</span><span class="lvl info">INFO</span><span class="src">pager.alert</span><span class="msg">backup.cold incident acknowledged by <span class="hl">cc</span></span></div> <div class="audit__line"><span class="t">04:11:00</span><span class="lvl ok">OK</span><span class="src">scheduler</span><span class="msg">overnight sweep · 87 jobs ok</span></div> <div class="audit__line"><span class="t">23:47:00</span><span class="lvl err">ERR</span><span class="src">pager.alert</span><span class="msg">backup.cold escalated · paged on-call (cc)</span></div> </div> </div> <div class="notice"><span class="lbl">Notice</span><span class="body">The status of any service requires scanning the stream. <em>What just happened? — right at the top. Always.</em></span></div> </div>
+</section> <!-- ============================================================ B — HOSPITAL CHART
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">The Hospital Chart <em>— services as patients with vitals.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">Each service is a <strong>row with vitals</strong>: name, current status, last-hour pulse-line, P99, error rate, attending notes. Sorted by severity, critical first. <em>The chart is a doctor's clipboard, not a stream.</em></p> <p class="option__refuses"><strong>Strength:</strong> "is X working?" at a glance. Each service has one row; pulses show whether things are stable or deteriorating. <strong>Weakness:</strong> "what just happened?" requires drilling into a row.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · ward round · Mon 12 May · 07:42</div> <div class="m-head__title">14 patients · sorted by status</div> </div> <div class="m-head__counts"> <strong>14</strong> services<br> <em>1</em> warn · <span class="err">1</span> critical · <strong style="color:#A9DC76;">12</strong> stable </div> </header> <div class="hosp"> <div class="hosp__sub"> <span>Last round · <strong>07:42</strong> · attending: <strong>cc</strong></span> <span>One patient <span class="err">critical</span> · one <em>under observation</em></span> </div> <div class="hosp__row-head"> <span></span><span>service</span><span>status</span><span>pulse · 1h</span><span>P99 ms</span><span>err rate</span><span>note</span> </div> <!-- CRITICAL --> <div class="hosp__row is-critical"> <span class="dot err"></span> <span class="name">backup.cold<small>· cold-storage · weekly snapshot</small></span> <span class="status err">critical</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 20,11 40,11 50,2 55,20 60,2 65,20 70,11 100,11" fill="none" stroke="#FF6188" stroke-width="1"/></svg> </span> <span class="p99 err">—</span> <span class="err-rate err">100%</span> <span class="note"><strong>flatlined</strong> at 09:42 · timeout 10s to s3 · retry exhausted; acked by cc 06:14.</span> </div> <!-- WARN --> <div class="hosp__row is-warn"> <span class="dot warn"></span> <span class="name">etl.briefing<small>· nightly briefing pipeline</small></span> <span class="status warn">slow</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,15 20,14 40,12 55,8 70,4 85,3 100,2" fill="none" stroke="#FFD866" stroke-width="1"/></svg> </span> <span class="p99 warn">2,118</span> <span class="err-rate">0.0%</span> <span class="note"><strong>fever</strong>: 4× baseline · slow feeds-query · not paging.</span> </div> <!-- STABLE --> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">ingest.geo<small>· geocoding ingest</small></span> <span class="status ok">stable</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 14,10 28,11 42,10 56,11 70,10 84,11 100,10" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> </span> <span class="p99">182</span> <span class="err-rate">0.02%</span> <span class="note">14,201 records flushed at 07:38. No issues.</span> </div> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">ml.score.v3<small>· scoring head · GBDT</small></span> <span class="status ok">stable</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,12 14,11 28,12 42,11 56,10 70,11 84,12 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> </span> <span class="p99">94</span> <span class="err-rate">0.01%</span> <span class="note">9,842 runs · within baseline.</span> </div> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">geocode.batch<small>· batch resolver</small></span> <span class="status ok">stable</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 28,10 42,11 56,12 70,11 84,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> </span> <span class="p99">63</span> <span class="err-rate">0.04%</span> <span class="note">2,402 resolved · 0 misses.</span> </div> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">auth.idp<small>· identity provider</small></span> <span class="status ok">stable</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> </span> <span class="p99">12</span> <span class="err-rate">0.00%</span> <span class="note">Key rotation completed 07:34.</span> </div> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">edge.cache.eu<small>· CDN · eu</small></span> <span class="status ok">stable</span> <span class="pulse"> <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none"><polyline points="0,11 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> </span> <span class="p99">8</span> <span class="err-rate">0.00%</span> <span class="note">98·2% hit rate. Flat.</span> </div> <div class="hosp__row"> <span class="dot ok"></span> <span class="name">+ 7 more<small>· all stable</small></span> <span class="status ok">stable</span> <span class="pulse"></span> <span class="p99">—</span> <span class="err-rate">—</span> <span class="note">expand to view individual vitals.</span> </div> </div> <div class="notice"><span class="lbl">Notice</span><span class="body"><em>"Critical first."</em> One row, one service. The medical metaphor carries the urgency without raising the voice.</span></div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-status-r1', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-status-r1'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-mode="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cody Champion — decision science at scale</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Lora:wght@400;500&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { padding: 0; min-height: 100vh; }
+.fid { position: fixed; top: 16px; right: 16px; z-index: 50; background: var(--c-bg-raised); border:1px solid var(--c-border-strong); border-radius:var(--r-sm); padding:var(--s-1); display:flex; font-family:var(--font-mono); font-size:var(--t-xs); letter-spacing:0.12em; text-transform:uppercase; box-shadow:var(--shadow-1); }
+.fid button { background:transparent; color:var(--c-text-subtle); border:0; padding:6px 12px; cursor:pointer; border-radius:2px; font-family: var(--font-mono); }
+.fid button.is-on { background:var(--c-accent); color:var(--c-accent-text); }
+.fid__label { padding:6px 10px 6px 12px; color:var(--c-text-subtle); border-right:1px solid var(--c-border); margin-right:4px; } .wire, .lo, .real { display: none; }
+body[data-fid="wire"] .wire { display: block; }
+body[data-fid="lo"] .lo { display: block; }
+body[data-fid="hi"] .real { display: block; } .page { max-width: 1080px; margin: 0 auto; padding: var(--s-16) var(--s-12) var(--s-24); } .nav-bar { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--s-12); }
+.brand { display:flex; align-items: baseline; gap: var(--s-3); font-family: var(--font-display); font-weight: 600; font-size: var(--t-md); letter-spacing: 0.04em; }
+.brand .crest { display:inline-block; width:14px; height:16px; background-color:var(--c-text); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; vertical-align: -2px; margin-right: 4px; }
+.nav-links { display:flex; gap: var(--s-6); font-family: var(--font-ui); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.nav-links a { color: var(--c-text-subtle); transition: color var(--dur-micro) var(--easing); }
+.nav-links a:hover { color: var(--c-text); text-decoration: none; } .hero { display: grid; grid-template-columns: 1fr; padding: var(--s-12) 0 var(--s-16); position: relative;
+}
+.hero .eye { font-family: var(--font-ui); font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-6);
+}
+.hero h1 { font-family: var(--font-display); font-size: clamp(56px, 9vw, 128px); font-weight: 500; letter-spacing: -0.035em; line-height: 0.95; max-width: 14ch;
+}
+.hero h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.hero__sub { font-family: var(--font-body); font-size: var(--t-md); color: var(--c-text-subtle); margin-top: var(--s-8); max-width: 50ch; line-height: 1.5;
+}
+.hero__meta { margin-top: var(--s-12); padding-top: var(--s-6); border-top: 1px solid var(--c-border-strong); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-6); font-family: var(--font-ui); font-size: var(--t-sm);
+}
+.hero__meta dt { font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+.hero__meta dd { margin: 0; color: var(--c-text); } .section-head { display: grid; grid-template-columns: 220px 1fr; gap: var(--s-8); align-items: baseline; margin: var(--s-24) 0 var(--s-8);
+}
+.section-head .num { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--c-text-subtle); letter-spacing: 0.14em; text-transform: uppercase;
+}
+.section-head h2 { font-family: var(--font-display); font-size: var(--t-xl); font-weight: 500; letter-spacing: -0.02em; max-width: 22ch;
+}
+.section-head h2 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; } /* Work list */
+.work-list { border-top: 1px solid var(--c-border-strong);
+}
+.work { display: grid; grid-template-columns: 80px 1fr 200px 120px 30px; gap: var(--s-6); padding: var(--s-8) 0; border-bottom: 1px solid var(--c-border); align-items: baseline; cursor: pointer; transition: background var(--dur-micro) var(--easing);
+}
+.work:hover { background: rgba(26, 79, 214, 0.04); }
+.work:hover .work__arrow { color: var(--c-accent); transform: translateX(4px); }
+.work__year { font-family: var(--font-mono); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.work__title { font-family: var(--font-display); font-size: var(--t-lg); font-weight: 500; line-height: 1.2; letter-spacing: -0.015em; }
+.work__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.work__client { font-family: var(--font-body); font-size: var(--t-sm); color: var(--c-text-subtle); }
+.work__tag { font-family: var(--font-ui); font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.12em; text-transform: uppercase; }
+.work__arrow { font-family: var(--font-display); color: var(--c-text-subtle); transition: transform var(--dur-micro) var(--easing); } /* Lede statement */
+.statement { font-family: var(--font-display); font-size: var(--t-2xl); font-weight: 500; font-style: italic; line-height: 1.15; letter-spacing: -0.02em; max-width: 24ch; margin: var(--s-8) 0 var(--s-4);
+}
+.statement em { font-style: italic; font-weight: 400; color: var(--c-text-subtle); } .now { display: grid; grid-template-columns: 30px 1fr; gap: var(--s-6); padding: var(--s-3) 0; align-items: baseline; border-bottom: 1px solid var(--c-border);
+}
+.now__when { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--c-text-subtle); letter-spacing: 0.06em; }
+.now__what { font-family: var(--font-body); font-size: var(--t-base); }
+.now__what em { font-style: italic; color: var(--c-text-subtle); } .foot { margin-top: var(--s-24); padding-top: var(--s-8); border-top: 1px solid var(--c-border-strong); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end;
+}
+.foot a { color: var(--c-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-accent); text-decoration-thickness: 1px; }
+.foot__crest { width: 48px; height: 56px; background-color: var(--c-text); -webkit-mask:url('../assets/crest_white.png') center/contain no-repeat; mask:url('../assets/crest_white.png') center/contain no-repeat; } /* WIRE skel */
+.skel { background: var(--c-border); border-radius: 2px; } @media (max-width: 800px) { .page { padding: var(--s-8) var(--s-6); } .section-head { grid-template-columns: 1fr; gap: var(--s-2); } .work { grid-template-columns: 60px 1fr 30px; } .work__client, .work__tag { display: none; } .hero__meta { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body data-fid="hi"> <div class="fid"> <span class="fid__label">Fidelity</span> <button data-fid="wire">Wire</button> <button data-fid="lo">Lo-fi</button> <button data-fid="hi" class="is-on">Hi-fi</button>
+</div> <div class="page"> <!-- WIRE -->
+<div class="wire"> <div class="skel" style="width: 20%; height: 14px;"></div> <div class="skel" style="width: 80%; height: 100px; margin-top: var(--s-12);"></div> <div class="skel" style="width: 40%; height: 14px; margin-top: var(--s-4);"></div> <div class="skel" style="width: 50%; height: 14px; margin-top: 8px;"></div> <div style="margin-top: var(--s-16);"><div class="skel" style="width: 14%; height: 10px;"></div></div> <div class="skel" style="width: 70%; height: 28px; margin-top: var(--s-2);"></div> <div style="margin-top: var(--s-8);"> <div class="skel" style="height: 60px; margin-bottom: var(--s-3);"></div> <div class="skel" style="height: 60px; margin-bottom: var(--s-3);"></div> <div class="skel" style="height: 60px; margin-bottom: var(--s-3);"></div> <div class="skel" style="height: 60px; margin-bottom: var(--s-3);"></div> </div>
+</div> <!-- LO -->
+<div class="lo" style="font-family: var(--font-mono); font-size: var(--t-sm); color: var(--c-text); line-height: 1.6;"> <div style="color: var(--c-text-subtle); margin-bottom: var(--s-4);">portfolio · home · hero / now / selected work / contact</div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-4);"> <div style="color: var(--c-text-subtle); font-size: var(--t-xs); letter-spacing: 0.14em;">[NAV] · cody.champion · work · writing · about · contact</div> </div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-8); margin-bottom: var(--s-4);"> [hero]<br> "Decision science. At planetary scale."<br> AI Decision Science Manager · Dublin<br> <br> [meta] role · location · availability · contact </div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-4);"> [§ 02 — selected work · table]<br> YEAR TITLE CLIENT DOMAIN<br> 2025 Parcel-level flood-risk scoring Federal spatial-ml<br> 2024 Real-time triage for emergency disp. Commercial operations<br> 2024 Synthetic demographic uplift Applied resch. fairness<br> 2023 Decision intelligence, energy markets Commercial forecasting </div> <div style="border: 1px dashed var(--c-border-strong); padding: var(--s-6); margin-bottom: var(--s-4);"> [§ 03 — now] writing · reading · open to senior IC/director · contact </div>
+</div> <!-- HI -->
+<div class="real"> <div class="nav-bar"> <div class="brand"><span class="crest"></span>cody.champion</div> <nav class="nav-links"> <a href="#work">Work</a> <a href="#writing">Writing</a> <a href="#now">Now</a> <a href="#contact">Contact</a> </nav>
+</div> <section class="hero"> <div class="eye">— Cody Champion · Decision science · Dublin</div> <h1>Decision<br>science. <em>At planetary scale.</em></h1> <p class="hero__sub">I lead the AI Decision Science practice for , building production ML systems for federal and commercial clients across geographic, operational, and fairness domains.</p> <dl class="hero__meta"> <div><dt>Role</dt><dd>AI Decision Science Manager</dd></div> <div><dt>Located</dt><dd>Dublin, Ireland</dd></div> <div><dt>Open to</dt><dd>Senior IC · Director · Europe</dd></div> <div><dt>Contact</dt><dd></dd></div> </dl>
+</section> <section id="work"> <div class="section-head"> <span class="num">§ 02 — Selected work</span> <h2>Federal, commercial, applied research. <em>Production, not pilots.</em></h2> </div> <div class="work-list"> <a href="case-study.html" style="display:block; color: inherit; text-decoration: none;"> <div class="work"> <span class="work__year">2025</span> <div class="work__title">Parcel-level flood-risk scoring <em>— for a federal client</em></div> <span class="work__client">Undisclosed · Federal</span> <span class="work__tag">spatial · ML</span> <span class="work__arrow">→</span> </div> </a> <div class="work"> <span class="work__year">2024</span> <div class="work__title">Real-time triage for emergency dispatch</div> <span class="work__client">Undisclosed · Commercial</span> <span class="work__tag">operations</span> <span class="work__arrow">→</span> </div> <div class="work"> <span class="work__year">2024</span> <div class="work__title">Synthetic demographic uplift for underrepresented cohorts</div> <span class="work__client">Applied research</span> <span class="work__tag">fairness</span> <span class="work__arrow">→</span> </div> <div class="work"> <span class="work__year">2023</span> <div class="work__title">Decision intelligence for European energy markets</div> <span class="work__client">Undisclosed · Commercial</span> <span class="work__tag">forecasting</span> <span class="work__arrow">→</span> </div> <div class="work" style="border-bottom: 1px solid var(--c-border-strong);"> <span class="work__year">2022</span> <div class="work__title">Counterfactual evaluation for policy interventions</div> <span class="work__client">Public sector · DK</span> <span class="work__tag">causal · pol</span> <span class="work__arrow">→</span> </div> </div>
+</section> <section id="writing" style="margin-top: var(--s-16);"> <div class="section-head"> <span class="num">§ 03 — Writing</span> <h2>Field journal. <em>Long-form, slow read.</em></h2> </div> <p class="statement">"Building production ML systems at planetary scale <em>requires more than engineering.</em>"</p> <p style="font-family: var(--font-body); color: var(--c-text-subtle); font-size: var(--t-base); max-width: 60ch; line-height: 1.55;">A working journal on decision systems, the practice of building them, and what happens when the dashboard meets the operator at 7am. <a href="essay.html" style="color: var(--c-accent); text-decoration: underline; text-underline-offset: 3px;">Read the journal →</a></p>
+</section> <section id="now" style="margin-top: var(--s-16);"> <div class="section-head"> <span class="num">§ 04 — Now</span> <h2>What I'm doing this week.</h2> </div> <div style="max-width: 60ch;"> <div class="now"><span class="now__when">work</span><span class="now__what">Shipping <em>parcel-risk v2·1</em> — staged this Friday.</span></div> <div class="now"><span class="now__when">read</span><span class="now__what">Tufte, <em>Beautiful Evidence</em> · second pass, slow.</span></div> <div class="now"><span class="now__when">build</span><span class="now__what">A small NOX backplane for personal ops.</span></div> <div class="now"><span class="now__when">life</span><span class="now__what">Dublin in May · a fortnight of rain, one bright Saturday.</span></div> </div>
+</section> <div id="contact" class="foot"> <div> <div style="font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle);">§ 05 — Contact</div> <p style="font-family: var(--font-display); font-size: var(--t-xl); font-weight: 500; max-width: 22ch; line-height: 1.15; letter-spacing: -0.02em; margin-top: var(--s-3);">Best by email. <em style="font-style: italic; color: var(--c-text-subtle); font-weight: 400;">Two-day reply window.</em></p> <p style="font-family: var(--font-body); margin-top: var(--s-4); color: var(--c-text-subtle); font-size: var(--t-sm);"><a href="#">github</a> · <a href="#">arxiv</a> · <a href="#">linkedin</a> · ◆ — C·C · v0·9 · 2026</p> </div> <div class="foot__crest"></div>
+</div> </div> </div> <script>
+document.querySelectorAll('.fid button').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.fid button').forEach(b => b.classList.remove('is-on')); btn.classList.add('is-on'); document.body.dataset.fid = btn.dataset.fid; });
+});
+</script>
+</body>
+</html>

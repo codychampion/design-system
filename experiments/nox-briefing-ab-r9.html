@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX briefing — Round 9 (header voice)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16); }
+.page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border); }
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3); }
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em; }
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 28ch; }
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start; }
+.option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border); }
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px; }
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); }
+.option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch; }
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55; }
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } .score { padding: 22px 28px; display: flex; flex-direction: column; flex: 1; }
+.score__eye-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase; } /* ============================================================ HEADER STYLES — the question ============================================================ */
+/* A: counts ribbon */
+.head-ribbon { display: grid; grid-template-columns: 1fr auto; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid #4a474b; margin-bottom: 18px;
+}
+.head-ribbon .title { font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 500; color: #FCFCFA; margin-top: 3px; }
+.head-ribbon .counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right; }
+.head-ribbon .counts strong { color: #FCFCFA; font-weight: 500; }
+.head-ribbon .counts em { color: #FFD866; font-style: normal; }
+.head-ribbon .counts .err { color: #FF6188; } /* B: opening sentence */
+.head-sentence { padding-bottom: 16px; border-bottom: 1px solid #4a474b; margin-bottom: 18px;
+}
+.head-sentence .opener { font-family: 'IBM Plex Sans', sans-serif; font-size: 22px; line-height: 1.25; color: #FCFCFA; margin-top: 6px; max-width: 54ch; font-weight: 400; letter-spacing: -0.005em;
+}
+.head-sentence .opener strong { font-weight: 500; }
+.head-sentence .opener em { font-style: italic; color: #939293; }
+.head-sentence .opener .high { color: #FFD866; font-style: normal; }
+.head-sentence .opener .err { color: #FF6188; }
+.head-sentence .ledger { display: flex; gap: 18px; margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.04em; color: #939293;
+}
+.head-sentence .ledger span strong { color: #FCFCFA; font-weight: 500; }
+.head-sentence .ledger span em { color: #FFD866; font-style: normal; }
+.head-sentence .ledger span .err { color: #FF6188; } /* Shared score elements (small version, just enough context) */
+.axis { display: grid; grid-template-columns: 100px 1fr; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; color: #939293; }
+.axis .lab { padding: 0 12px 4px 0; text-align: right; }
+.axis .ticks { position: relative; height: 28px; border-bottom: 1px solid #4a474b; }
+.axis .ticks span { position: absolute; transform: translateX(-50%); bottom: 2px; }
+.axis .ticks span.is-now { color: #FC9867; font-weight: 500; }
+.axis .ticks span.dim { color: #5b5862; }
+.axis .ticks .zone-band { position: absolute; top: 0; bottom: 1px; }
+.axis .ticks .zone-rule { position: absolute; top: 0; bottom: 0; width: 1px; background: #4a474b; }
+.axis .ticks .zone-lbl { position: absolute; top: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; color: #5b5862; text-transform: uppercase; } .stave-block { position: relative; }
+.stave { display: grid; grid-template-columns: 100px 1fr; position: relative; border-bottom: 1px solid #3a3739; }
+.stave:last-of-type { border-bottom: 0; }
+.stave .lab { padding: 12px 12px 12px 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.04em; color: #939293; border-right: 1px solid #4a474b; }
+.stave .lab strong { color: #FCFCFA; font-weight: 500; }
+.stave .lab small { display: block; font-size: 9px; color: #5b5862; letter-spacing: 0.12em; margin-top: 2px; }
+.stave .track { position: relative; padding: 10px 12px; } .stave.primary .lab { font-size: 13px; padding: 18px 12px 18px 0; }
+.stave.primary .track { min-height: 130px; padding: 16px 12px; }
+.stave.secondary .lab { padding: 8px 12px 8px 0; font-size: 10.5px; }
+.stave.secondary .track { min-height: 32px; padding: 5px 12px; }
+.stave.tertiary .lab { padding: 4px 12px 4px 0; font-size: 9.5px; color: #5b5862; }
+.stave.tertiary .lab strong { color: #939293; font-size: 9.5px; }
+.stave.tertiary .track { min-height: 22px; padding: 3px 12px; } .past-wash { position: absolute; top: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(34, 31, 34, 0.85) 0%, rgba(34, 31, 34, 0.5) 60%, rgba(34, 31, 34, 0) 100%); z-index: 4; pointer-events: none; }
+.past-wash::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 2px; background: #FC9867; box-shadow: 0 0 8px rgba(252, 152, 103, 0.5); }
+.now-label { position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; background: #FC9867; color: #2D2A2E; padding: 1px 5px; z-index: 6; pointer-events: none; } .ev-stem { position: absolute; display: flex; flex-direction: column; }
+.ev-stem .lbl { font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; color: #FCFCFA; white-space: nowrap; padding-bottom: 4px; display: flex; align-items: baseline; gap: 8px; }
+.ev-stem .lbl strong { font-weight: 500; }
+.ev-stem .lbl em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.ev-stem .bar { height: 14px; border: 1px solid #FC9867; border-bottom: 2px solid #FC9867; background: transparent; width: 100%; } .task-mark { position: absolute; display: flex; align-items: center; gap: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 10.5px; color: #FCFCFA; white-space: nowrap; }
+.task-mark::before { content: "☐"; color: #5b5862; font-size: 11px; }
+.task-mark em { font-style: normal; color: #939293; font-family: 'IBM Plex Mono', monospace; font-size: 10px; margin-left: 4px; } .sys-dot { position: absolute; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); }
+.sys-dot .dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.3); }
+.sys-dot .dot.ok { background: #A9DC76; }
+.sys-dot .dot.warn { background: #FFD866; }
+.sys-dot .dot.err { background: #FF6188; }
+.sys-dot .lbl { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #939293; white-space: nowrap; letter-spacing: 0.04em; }
+.sys-dot .lbl strong { color: #FCFCFA; font-weight: 500; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); } }
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"> <span class="back"><a href="nox-briefing-ab-r8.html">← R8 · wash chosen</a></span> <span>Champion · A/B · Round 9</span> </div> <h1>The header — counts ribbon, or opening sentence?</h1> </div> <div class="note"> Same score below.<br> <strong>What changes is the first thing you read.</strong> </div>
+</header> <div class="versus"> <!-- ============================================================ A — COUNTS RIBBON
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">Counts ribbon <em>— a small tally in the corner.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">A spare, mono header: title left, count tally right — <em>3 events · 2 tasks · 1 alert · backup.cold</em>. <strong>The chart speaks; the header just labels it.</strong></p> <p class="option__refuses"><strong>Strength:</strong> calm, neutral, unobtrusive — the score does the work. <strong>Weakness:</strong> a tally is not a summary; "1 alert" doesn't tell you whether to panic.</p> <div class="mockup"> <div class="score"> <div class="head-ribbon"> <div> <div class="score__eye-row">Briefing · Mon 12 May 2026 · 07:42</div> <div class="title">Morning briefing.</div> </div> <div class="counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </div> <div class="axis"> <div class="lab">hour →</div> <div class="ticks"> <div class="zone-band" style="left: 0%; width: 8%; background: rgba(74,71,75,0.3);"></div> <div class="zone-band" style="left: 8%; width: 36%; background: rgba(252,152,103,0.06);"></div> <div class="zone-band" style="left: 44%; width: 18%; background: rgba(255,255,255,0.02);"></div> <div class="zone-band" style="left: 62%; width: 28%; background: rgba(252,152,103,0.06);"></div> <div class="zone-band" style="left: 90%; width: 10%; background: rgba(74,71,75,0.3);"></div> <div class="zone-rule" style="left: 8%;"></div> <div class="zone-rule" style="left: 44%;"></div> <div class="zone-rule" style="left: 62%;"></div> <div class="zone-rule" style="left: 90%;"></div> <span class="zone-lbl" style="left: 0%;">OVERNIGHT</span> <span class="zone-lbl" style="left: 9%;">MORNING</span> <span class="zone-lbl" style="left: 45%;">MIDDAY</span> <span class="zone-lbl" style="left: 63%;">AFTERNOON</span> <span class="zone-lbl" style="left: 91%;">AFTER</span> <span class="dim" style="left: 4%; bottom: -2px;">06</span> <span class="is-now" style="left: 14%; bottom: -2px;">07</span> <span style="left: 32%; bottom: -2px;">09</span> <span style="left: 53%; bottom: -2px;">12</span> <span style="left: 76%; bottom: -2px;">15</span> <span style="left: 87%; bottom: -2px;">17</span> <span class="dim" style="left: 96%; bottom: -2px;">20</span> </div> </div> <div class="stave-block"> <div class="past-wash" style="width: calc(100px + (100% - 100px) * 0.20);"></div> <div class="now-label" style="left: calc(100px + (100% - 100px) * 0.20 - 16px); top: -18px;">07:42 · NOW</div> <div class="stave primary"> <div class="lab"><strong>calendar</strong><small>· 3 events</small></div> <div class="track"> <div class="ev-stem" style="left: 32%; width: 5%; top: 10px;"><span class="lbl"><strong>standup</strong><em>09:00 · 30m</em></span><span class="bar"></span></div> <div class="ev-stem" style="left: 41%; width: 5%; top: 62px;"><span class="lbl"><strong>1:1 · EM</strong><em>10:30 · 45m</em></span><span class="bar"></span></div> <div class="ev-stem" style="left: 76%; width: 5%; top: 10px;"><span class="lbl"><strong>design review · v2·1</strong><em>15:00 · 60m</em></span><span class="bar"></span></div> </div> </div> <div class="stave secondary"> <div class="lab"><strong>tasks</strong></div> <div class="track"> <div class="task-mark" style="left: 87%;">review incident <em>17:00</em></div> <div class="task-mark" style="left: 92%;">ship v2·1 <em>EOD</em></div> </div> </div> <div class="stave secondary"> <div class="lab"><strong>systems</strong></div> <div class="track" style="min-height: 30px;"> <div class="sys-dot" style="left: 2%; top: 8px;"><span class="dot err"></span><span class="lbl"><strong>backup</strong></span></div> <div class="sys-dot" style="left: 14%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 36%; top: 8px;"><span class="dot warn"></span><span class="lbl">etl <strong>2·1s</strong></span></div> <div class="sys-dot" style="left: 53%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 76%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 96%; top: 8px;"><span class="dot ok"></span></div> </div> </div> </div> </div> <div class="notice"><span class="lbl">Notice</span><span class="body">Header carries the title and a tally. <em>Nothing else; the score is the briefing.</em></span></div> </div>
+</section> <!-- ============================================================ B — OPENING SENTENCE
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Opening sentence <em>— a one-line read of the day.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">A single readable sentence at the top: <em>"One thing is on fire and four are nice to know."</em> A small ledger underneath. <strong>The header has an opinion before you read the chart.</strong></p> <p class="option__refuses"><strong>Strength:</strong> the briefing speaks before you have to look at it; sets the emotional shape of the morning. <strong>Weakness:</strong> requires NOX to write a real sentence — voice is now part of the system, not just data.</p> <div class="mockup"> <div class="score"> <div class="head-sentence"> <div class="score__eye-row">Briefing · Mon 12 May 2026 · 07:42</div> <p class="opener">One thing is <span class="err">on fire</span>, and four are <span class="high">nice to know</span>. <em>backup.cold went down at 09:42 last night; you have standup at 09:00 and a v2·1 review at 15:00.</em></p> <div class="ledger"> <span><strong>3</strong> events</span> <span><strong>2</strong> tasks</span> <span><em>1</em> alert</span> <span><strong>12</strong>/14 services <strong style="color:#A9DC76;">●</strong></span> <span>weather <strong>11°</strong> rising</span> </div> </div> <div class="axis"> <div class="lab">hour →</div> <div class="ticks"> <div class="zone-band" style="left: 0%; width: 8%; background: rgba(74,71,75,0.3);"></div> <div class="zone-band" style="left: 8%; width: 36%; background: rgba(252,152,103,0.06);"></div> <div class="zone-band" style="left: 44%; width: 18%; background: rgba(255,255,255,0.02);"></div> <div class="zone-band" style="left: 62%; width: 28%; background: rgba(252,152,103,0.06);"></div> <div class="zone-band" style="left: 90%; width: 10%; background: rgba(74,71,75,0.3);"></div> <div class="zone-rule" style="left: 8%;"></div> <div class="zone-rule" style="left: 44%;"></div> <div class="zone-rule" style="left: 62%;"></div> <div class="zone-rule" style="left: 90%;"></div> <span class="zone-lbl" style="left: 0%;">OVERNIGHT</span> <span class="zone-lbl" style="left: 9%;">MORNING</span> <span class="zone-lbl" style="left: 45%;">MIDDAY</span> <span class="zone-lbl" style="left: 63%;">AFTERNOON</span> <span class="zone-lbl" style="left: 91%;">AFTER</span> <span class="dim" style="left: 4%; bottom: -2px;">06</span> <span class="is-now" style="left: 14%; bottom: -2px;">07</span> <span style="left: 32%; bottom: -2px;">09</span> <span style="left: 53%; bottom: -2px;">12</span> <span style="left: 76%; bottom: -2px;">15</span> <span style="left: 87%; bottom: -2px;">17</span> <span class="dim" style="left: 96%; bottom: -2px;">20</span> </div> </div> <div class="stave-block"> <div class="past-wash" style="width: calc(100px + (100% - 100px) * 0.20);"></div> <div class="now-label" style="left: calc(100px + (100% - 100px) * 0.20 - 16px); top: -18px;">07:42 · NOW</div> <div class="stave primary"> <div class="lab"><strong>calendar</strong><small>· 3 events</small></div> <div class="track"> <div class="ev-stem" style="left: 32%; width: 5%; top: 10px;"><span class="lbl"><strong>standup</strong><em>09:00 · 30m</em></span><span class="bar"></span></div> <div class="ev-stem" style="left: 41%; width: 5%; top: 62px;"><span class="lbl"><strong>1:1 · EM</strong><em>10:30 · 45m</em></span><span class="bar"></span></div> <div class="ev-stem" style="left: 76%; width: 5%; top: 10px;"><span class="lbl"><strong>design review · v2·1</strong><em>15:00 · 60m</em></span><span class="bar"></span></div> </div> </div> <div class="stave secondary"> <div class="lab"><strong>tasks</strong></div> <div class="track"> <div class="task-mark" style="left: 87%;">review incident <em>17:00</em></div> <div class="task-mark" style="left: 92%;">ship v2·1 <em>EOD</em></div> </div> </div> <div class="stave secondary"> <div class="lab"><strong>systems</strong></div> <div class="track" style="min-height: 30px;"> <div class="sys-dot" style="left: 2%; top: 8px;"><span class="dot err"></span><span class="lbl"><strong>backup</strong></span></div> <div class="sys-dot" style="left: 14%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 36%; top: 8px;"><span class="dot warn"></span><span class="lbl">etl <strong>2·1s</strong></span></div> <div class="sys-dot" style="left: 53%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 76%; top: 8px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 96%; top: 8px;"><span class="dot ok"></span></div> </div> </div> </div> </div> <div class="notice"><span class="lbl">Notice</span><span class="body">The first thing you read is a sentence, not a number. <em>The score follows; it doesn't lead.</em></span></div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-briefing-r9', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-briefing-r9'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

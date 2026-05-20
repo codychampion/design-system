@@ -1,0 +1,165 @@
+<!doctype html>
+<!-- NOX morning briefing · obsidian Synthesis of A/B rounds 1–9. See cody-prefs.md for the decisions log. Shape: horizontal "Score" with fish-eye axis, day-zones, tiered staves, stems, past-wash, opening sentence.
+-->
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOX · Morning briefing — 07:42</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: var(--c-bg); color: var(--c-text); font-family: 'IBM Plex Sans', sans-serif; margin: 0; padding: 0; min-height: 100vh;
+} /* ---- fidelity slider ---- */
+.fid { position: fixed; top: 16px; right: 16px; z-index: 50; background: var(--c-bg-raised); border: 1px solid var(--c-border-strong); border-radius: var(--r-sm); padding: var(--s-1); display: flex; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; box-shadow: var(--shadow-1);
+}
+.fid button { background: transparent; color: var(--c-text-subtle); border: 0; padding: 6px 12px; cursor: pointer; border-radius: 2px; font-family: var(--font-mono);
+}
+.fid button.is-on { background: var(--c-accent); color: var(--c-accent-text); }
+.fid__label { padding: 6px 10px 6px 12px; color: var(--c-text-subtle); border-right: 1px solid var(--c-border); margin-right: 4px; }
+.fid__theme { background: transparent; border: 0; padding: 6px 10px; cursor: pointer; color: var(--c-text-subtle); font-size: 14px; line-height: 1; border-right: 1px solid var(--c-border); margin-right: 4px;
+}
+.fid__theme:hover { color: var(--c-accent); } body[data-fid="wire"] .real, body[data-fid="wire"] .lo { display: none; }
+body[data-fid="lo"] .real, body[data-fid="lo"] .wire { display: none; }
+body[data-fid="hi"] .wire, body[data-fid="hi"] .lo { display: none; } main { max-width: 1320px; margin: 0 auto; padding: 36px 40px 56px; } /* ============================================================ HEAD — opening sentence + ledger ============================================================ */
+.head { padding-bottom: 20px; border-bottom: 1px solid var(--c-border); margin-bottom: 22px;
+}
+.head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.22em; color: var(--c-text-subtle); text-transform: uppercase; display: flex; gap: 14px; align-items: center;
+}
+.head__eye .crest { display: inline-block; width: 16px; height: 18px; background-color: var(--c-accent); -webkit-mask: url("../assets/crest_white.png") center/contain no-repeat; mask: url("../assets/crest_white.png") center/contain no-repeat;
+}
+.head__opener { font-family: 'IBM Plex Sans', sans-serif; font-size: 26px; line-height: 1.22; font-weight: 400; letter-spacing: -0.005em; color: var(--c-text); margin: 12px 0 0; max-width: 60ch;
+}
+.head__opener strong { font-weight: 500; }
+.head__opener em { font-style: italic; color: var(--c-text-subtle); }
+.head__opener .high { color: var(--c-warning); font-style: normal; }
+.head__opener .err { color: var(--c-danger); }
+.head__ledger { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.04em; color: var(--c-text-subtle);
+}
+.head__ledger strong { color: var(--c-text); font-weight: 500; }
+.head__ledger em { color: var(--c-warning); font-style: normal; }
+.head__ledger .err { color: var(--c-danger); }
+.head__ledger .ok { color: var(--c-success); } /* ============================================================ SCORE — axis + staves ============================================================ */
+.score { /* container */ } .axis { display: grid; grid-template-columns: 110px 1fr; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; color: var(--c-text-subtle);
+}
+.axis .lab { padding: 0 12px 4px 0; text-align: right; }
+.axis .ticks { position: relative; height: 30px; border-bottom: 1px solid var(--c-border);
+}
+.axis .ticks span { position: absolute; transform: translateX(-50%); bottom: 2px;
+}
+.axis .ticks span.is-now { color: var(--c-accent); font-weight: 500; }
+.axis .ticks span.dim { color: var(--c-text-disabled); }
+.axis .ticks .zone-band { position: absolute; top: 0; bottom: 1px; }
+.axis .ticks .zone-rule { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--c-border); }
+.axis .ticks .zone-lbl { position: absolute; top: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; color: var(--c-text-disabled); text-transform: uppercase;
+} .stave-block { position: relative; }
+.stave { display: grid; grid-template-columns: 110px 1fr; position: relative; border-bottom: 1px solid var(--c-bg-raised);
+}
+.stave:last-of-type { border-bottom: 0; }
+.stave .lab { padding: 12px 12px 12px 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.04em; color: var(--c-text-subtle); border-right: 1px solid var(--c-border);
+}
+.stave .lab strong { color: var(--c-text); font-weight: 500; }
+.stave .lab small { display: block; font-size: 9px; color: var(--c-text-disabled); letter-spacing: 0.12em; margin-top: 2px;
+}
+.stave .track { position: relative; padding: 10px 14px; } .stave.primary .lab { font-size: 13px; padding: 20px 12px 20px 0; }
+.stave.primary .lab strong { font-size: 13px; }
+.stave.primary .track { min-height: 140px; padding: 18px 14px; }
+.stave.secondary .lab { padding: 10px 12px 10px 0; font-size: 10.5px; }
+.stave.secondary .lab strong { font-size: 10.5px; }
+.stave.secondary .track { min-height: 36px; padding: 6px 14px; }
+.stave.tertiary .lab { padding: 4px 12px 4px 0; font-size: 9.5px; color: var(--c-text-disabled); }
+.stave.tertiary .lab strong { color: var(--c-text-subtle); font-size: 9.5px; }
+.stave.tertiary .track { min-height: 24px; padding: 3px 14px; }
+/* Weather label \u2014 lives over the curve, in HTML so it isn't stretched by the SVG's preserveAspectRatio="none". */
+.stave.tertiary .weather-mark { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9px; color: var(--c-text-subtle); letter-spacing: 0.04em; white-space: nowrap; pointer-events: none;
+} /* past wash */
+.past-wash { position: absolute; top: 0; bottom: 0; left: 0; background: linear-gradient(to right, color-mix(in srgb, var(--c-bg) 85%, transparent) 0%, color-mix(in srgb, var(--c-bg) 50%, transparent) 60%, transparent 100%); z-index: 4; pointer-events: none;
+}
+.past-wash::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 2px; background: var(--c-accent); box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 50%, transparent);
+}
+.now-label { position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; background: var(--c-accent); color: var(--c-bg); padding: 1px 5px; z-index: 6; pointer-events: none;
+} /* event stems */
+.ev-stem { position: absolute; display: flex; flex-direction: column; }
+.ev-stem .lbl { font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; color: var(--c-text); white-space: nowrap; padding-bottom: 4px; display: flex; align-items: baseline; gap: 8px;
+}
+.ev-stem .lbl strong { font-weight: 500; }
+.ev-stem .lbl em { font-style: normal; color: var(--c-text-subtle); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.ev-stem .bar { height: 14px; border: 1px solid var(--c-accent); border-bottom: 2px solid var(--c-accent); background: transparent; width: 100%;
+} /* task marks */
+.task-mark { position: absolute; display: flex; align-items: center; gap: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 11.5px; color: var(--c-text); white-space: nowrap;
+}
+.task-mark::before { content: "☐"; color: var(--c-text-disabled); font-size: 12px; }
+.task-mark em { font-style: normal; color: var(--c-text-subtle); font-family: 'IBM Plex Mono', monospace; font-size: 10px; margin-left: 4px; } /* system dots */
+.sys-dot { position: absolute; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%);
+}
+.sys-dot .dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.3);
+}
+.sys-dot .dot.ok { background: var(--c-success); }
+.sys-dot .dot.warn { background: var(--c-warning); }
+.sys-dot .dot.err { background: var(--c-danger); }
+.sys-dot .lbl { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--c-text-subtle); white-space: nowrap; letter-spacing: 0.04em;
+}
+.sys-dot .lbl strong { color: var(--c-text); font-weight: 500; } /* tertiary marks */
+.read-mark { position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: var(--c-text-subtle); white-space: nowrap; letter-spacing: 0.04em;
+}
+.read-mark::before { content: "▸ "; color: var(--c-text-disabled); } /* ============================================================ DETAILS — expanded info below the score ============================================================ */
+.details { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--c-border); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 36px;
+}
+.det-col h4 { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-accent); margin: 0 0 10px; font-weight: 500; padding-bottom: 4px; border-bottom: 1px solid var(--c-border);
+}
+.det-col p, .det-col li { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; line-height: 1.55; color: var(--c-text); margin: 0 0 10px;
+}
+.det-col p em, .det-col li em { font-style: italic; color: var(--c-text-subtle); }
+.det-col p code, .det-col li code { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--c-accent);
+}
+.det-col ul { padding: 0; margin: 0; list-style: none; }
+.det-col li { display: grid; grid-template-columns: 60px 1fr; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--c-bg-raised); align-items: baseline;
+}
+.det-col li:last-child { border-bottom: 0; }
+.det-col li .when { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-accent); letter-spacing: 0.04em;
+}
+.det-col .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--c-text-subtle); margin-right: 4px;
+}
+.det-col .tag.err { color: var(--c-danger); }
+.det-col .tag.warn { color: var(--c-warning); }
+.det-col .tag.ok { color: var(--c-success); } /* ============================================================ FOOT ============================================================ */
+.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--c-border); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--c-text-subtle); letter-spacing: 0.08em; display: grid; grid-template-columns: 1fr auto; align-items: baseline;
+}
+.foot .cmds { color: var(--c-text-disabled); }
+.foot .cmds span { color: var(--c-accent); margin-right: 14px; }
+.foot .end { color: var(--c-text-disabled); } /* WIRE & LO */
+.wire .skel { background: var(--c-border); border-radius: 2px; }
+.wire .row { display: flex; gap: 12px; margin-bottom: 10px; } @media (max-width: 1000px) { main { padding: 24px 20px 40px; } .details { grid-template-columns: 1fr; gap: 24px; } .head__opener { font-size: 20px; }
+}
+@media (max-width: 720px) { main { padding: 18px 14px 36px; } .head__opener { font-size: 17px; line-height: 1.3; } .head__ledger { font-size: 10px; gap: 10px; flex-wrap: wrap; } .details { gap: 18px; } .fid { top: 6px; right: 6px; font-size: 8.5px; padding: 2px; } .fid button, .fid__label { padding: 3px 6px; } /* ============================================================ SCORE → LIST on mobile. A score-shaped time-as-spine layout needs horizontal width to draw events along a hour-axis. On a phone, that breaks. The honest collapse: drop the axis + past-wash, stack each stave vertically with time + label rows. ============================================================ */ .score .axis { display: none; } .stave-block { padding-top: 0; } .stave-block .past-wash { display: none; } .stave-block .now-label { position: static; display: inline-block; margin: 0 0 12px; padding: 3px 8px; font-size: 10px; } /* Each stave: stack lab as a header band, track as a list */ .stave, .stave.primary, .stave.secondary, .stave.tertiary { display: block; padding: 10px 0 4px; border-bottom: 1px solid var(--c-bg-raised); } .stave .lab, .stave.primary .lab, .stave.secondary .lab, .stave.tertiary .lab { text-align: left; padding: 0 0 6px; border-right: 0; border-bottom: 1px dashed var(--c-bg-raised); display: flex; align-items: baseline; gap: 8px; font-size: 10.5px; } .stave .lab small { display: inline; margin-top: 0; font-size: 9.5px; } .stave .track, .stave.primary .track, .stave.secondary .track, .stave.tertiary .track { position: relative; min-height: 0; padding: 8px 0 4px; } /* Event stems: linearize. Hide the time-bar, restructure the label into a clean "[time] · [title]" row. */ .ev-stem { position: static; width: auto; margin-bottom: 6px; } .ev-stem .bar { display: none; } .ev-stem .lbl { display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding-bottom: 0; align-items: baseline; white-space: normal; } .ev-stem .lbl em { order: -1; color: var(--c-accent); font-size: 10.5px; font-family: 'IBM Plex Mono', monospace; } .ev-stem .lbl strong { color: var(--c-text); font-size: 13px; } /* Task marks: list rows with checkbox + label + meta */ .task-mark { position: static; transform: none; display: grid; grid-template-columns: 14px 1fr; column-gap: 6px; padding: 4px 0; font-size: 12.5px; white-space: normal; } .task-mark::before { font-size: 13px; line-height: 1.4; } .task-mark em { font-size: 10px; color: var(--c-accent); } /* System dots: inline strip with labels where present */ .stave.secondary .track:has(.sys-dot) { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding-top: 10px; } .sys-dot { position: static; transform: none; flex-direction: row; align-items: center; gap: 5px; } .sys-dot .dot { width: 7px; height: 7px; flex-shrink: 0; } .sys-dot .lbl { position: static; transform: none; top: auto; left: auto; font-size: 10px; color: var(--c-text-subtle); } /* Dots without labels collapse to just the dot */ .sys-dot:not(:has(.lbl)) { width: 9px; } /* Reading marks: vertical list */ .read-mark { position: static; display: block; padding: 2px 0; font-size: 10.5px; } /* Weather: drop the SVG curve, keep the mark text */ .stave.tertiary .track svg { display: none; } .weather-mark { position: static; transform: none; top: auto; left: auto; display: inline-block; font-size: 10.5px; } .stave.tertiary:last-of-type .track::before { content: "11° \2192 14° \2192 10°"; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--c-accent); margin-right: 10px; } /* Details section: stacks already at 1000px, here just tighter */ .det-col h4 { font-size: 9.5px; } .det-col p, .det-col li { font-size: 12.5px; } /* Foot: stack */ .foot { grid-template-columns: 1fr; gap: 8px; font-size: 10px; } .foot .cmds { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+}
+@media (max-width: 480px) { main { padding: 14px 12px 28px; } .head__opener { font-size: 15.5px; } .head__ledger { font-size: 9.5px; gap: 8px; } .ev-stem .lbl { grid-template-columns: 60px 1fr; gap: 6px; } .ev-stem .lbl strong { font-size: 12px; } .stave.secondary .track:has(.sys-dot) { gap: 4px 8px; }
+}
+</style>
+</head>
+<body data-fid="hi"> <div class="fid"> <button class="fid__theme" data-theme-toggle>☾</button> <span class="fid__label">Fidelity</span> <button data-fid="wire">Wire</button> <button data-fid="lo">Lo-fi</button> <button data-fid="hi" class="is-on">Hi-fi</button>
+</div> <main> <!-- ============================================================ WIRE
+============================================================ -->
+<div class="wire"> <div class="row"><div class="skel" style="width:40%; height:12px;"></div></div> <div class="row"><div class="skel" style="width:80%; height:28px;"></div></div> <div class="row"><div class="skel" style="width:25%; height:10px;"></div><div class="skel" style="width:25%; height:10px;"></div><div class="skel" style="width:25%; height:10px;"></div></div> <div class="row" style="margin-top:24px;"><div class="skel" style="width:100%; height:30px;"></div></div> <div class="row"><div class="skel" style="width:100%; height:140px;"></div></div> <div class="row"><div class="skel" style="width:100%; height:36px;"></div></div> <div class="row"><div class="skel" style="width:100%; height:36px;"></div></div> <div class="row"><div class="skel" style="width:100%; height:24px;"></div></div> <div class="row"><div class="skel" style="width:100%; height:24px;"></div></div> <div class="row" style="margin-top:24px;"><div class="skel" style="width:50%; height:100px;"></div><div class="skel" style="width:25%; height:100px;"></div><div class="skel" style="width:25%; height:100px;"></div></div>
+</div> <!-- ============================================================ LO
+============================================================ -->
+<div class="lo" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--c-text);"> <div style="color: var(--c-text-subtle); margin-bottom: 16px;">briefing · score-shaped · opening-sentence header · fish-eye axis · tiered staves</div> <div style="border: 1px dashed var(--c-border-strong); padding: 16px; margin-bottom: 12px;"> [opening]<br>"One thing is on fire, four are nice to know. backup.cold went down at 09:42 last night; standup at 09:00, v2·1 review at 15:00." <br><br>[ledger] 3 events · 2 tasks · 1 alert · 12/14 svc · 11° rising </div> <div style="border: 1px dashed var(--c-border-strong); padding: 16px; margin-bottom: 12px; white-space: pre-line;">
+[axis] overnight · MORNING · midday · AFTERNOON · after 06 07▸NOW 09 12 15 17 20 [primary] calendar — stems at 09 standup, 10:30 1:1, 15:00 review
+[secondary] tasks — review 17:00 · ship v2·1 EOD
+[secondary] systems — ● backup overnight (red) · ● etl 09:42 (yellow) · ● else ok
+[tertiary] reading — 3 marks
+[tertiary] weather — curve 11° → 14° → 10° past wash · gold boundary at 07:42 · NOW label </div> <div style="border: 1px dashed var(--c-border-strong); padding: 16px;">
+[details]
+incident · standup prep · reading queue
+[foot] commands · end of briefing · ∎ </div>
+</div> <!-- ============================================================ HI
+============================================================ -->
+<div class="real"> <header class="head"> <div class="head__eye"> <span class="crest"></span> <span>Champion · NOX · briefing — Mon 12 May 2026 · <span style="color:var(--c-accent)">07:42</span></span> </div> <p class="head__opener"> One thing is <span class="err">on fire</span>, and four are <span class="high">nice to know</span>. <em><code style="font-family:'IBM Plex Mono', monospace; font-size:22px; color:var(--c-danger);">backup.cold</code> went down at 09:42 last night; you have <strong>standup at 09:00</strong> and a <strong>v2·1 review at 15:00</strong>.</em> </p> <div class="head__ledger"> <span><strong>3</strong> events</span> <span><strong>2</strong> tasks due</span> <span><em>1</em> alert</span> <span><span class="ok">●</span> <strong>12</strong>/14 services</span> <span>weather <strong>11°</strong> rising · dry window 12–13</span> <span>last sync <strong>4h</strong> ago</span> </div> </header> <section class="score"> <div class="axis"> <div class="lab">hour →</div> <div class="ticks"> <div class="zone-band" style="left: 0%; width: 8%; background: color-mix(in srgb, var(--c-border) 30%, transparent);"></div> <div class="zone-band" style="left: 8%; width: 36%; background: color-mix(in srgb, var(--c-accent) 6%, transparent);"></div> <div class="zone-band" style="left: 44%; width: 18%; background: color-mix(in srgb, var(--c-text) 2%, transparent);"></div> <div class="zone-band" style="left: 62%; width: 28%; background: color-mix(in srgb, var(--c-accent) 6%, transparent);"></div> <div class="zone-band" style="left: 90%; width: 10%; background: color-mix(in srgb, var(--c-border) 30%, transparent);"></div> <div class="zone-rule" style="left: 8%;"></div> <div class="zone-rule" style="left: 44%;"></div> <div class="zone-rule" style="left: 62%;"></div> <div class="zone-rule" style="left: 90%;"></div> <span class="zone-lbl" style="left: 0%;">OVERNIGHT</span> <span class="zone-lbl" style="left: 9%;">MORNING</span> <span class="zone-lbl" style="left: 45%;">MIDDAY</span> <span class="zone-lbl" style="left: 63%;">AFTERNOON</span> <span class="zone-lbl" style="left: 91%;">AFTER</span> <span class="dim" style="left: 4%; bottom: -2px;">06</span> <span class="is-now" style="left: 14%; bottom: -2px;">07</span> <span style="left: 23%; bottom: -2px;">08</span> <span style="left: 32%; bottom: -2px;">09</span> <span style="left: 41%; bottom: -2px;">10</span> <span style="left: 53%; bottom: -2px;">12</span> <span style="left: 65%; bottom: -2px;">14</span> <span style="left: 76%; bottom: -2px;">15</span> <span style="left: 87%; bottom: -2px;">17</span> <span class="dim" style="left: 96%; bottom: -2px;">20</span> </div> </div> <div class="stave-block"> <div class="past-wash" style="width: calc(110px + (100% - 110px) * 0.20);"></div> <div class="now-label" style="left: calc(110px + (100% - 110px) * 0.20 - 16px); top: -18px;">07:42 · NOW</div> <!-- PRIMARY · calendar --> <div class="stave primary"> <div class="lab"><strong>calendar</strong><small>· 3 events</small></div> <div class="track"> <div class="ev-stem" style="left: 32%; width: 5%; top: 14px;"> <span class="lbl"><strong>standup</strong><em>09:00 · 30m · 6 ppl</em></span> <span class="bar"></span> </div> <div class="ev-stem" style="left: 41%; width: 5%; top: 72px;"> <span class="lbl"><strong>1:1 · EM</strong><em>10:30 · 45m · in person</em></span> <span class="bar"></span> </div> <div class="ev-stem" style="left: 76%; width: 5%; top: 14px;"> <span class="lbl"><strong>design review · v2·1</strong><em>15:00 · 60m · zoom</em></span> <span class="bar"></span> </div> </div> </div> <!-- SECONDARY · tasks --> <div class="stave secondary"> <div class="lab"><strong>tasks</strong><small>· 2 due</small></div> <div class="track"> <div class="task-mark" style="left: 87%; top: 9px; transform: translateX(-100%);">review incident report <em>17:00 · P2</em></div> <div class="task-mark" style="left: 96%; top: 9px; transform: translateX(-100%);">ship v2·1 to staging <em>EOD · P1</em></div> </div> </div> <!-- SECONDARY · systems --> <div class="stave secondary"> <div class="lab"><strong>systems</strong><small>· 14 svc</small></div> <div class="track" style="min-height: 36px;"> <div class="sys-dot" style="left: 2%; top: 10px;"><span class="dot err"></span><span class="lbl"><strong>backup</strong> overnight</span></div> <div class="sys-dot" style="left: 14%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 23%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 36%; top: 10px;"><span class="dot warn"></span><span class="lbl">etl <strong>2·1s</strong></span></div> <div class="sys-dot" style="left: 53%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 65%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 76%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 87%; top: 10px;"><span class="dot ok"></span></div> <div class="sys-dot" style="left: 98%; top: 10px;"><span class="dot ok"></span><span class="lbl">retry · 22:00</span></div> </div> </div> <!-- TERTIARY · reading --> <div class="stave tertiary"> <div class="lab"><strong>reading</strong></div> <div class="track"> <div class="read-mark" style="left: 18%; top: 8px;">calibration · 9m</div> <div class="read-mark" style="left: 53%; top: 8px;">deep notebooks · 7m</div> <div class="read-mark" style="left: 66%; top: 8px;">death of dashboard · 4m</div> </div> </div> <!-- TERTIARY · weather --> <div class="stave tertiary"> <div class="lab"><strong>weather</strong></div> <div class="track"> <svg width="100%" height="18" viewBox="0 0 100 18" preserveAspectRatio="none"> <polyline points="0,11 14,10 23,8 32,6 41,4 53,3 65,5 76,7 87,12 100,15" fill="none" style="stroke: var(--c-accent)" stroke-width="0.8" stroke-linejoin="round"/> <line x1="0" y1="16" x2="100" y2="16" style="stroke: var(--c-border)" stroke-width="0.3"/> </svg> <span class="weather-mark">dry · 12&ndash;13</span> </div> </div> </div> </section> <!-- ============================================================ DETAILS — expanded information below the score ============================================================ --> <section class="details"> <div class="det-col"> <h4>The alert · backup.cold</h4> <p><span class="tag err">FAIL</span><strong>Snapshot <code>w20-2026</code> didn't write.</strong> Three retries against the cold-storage endpoint, each timing out at <em>10s</em> to <code>s3.eu-west-1</code>.</p> <p>Paged at <em>23:47</em>; acknowledged at <em>06:14</em>. Retry window opens <em>22:00 tonight</em>. <code>etl.briefing</code> was also slow at 09:42 (<em>2·1s · 4× baseline</em>) but it self-recovered and isn't paging.</p> <p style="color: var(--c-text-subtle);">→ <span style="color:var(--c-accent);">open logs</span> · <span style="color:var(--c-accent);">ack</span> · <span style="color:var(--c-accent);">re-run from snapshot</span> · <span style="color:var(--c-accent);">draft incident note</span></p> </div> <div class="det-col"> <h4>Today's commitments</h4> <ul> <li><span class="when">09:00</span><span><strong>standup</strong> <em>· prep two notes: v2·1 ships today; backup incident.</em></span></li> <li><span class="when">10:30</span><span><strong>1:1 · EM</strong> <em>· Q3 staffing; v2·1 retro; H2 line.</em></span></li> <li><span class="when">15:00</span><span><strong>design review</strong> <em>· bring the recall–FPR figure; the shipping call lives here.</em></span></li> <li><span class="when">17:00</span><span><strong>☐ review</strong> backup incident report <em>· three lines is enough.</em></span></li> <li><span class="when">EOD</span><span><strong>☐ ship</strong> v2·1 to staging <em>· two unresolved comments on the PR.</em></span></li> </ul> </div> <div class="det-col"> <h4>Reading queue</h4> <ul> <li><span class="when">9 min</span><span><strong>Calibration drift in spatial-ML ensembles</strong> <em>· arxiv · worth the bus.</em></span></li> <li><span class="when">7 min</span><span>Mod, <strong>Deep notebooks, deep work</strong> <em>· essay.</em></span></li> <li><span class="when">4 min</span><span><strong>The death of the dashboard</strong> <em>· FT Alphaville · over coffee.</em></span></li> </ul> </div> </section> <footer class="foot"> <div class="cmds"> <span>⌘k · search</span> <span>/ack</span> <span>/silence</span> <span>/compose</span> </div> <div class="end">last sync 4h ago · ∎</div> </footer> </div> </main> <script>
+document.querySelectorAll('.fid button[data-fid]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.fid button[data-fid]').forEach(b => b.classList.remove('is-on')); btn.classList.add('is-on'); document.body.dataset.fid = btn.dataset.fid; });
+});
+</script>
+<script src="../assets/theme-toggle.js"></script>
+</body>
+</html>

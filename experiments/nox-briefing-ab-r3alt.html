@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX briefing — Round 3 alt (new shapes)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16);
+} .page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border);
+}
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3);
+}
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em;
+}
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 28ch;
+}
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; } .versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start;
+} .option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border);
+}
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px;
+}
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); } .option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch;
+}
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55;
+}
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; } .mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); position: relative; overflow: hidden; display: flex; flex-direction: column;
+} .notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+}
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } /* ============================================================ A — THE DISPATCH A typewritten morning note. No widgets. Prose only. ============================================================ */
+.dispatch { padding: 32px 40px 24px; background: #2D2A2E; display: flex; flex-direction: column; flex: 1; /* faint paper texture via diagonal grid */ background-image: repeating-linear-gradient( to bottom, transparent 0, transparent 21px, rgba(252, 252, 250, 0.02) 21px, rgba(252, 252, 250, 0.02) 22px );
+}
+.dispatch__head { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid #4a474b; padding-bottom: 10px; margin-bottom: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #939293; align-items: end;
+}
+.dispatch__head strong { color: #FCFCFA; font-weight: 500; }
+.dispatch__head .r { text-align: right; } .dispatch__from { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #939293; margin-bottom: 18px; display: grid; grid-template-columns: 60px 1fr; gap: 12px; line-height: 1.5;
+}
+.dispatch__from .l { color: #5b5862; text-align: right; }
+.dispatch__from .v { color: #FCFCFA; }
+.dispatch__from .v em { color: #FFD866; font-style: normal; } .dispatch__greet { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #FCFCFA; margin-bottom: 12px;
+} .dispatch__body { font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; line-height: 1.7; color: #FCFCFA; flex: 1;
+}
+.dispatch__body p { margin: 0 0 14px; }
+.dispatch__body strong { font-weight: 500; }
+.dispatch__body em { font-style: italic; color: #939293; }
+.dispatch__body .high { color: #FFD866; font-weight: 500; font-style: normal; }
+.dispatch__body .ok { color: #A9DC76; }
+.dispatch__body .err { color: #FF6188; }
+.dispatch__body code { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FC9867; letter-spacing: 0;
+}
+.dispatch__body .time { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FC9867; font-style: normal;
+} .dispatch__sign { margin-top: 18px; padding-top: 10px; border-top: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #939293; letter-spacing: 0.08em; display: grid; grid-template-columns: 1fr auto; align-items: baseline;
+}
+.dispatch__sign strong { color: #FCFCFA; font-weight: 500; }
+.dispatch__sign .actions { text-align: right; color: #939293;
+}
+.dispatch__sign .actions span { color: #FC9867; margin-left: 12px; } /* ============================================================ B — THE SCORE Horizontal time axis with parallel staves. Reads left-to-right. ============================================================ */
+.score { padding: 22px 26px; display: flex; flex-direction: column; flex: 1;
+}
+.score__head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid #4a474b; margin-bottom: 14px;
+}
+.score__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase;
+}
+.score__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; color: #FCFCFA; margin-top: 3px;
+}
+.score__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right;
+}
+.score__counts strong { color: #FCFCFA; font-weight: 500; }
+.score__counts em { color: #FFD866; font-style: normal; }
+.score__counts .err { color: #FF6188; } /* The time axis */
+.score__axis { display: grid; grid-template-columns: 110px 1fr; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: #939293;
+}
+.score__axis .lab { padding-right: 8px; text-align: right; }
+.score__axis .ticks { display: grid; grid-template-columns: repeat(15, 1fr); position: relative; border-bottom: 1px solid #4a474b;
+}
+.score__axis .ticks span { text-align: left; padding-bottom: 4px;
+}
+.score__axis .ticks span.is-now { color: #FC9867; font-weight: 500; } /* A stave */
+.stave { display: grid; grid-template-columns: 110px 1fr; align-items: stretch; position: relative; border-bottom: 1px solid #3a3739;
+}
+.stave:last-of-type { border-bottom: 0; }
+.stave .lab { padding: 10px 8px 10px 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.04em; color: #939293; border-right: 1px solid #4a474b;
+}
+.stave .lab small { display: block; font-size: 9px; color: #5b5862; letter-spacing: 0.12em; margin-top: 2px;
+}
+.stave .track { position: relative; display: grid; grid-template-columns: repeat(28, 1fr); /* half-hour resolution from 06 to 20 = 14h * 2 = 28 columns */ min-height: 48px; align-items: center; padding: 6px 0;
+}
+.stave .track .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(74, 71, 75, 0.4);
+} /* Stave content: positioned cells (col-start / col-end) */
+.event-bar { height: 22px; background: rgba(252, 152, 103, 0.16); border: 1px solid #FC9867; display: flex; align-items: center; padding: 0 8px; font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; color: #FCFCFA; white-space: nowrap; overflow: hidden; border-radius: 0;
+}
+.event-bar strong { font-weight: 500; }
+.event-bar em { font-style: normal; color: #939293; margin-left: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; } .task-tick { display: flex; align-items: center; gap: 4px; font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; color: #FCFCFA; white-space: nowrap;
+}
+.task-tick::before { content: "☐"; color: #5b5862;
+} .dot-mark { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin: 0 auto;
+}
+.dot-mark.ok { background: #A9DC76; }
+.dot-mark.warn { background: #FFD866; }
+.dot-mark.err { background: #FF6188; }
+.dot-mark.ping { background: #FC9867; } .dot-cell { display: flex; align-items: center; justify-content: center; position: relative;
+}
+.dot-cell::after { content: attr(data-l); position: absolute; top: -6px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #939293; white-space: nowrap; letter-spacing: 0.04em;
+} .weather-svg { width: 100%; height: 36px; display: block;
+} .read-tick { display: flex; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #FC9867; white-space: nowrap; letter-spacing: 0.04em;
+} /* NOW line — vertical across all staves */
+.score__now { position: absolute; top: 0; bottom: 0; width: 1px; background: #FC9867; z-index: 5; pointer-events: none;
+}
+.score__now::before { content: "07:42"; position: absolute; top: -16px; left: -16px; background: #FC9867; color: #2D2A2E; padding: 1px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+} .score__staves { position: relative;
+} /* Footer summary */
+.score__foot { margin-top: 14px; padding-top: 10px; border-top: 1px solid #4a474b; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; line-height: 1.7; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.score__foot strong { color: #FCFCFA; font-weight: 500; }
+.score__foot em { color: #FC9867; font-style: normal; }
+.score__foot .h { letter-spacing: 0.2em; color: #FC9867; font-size: 9.5px; text-transform: uppercase; display: block; margin-bottom: 4px;
+} @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); }
+}
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"> <span class="back"><a href="nox-briefing-ab-r2.html">← restart from R2</a></span> <span>Champion · A/B · Round 3 (alt)</span> </div> <h1>Two unfamiliar shapes. <em>— pick on character, not memory.</em></h1> </div> <div class="note"> Discarding the Daybook track for this round.<br> Same content, but the shape is <strong>not</strong> a vertical hour-rail.<br> <em>The thing that was familiar was the rail itself.</em> </div>
+</header> <div class="versus"> <!-- ============================================================ A — THE DISPATCH (typed morning note)
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">The Dispatch <em>— NOX writes you a note.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">No layout. <strong>The briefing is a typed letter from NOX</strong>, dated, signed, six paragraphs long. Information is woven into the prose, not arranged on a grid. A morning correspondence from someone who keeps track of your stuff for you.</p> <p class="option__refuses"><strong>Strength:</strong> reads in order without scanning. Voice does the structuring. <strong>Weakness:</strong> not glanceable — must be read; can't be re-found by spatial memory.</p> <div class="mockup"> <div class="dispatch"> <div class="dispatch__head"> <div><strong>NOX · Morning dispatch</strong> · for cody.champion</div> <div class="r">Mon 12 May 2026 · 07:42</div> </div> <div class="dispatch__from"> <span class="l">FROM</span><span class="v">NOX <em>(home-row daemon)</em></span> <span class="l">TO</span><span class="v">cody.champion</span> <span class="l">RE</span><span class="v">Morning briefing — what survived the night.</span> </div> <div class="dispatch__greet">Good morning.</div> <div class="dispatch__body"> <p>One thing is on fire and four things are nice to know. I'll take them in that order.</p> <p><span class="err">●</span> <code>backup.cold</code> <span class="high">failed at 09:42 last night.</span> Three retries against the cold-storage endpoint, each timing out at ten seconds. Snapshot <em>w20-2026</em> didn't write. I paged at <span class="time">23:47</span>; you acknowledged at <span class="time">06:14</span>. The retry window opens at <span class="time">22:00</span> tonight — you'll want the incident note in hand by then.</p> <p>Your day has three meetings: <strong>standup</strong> at <span class="time">09:00</span> (six people, zoom), <strong>1:1 with the EM</strong> at <span class="time">10:30</span> (in person, Q3 staffing on the table), and a <strong>design review on parcel-risk v2·1</strong> at <span class="time">15:00</span>. The design review is where the shipping call lives; bring the recall–FPR figure.</p> <p>Two things are due. <strong>Ship v2·1 to staging</strong> by EOD — P1, two unresolved comments on the PR. <strong>Review the backup-failure incident report</strong> by <span class="time">17:00</span> — three lines is enough.</p> <p>Three things I surfaced for reading: a paper on <em>calibration drift in spatial-ML ensembles</em> (9 min), Mod on <em>deep notebooks, deep work</em> (7 min), and a piece on the <em>death of the dashboard</em> (4 min). The first is worth the bus.</p> <p>The rest of the system is nominal. <span class="ok">●</span> twelve services healthy; <code>etl.briefing</code> was slow at <span class="time">09:42</span> last night (2·1s, four times baseline) but not paging. <span class="high">●</span> Weather: 11° rising to 14°, dry window <span class="time">12–13</span>, mind the rain after <span class="time">17:00</span>.</p> </div> <div class="dispatch__sign"> <span>— NOX · <strong>07:42</strong> · last sync 4h ago · ∎</span> <span class="actions"><span>open logs →</span><span>ack →</span><span>reply →</span></span> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">No widgets at all. The hierarchy is <em>the order of paragraphs.</em> First sentence — "one is on fire and four are nice to know" — is the whole briefing.</span> </div> </div>
+</section> <!-- ============================================================ B — THE SCORE (horizontal staves)
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">The Score <em>— time runs sideways, in lanes.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">The day is a <strong>horizontal time axis</strong>. Below it, five parallel <em>staves</em> — calendar, tasks, systems, reading, weather — each annotated where things happen along the axis. A vertical NOW line spans the whole score. Reads like a Gantt chart, like sheet music, like a Tufte small-multiples row.</p> <p class="option__refuses"><strong>Strength:</strong> every category gets its own line; cross-category sync is built in geometrically. <strong>Weakness:</strong> longer to read in detail — labels compress, depth lives in tooltips.</p> <div class="mockup"> <div class="score"> <div class="score__head"> <div> <div class="score__eye">Briefing · Mon 12 May 2026 · 07:42</div> <div class="score__title">The Score — five staves, one axis.</div> </div> <div class="score__counts"><strong>3</strong> events · <strong>2</strong> tasks · <em>1</em> alert · <span class="err">backup.cold</span></div> </div> <!-- TIME AXIS --> <div class="score__axis"> <div class="lab">hour →</div> <div class="ticks"> <span>06</span><span>07</span><span class="is-now">08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span> </div> </div> <!-- STAVES --> <div class="score__staves"> <!-- NOW line — covers all staves below the axis --> <!-- 07:42 within a 06-20 (14h) range = 1h42m in = 1.7 / 14 = 12.14% --> <div class="score__now" style="left: calc(110px + (100% - 110px) * 0.121);"></div> <!-- Calendar --> <div class="stave"> <div class="lab">calendar<small>· 3 events</small></div> <div class="track"> <!-- gridlines every other column = every hour --> <div class="gridline" style="left: 7.14%;"></div> <div class="gridline" style="left: 14.28%;"></div> <div class="gridline" style="left: 21.42%;"></div> <div class="gridline" style="left: 28.57%;"></div> <div class="gridline" style="left: 35.71%;"></div> <div class="gridline" style="left: 42.85%;"></div> <div class="gridline" style="left: 50%;"></div> <div class="gridline" style="left: 57.14%;"></div> <div class="gridline" style="left: 64.28%;"></div> <div class="gridline" style="left: 71.42%;"></div> <div class="gridline" style="left: 78.57%;"></div> <div class="gridline" style="left: 85.71%;"></div> <div class="gridline" style="left: 92.85%;"></div> <!-- 09:00–09:30 standup: cols 7..8 (0-indexed half-hours from 06) --> <div class="event-bar" style="grid-column: 7 / span 1;"><strong>standup</strong><em>9:00</em></div> <!-- 10:30–11:15: cols 10..11 --> <div class="event-bar" style="grid-column: 10 / span 2;"><strong>1:1 · EM</strong><em>10:30</em></div> <!-- 15:00–16:00: cols 19..20 --> <div class="event-bar" style="grid-column: 19 / span 2;"><strong>design review · v2·1</strong><em>15:00</em></div> </div> </div> <!-- Tasks --> <div class="stave"> <div class="lab">tasks<small>· 2 due</small></div> <div class="track"> <!-- task at 17:00 --> <div class="task-tick" style="grid-column: 23 / span 4;">review incident · 17:00 · P2</div> <!-- task at EOD ~19:00 --> <div class="task-tick" style="grid-column: 27 / span 2;">ship v2·1 · EOD · P1</div> </div> </div> <!-- Systems --> <div class="stave"> <div class="lab">systems<small>· 14 svc</small></div> <div class="track"> <div class="gridline" style="left: 14.28%;"></div> <div class="gridline" style="left: 50%;"></div> <!-- backup.cold at ~09:42 the night before, but we render it as the overnight event near 06 --> <div class="dot-cell" style="grid-column: 1; height: 100%;" data-l="backup.cold · overnight"><span class="dot-mark err"></span></div> <!-- etl.briefing slow at 09:42 --> <div class="dot-cell" style="grid-column: 8; height: 100%;" data-l="etl 2.1s"><span class="dot-mark warn"></span></div> <!-- ok pings at hour ticks --> <div class="dot-cell" style="grid-column: 4; height: 100%;"><span class="dot-mark ok"></span></div> <div class="dot-cell" style="grid-column: 6; height: 100%;"><span class="dot-mark ok"></span></div> <div class="dot-cell" style="grid-column: 12; height: 100%;"><span class="dot-mark ok"></span></div> <div class="dot-cell" style="grid-column: 16; height: 100%;"><span class="dot-mark ok"></span></div> <div class="dot-cell" style="grid-column: 20; height: 100%;"><span class="dot-mark ok"></span></div> <div class="dot-cell" style="grid-column: 24; height: 100%;"><span class="dot-mark ok"></span></div> <!-- ml.calibrate.nightly window near 20:00 --> <div class="dot-cell" style="grid-column: 28; height: 100%;" data-l="retry · 22:00"><span class="dot-mark ping"></span></div> </div> </div> <!-- Reading --> <div class="stave"> <div class="lab">reading<small>· 3 queued</small></div> <div class="track"> <div class="read-tick" style="grid-column: 5 / span 4;">▸ calibration drift · 9m</div> <div class="read-tick" style="grid-column: 13 / span 4;">▸ deep notebooks · 7m</div> <div class="read-tick" style="grid-column: 22 / span 4;">▸ death of dashboard · 4m</div> </div> </div> <!-- Weather (continuous line + rain markers) --> <div class="stave"> <div class="lab">weather<small>· 11° → 14° → 10°</small></div> <div class="track" style="min-height: 50px; align-items: end; padding-bottom: 8px;"> <svg class="weather-svg" viewBox="0 0 280 36" preserveAspectRatio="none"> <!-- temp curve 11 -> 14 -> 10. Map 7-21° to 30-2. --> <!-- x: 28 columns, y: temp --> <polyline points=" 0,22 10,22 20,21 30,20 40,18 50,16 60,14 70,12 80,10 90,10 100,11 110,12 120,13 130,14 140,14 150,14 160,14 170,15 180,16 190,18 200,20 210,22 220,24 230,25 240,26 250,26 260,27 270,28 280,28 " fill="none" stroke="#FC9867" stroke-width="1" stroke-linejoin="round"/> <!-- rain markers --> <g fill="#939293" font-family="IBM Plex Mono" font-size="7"> <text x="6" y="34">·</text> <text x="16" y="34">·</text> <text x="26" y="34">·</text> <text x="240" y="34">·</text> <text x="250" y="34">·</text> <text x="260" y="34">·</text> <text x="272" y="34">·</text> </g> <!-- annotations --> <text x="92" y="6" font-family="IBM Plex Mono" font-size="7" fill="#939293">dry · 12–13</text> </svg> </div> </div> </div> <div class="score__foot"> <div><span class="h">overnight</span>backup.cold failed <em>09:42</em>, retry exhausted · acked 06:14 · snapshot w20-2026 missing.</div> <div><span class="h">to read first</span>calibration-drift paper · worth the bus · the other two if there's a minute.</div> </div> </div> <div class="notice"> <span class="lbl">Notice</span> <span class="body">Five staves, one axis. <em>standup at 09:00</em> and the <em>etl.briefing warn at 09:42</em> line up under each other — geometry, not text.</span> </div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-briefing-r3alt', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-briefing-r3alt'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>

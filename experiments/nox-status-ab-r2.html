@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-mode="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A/B · NOX status — Round 2 (where the pulse lives)</title>
+<link rel="icon" href="../assets/crest_dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body { background: #1a1819; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-text); margin: 0; padding: var(--s-12) var(--s-8) var(--s-16); }
+.page-head { max-width: 1480px; margin: 0 auto var(--s-12); display: grid; grid-template-columns: 1fr auto; gap: var(--s-6); align-items: end; padding-bottom: var(--s-4); border-bottom: 1px solid var(--c-border); }
+.page-head .eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--c-text-subtle); margin-bottom: var(--s-3); }
+.page-head .eye .back { margin-right: 12px; border-right: 1px solid var(--c-border); padding-right: 12px; }
+.page-head .eye a { color: var(--c-text-subtle); text-decoration: none; }
+.page-head .eye a:hover { color: var(--c-accent); }
+.page-head h1 { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0; letter-spacing: -0.005em; }
+.page-head h1 em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.page-head .note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-subtle); letter-spacing: 0.08em; text-align: right; line-height: 1.6; max-width: 32ch; }
+.page-head .note strong { color: var(--c-text); font-weight: 500; }
+.page-head .note em { color: var(--c-accent); font-style: normal; }
+.versus { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: start; }
+.option { display: flex; flex-direction: column; gap: var(--s-3); }
+.option__head { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-border); }
+.option__letter { font-family: 'IBM Plex Mono', monospace; color: var(--c-accent); font-size: 13px; letter-spacing: 0.14em; }
+.option__title { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500; }
+.option__title em { font-style: italic; color: var(--c-text-subtle); font-weight: 400; }
+.option__pick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-text-subtle); border: 1px solid var(--c-border-strong); padding: 6px 12px; background: transparent; cursor: pointer; border-radius: 3px; }
+.option__pick:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.option__pick.is-picked { background: var(--c-accent); color: var(--c-accent-text); border-color: var(--c-accent); }
+.option__sub { font-family: var(--font-body); font-size: 13.5px; line-height: 1.55; color: var(--c-text-subtle); max-width: 56ch; }
+.option__sub strong { color: var(--c-text); font-weight: 500; }
+.option__sub em { font-style: italic; color: var(--c-text); }
+.option__refuses { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--c-text-disabled); line-height: 1.55; }
+.option__refuses strong { color: var(--c-text-subtle); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.mockup { background: #2D2A2E; border: 1px solid #4a474b; margin-top: var(--s-2); display: flex; flex-direction: column; min-height: 760px; }
+.notice { border-top: 1px solid #4a474b; padding: 10px 22px; background: rgba(252, 152, 103, 0.04); font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; letter-spacing: 0.04em; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.notice .lbl { color: #FC9867; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.notice .body { color: #FCFCFA; line-height: 1.5; }
+.notice .body em { color: #939293; font-style: italic; } .m-head { padding: 20px 24px 14px; border-bottom: 1px solid #4a474b; display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+.m-head__eye { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #939293; text-transform: uppercase; }
+.m-head__title { font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #FCFCFA; margin-top: 3px; font-weight: 500; }
+.m-head__counts { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #939293; text-align: right; line-height: 1.55; }
+.m-head__counts strong { color: #FCFCFA; font-weight: 500; }
+.m-head__counts em { color: #FFD866; font-style: normal; }
+.m-head__counts .err { color: #FF6188; } /* Audit log shared (now a base, not a variant) */
+.audit__line { display: grid; grid-template-columns: 76px 56px 130px 1fr; gap: 14px; padding: 4px 24px; align-items: baseline; border-bottom: 1px solid #2a282a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.55; }
+.audit__line.is-recent { background: rgba(252, 152, 103, 0.03); }
+.audit__line .t { color: #939293; font-size: 10.5px; }
+.audit__line .lvl { font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.audit__line .lvl.info { color: #939293; }
+.audit__line .lvl.warn { color: #FFD866; }
+.audit__line .lvl.err { color: #FF6188; }
+.audit__line .lvl.ok { color: #A9DC76; }
+.audit__line .src { color: #FC9867; }
+.audit__line .msg { color: #FCFCFA; }
+.audit__line .msg .hl { color: #FC9867; }
+.audit__live { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; color: #FC9867; text-transform: uppercase; padding: 10px 24px 4px; display: flex; gap: 10px; align-items: baseline; }
+.audit__live::before { content: ""; width: 6px; height: 6px; background: #FC9867; border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.3; } } /* Tiny inline sparkline (used inside audit lines) */
+.tinyspark { display: inline-block; width: 64px; height: 11px; vertical-align: -1px; margin: 0 4px; }
+.tinyspark polyline { fill: none; stroke-width: 1; }
+.tinyspark.ok polyline { stroke: #A9DC76; }
+.tinyspark.warn polyline { stroke: #FFD866; }
+.tinyspark.err polyline { stroke: #FF6188; } /* ============================================================ A — PULSE STRIP ABOVE THE LOG ============================================================ */
+.pulses-strip { padding: 14px 24px 18px; border-bottom: 1px solid #4a474b; }
+.pulses-strip__lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; color: #FC9867; text-transform: uppercase; margin-bottom: 8px; }
+.pulses-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
+.pulse-cell { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #939293; }
+.pulse-cell .name { color: #FCFCFA; display: block; margin-bottom: 4px; letter-spacing: 0.02em; }
+.pulse-cell .name.err { color: #FF6188; }
+.pulse-cell .name.warn { color: #FFD866; }
+.pulse-cell svg { width: 100%; height: 26px; display: block; }
+.pulse-cell .val { color: #FCFCFA; font-size: 10px; letter-spacing: 0.04em; margin-top: 2px; display: block; }
+.pulse-cell .val.warn { color: #FFD866; }
+.pulse-cell .val.err { color: #FF6188; } /* ============================================================ B — PULSE COMPANION IN THE MARGIN ============================================================ */
+.body-grid { display: grid; grid-template-columns: 1fr 300px; flex: 1; min-height: 0; }
+.body-grid .log-col { border-right: 1px solid #4a474b; }
+.body-grid .marg-col { padding: 16px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #939293; }
+.body-grid .marg-col h4 { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: #FC9867; text-transform: uppercase; margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px solid #4a474b; }
+.body-grid .marg-col h4 + h4 { margin-top: 18px; }
+.marg-pulse { padding: 8px 0; border-bottom: 1px solid #2a282a; }
+.marg-pulse:last-child { border-bottom: 0; }
+.marg-pulse .name { color: #FCFCFA; font-size: 11px; display: flex; justify-content: space-between; align-items: baseline; }
+.marg-pulse .name .v { color: #939293; font-size: 10px; }
+.marg-pulse .name.err { color: #FF6188; }
+.marg-pulse .name.err .v { color: #FF6188; }
+.marg-pulse .name.warn { color: #FFD866; }
+.marg-pulse .name.warn .v { color: #FFD866; }
+.marg-pulse svg { width: 100%; height: 30px; margin-top: 4px; display: block; }
+.marg-pulse .ann { font-size: 9.5px; color: #5b5862; letter-spacing: 0.04em; margin-top: 2px; } @media (max-width: 1100px) { .versus { grid-template-columns: 1fr; gap: var(--s-12); } }
+</style>
+</head>
+<body> <header class="page-head"> <div> <div class="eye"><span class="back"><a href="nox-status-ab-r1.html">← R1 · audit log chosen, with pulses</a></span><span>Champion · NOX status · A/B · Round 2</span></div> <h1>Where do the pulse-lines live?</h1> </div> <div class="note"> Same log. Same data.<br> Question: <strong>where do the time-series pulses sit relative to the stream?</strong><br> <em>A: above. B: beside.</em> </div>
+</header> <div class="versus"> <!-- ============================================================ A — PULSES ABOVE
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option A</span> <span class="option__title">Pulses above <em>— a vital-signs strip, then the log.</em></span> <button class="option__pick" data-pick="A">Pick A</button> </div> <p class="option__sub">A <strong>small-multiples strip</strong> of pulse-lines sits above the log: one mini-sparkline per service, last hour, with current value. The log streams below. <em>You glance up for "how are vitals?", glance down for "what just happened?"</em></p> <p class="option__refuses"><strong>Strength:</strong> two distinct reading zones; pulses are scannable as a row. <strong>Weakness:</strong> pulses are above the fold, the log is below; you can't see both at once for a small viewport.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · live · Mon 12 May 2026</div> <div class="m-head__title">vitals · then the log</div> </div> <div class="m-head__counts">14 services · last 1h<br><em>1</em> warn · <span class="err">1</span> err · <strong>12</strong> ok</div> </header> <div class="pulses-strip"> <div class="pulses-strip__lbl">Vital signs · last 1h · P99 ms</div> <div class="pulses-grid"> <div class="pulse-cell"> <span class="name err">backup.cold</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,12 20,12 40,12 50,2 55,24 60,2 70,24" fill="none" stroke="#FF6188" stroke-width="1"/></svg> <span class="val err">— flat</span> </div> <div class="pulse-cell"> <span class="name warn">etl.briefing</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,18 20,16 40,12 60,8 80,4 100,3" fill="none" stroke="#FFD866" stroke-width="1"/></svg> <span class="val warn">2,118ms</span> </div> <div class="pulse-cell"> <span class="name">ingest.geo</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,12 20,11 40,13 60,11 80,12 100,11" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">182</span> </div> <div class="pulse-cell"> <span class="name">ml.score.v3</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,13 20,12 40,14 60,12 80,13 100,12" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">94</span> </div> <div class="pulse-cell"> <span class="name">geocode</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,13 30,12 60,14 80,13 100,12" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">63</span> </div> <div class="pulse-cell"> <span class="name">auth.idp</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,13 100,13" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">12</span> </div> <div class="pulse-cell"> <span class="name">edge.cache</span> <svg viewBox="0 0 100 26" preserveAspectRatio="none"><polyline points="0,13 100,13" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <span class="val">8</span> </div> </div> </div> <div class="audit__live">live · streaming</div> <div class="audit__line is-recent"><span class="t">09:42:14</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">connection timeout after <span class="hl">10000ms</span> · retry exhausted</span></div> <div class="audit__line is-recent"><span class="t">09:41:11</span><span class="lvl info">INFO</span><span class="src">backup.cold</span><span class="msg">starting snapshot <span class="hl">w20-2026</span></span></div> <div class="audit__line"><span class="t">09:40:58</span><span class="lvl ok">OK</span><span class="src">etl.briefing</span><span class="msg">completed · <span class="hl">2118ms</span> · 1,402 rows</span></div> <div class="audit__line"><span class="t">09:40:54</span><span class="lvl warn">WARN</span><span class="src">etl.briefing</span><span class="msg">slow query: feeds-since</span></div> <div class="audit__line"><span class="t">09:39:01</span><span class="lvl ok">OK</span><span class="src">ml.score.v3</span><span class="msg">batch 4112 · P99 94ms</span></div> <div class="audit__line"><span class="t">07:38:12</span><span class="lvl info">INFO</span><span class="src">ingest.geo</span><span class="msg">flushed <span class="hl">14,201</span> records</span></div> <div class="audit__line"><span class="t">07:34:21</span><span class="lvl ok">OK</span><span class="src">auth.idp</span><span class="msg">key rotation · kid=<span class="hl">k-2026w20</span></span></div> <div class="audit__line"><span class="t">06:14:00</span><span class="lvl info">INFO</span><span class="src">pager.alert</span><span class="msg">backup.cold acknowledged by <span class="hl">cc</span></span></div> <div class="notice"><span class="lbl">Notice</span><span class="body">Vitals as a row at the top — <em>backup.cold's flatline visible without scrolling.</em> Log below.</span></div> </div>
+</section> <!-- ============================================================ B — PULSES BESIDE
+============================================================ -->
+<section class="option"> <div class="option__head"> <span class="option__letter">Option B</span> <span class="option__title">Pulses beside <em>— companion column to the log.</em></span> <button class="option__pick" data-pick="B">Pick B</button> </div> <p class="option__sub">The log dominates the main column. A <strong>narrow right margin</strong> shows live pulses for the most relevant services (auto-sorted by severity). Pulses are <em>companions</em> to the log, not a summary; they share the page, you read them in parallel.</p> <p class="option__refuses"><strong>Strength:</strong> log and pulses are visible together; the eye triangulates. <strong>Weakness:</strong> margin only fits 4-5 pulses; less-relevant services need to be browsed elsewhere.</p> <div class="mockup"> <header class="m-head"> <div> <div class="m-head__eye">NOX · status · live · Mon 12 May 2026</div> <div class="m-head__title">log + companion pulses</div> </div> <div class="m-head__counts">14 services<br><em>1</em> warn · <span class="err">1</span> err · <strong>12</strong> ok</div> </header> <div class="body-grid"> <div class="log-col"> <div class="audit__live">live · streaming</div> <div class="audit__line is-recent"><span class="t">09:42:14</span><span class="lvl err">ERR</span><span class="src">backup.cold</span><span class="msg">timeout <span class="hl">10000ms</span> · retry exhausted</span></div> <div class="audit__line is-recent"><span class="t">09:41:11</span><span class="lvl info">INFO</span><span class="src">backup.cold</span><span class="msg">starting <span class="hl">w20-2026</span></span></div> <div class="audit__line"><span class="t">09:40:58</span><span class="lvl ok">OK</span><span class="src">etl.briefing</span><span class="msg">completed · <span class="hl">2118ms</span></span></div> <div class="audit__line"><span class="t">09:40:54</span><span class="lvl warn">WARN</span><span class="src">etl.briefing</span><span class="msg">slow query</span></div> <div class="audit__line"><span class="t">09:39:01</span><span class="lvl ok">OK</span><span class="src">ml.score.v3</span><span class="msg">batch 4112 · P99 94ms</span></div> <div class="audit__line"><span class="t">09:36:00</span><span class="lvl info">INFO</span><span class="src">scheduler</span><span class="msg">tick · 3 jobs</span></div> <div class="audit__line"><span class="t">07:38:12</span><span class="lvl info">INFO</span><span class="src">ingest.geo</span><span class="msg">flushed <span class="hl">14,201</span> records</span></div> <div class="audit__line"><span class="t">07:34:21</span><span class="lvl ok">OK</span><span class="src">auth.idp</span><span class="msg">key rotation</span></div> <div class="audit__line"><span class="t">06:14:00</span><span class="lvl info">INFO</span><span class="src">pager.alert</span><span class="msg">backup.cold ack by <span class="hl">cc</span></span></div> <div class="audit__line"><span class="t">04:11:00</span><span class="lvl ok">OK</span><span class="src">scheduler</span><span class="msg">overnight · 87 jobs ok</span></div> <div class="audit__line"><span class="t">23:47:00</span><span class="lvl err">ERR</span><span class="src">pager.alert</span><span class="msg">backup.cold paged on-call</span></div> </div> <aside class="marg-col"> <h4>vitals · most relevant</h4> <div class="marg-pulse"> <span class="name err">backup.cold <span class="v">— flat</span></span> <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,15 20,15 40,15 50,3 55,27 60,3 65,27 70,15 100,15" fill="none" stroke="#FF6188" stroke-width="1"/></svg> <div class="ann">since 09:42 · timeout to s3</div> </div> <div class="marg-pulse"> <span class="name warn">etl.briefing <span class="v">2118ms</span></span> <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,22 20,20 40,16 60,10 80,5 100,3" fill="none" stroke="#FFD866" stroke-width="1"/></svg> <div class="ann">4× baseline · slow query</div> </div> <div class="marg-pulse"> <span class="name">ingest.geo <span class="v">182ms</span></span> <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,14 20,13 40,15 60,13 80,14 100,13" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <div class="ann">stable · 14,201 records/h</div> </div> <div class="marg-pulse"> <span class="name">ml.score.v3 <span class="v">94ms</span></span> <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,15 20,14 40,16 60,14 80,15 100,14" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <div class="ann">stable</div> </div> <div class="marg-pulse"> <span class="name">edge.cache <span class="v">8ms</span></span> <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,15 100,15" fill="none" stroke="#A9DC76" stroke-width="1"/></svg> <div class="ann">98·2% hit · flat</div> </div> <h4>+ 9 services <span style="color:#A9DC76;">● stable</span></h4> </aside> </div> <div class="notice"><span class="lbl">Notice</span><span class="body">Log on the left, pulses on the right. <em>"What just happened?" and "how are vitals?" answered without switching context.</em></span></div> </div>
+</section> </div> <script>
+document.querySelectorAll('.option__pick').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.option__pick').forEach(b => b.classList.remove('is-picked')); btn.classList.add('is-picked'); const pick = btn.dataset.pick; btn.textContent = 'Picked · ' + pick; try { localStorage.setItem('nox-status-r2', pick); } catch(e){} });
+});
+try { const prior = localStorage.getItem('nox-status-r2'); if (prior) { const btn = document.querySelector('.option__pick[data-pick="' + prior + '"]'); if (btn) { btn.classList.add('is-picked'); btn.textContent = 'Picked · ' + prior; } }
+} catch(e){}
+</script>
+</body>
+</html>
