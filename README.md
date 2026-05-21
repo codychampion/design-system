@@ -24,7 +24,7 @@ The goal is to make design choices portable. Instead of relying on memory or vib
 | `obsidian` | Dashboards, ops tooling, personal command surfaces | A Bloomberg Terminal at 2am | dense, alert, operational |
 | `field` | Long-form writing, notes, reflective artifacts | A naturalist's field journal on a workbench | tactile, warm, archival |
 
-Each mode has a light/dark sibling: `signal` ↔ `signal-dark`, `obsidian` ↔ `obsidian-light`, and `field` ↔ `field-light`. Surfaces can toggle theme directly or accept `?theme=light|dark`.
+Each mode has a light/dark sibling: `signal` to `signal-dark`, `obsidian` to `obsidian-light`, and `field` to `field-light`. Surfaces can toggle theme directly or accept `?theme=light|dark`.
 
 ## Start here
 
@@ -62,8 +62,14 @@ Start with the gallery, pick the closest canonical surface, then modify through 
 Suggested workflow:
 
 ```text
-choose surface → create experiment → compare variants → log decision → update canonical surface
+choose surface -> create experiment -> compare variants -> log decision -> update canonical surface
 ```
+
+## Maintenance
+
+The source of truth lives in `satellites/design-system` in the private monorepo. The mirror workflow subtree-splits that directory and publishes this public repo.
+
+Do not use this repo as the canonical editing location, and do not store secrets, tokens, private notes, or unreleased personal material here.
 
 ## What this is not
 
@@ -71,6 +77,6 @@ This is not a general-purpose component library. It is not meant to be neutral, 
 
 ## License
 
-This is a personal design system. The taste is mine. The tokens, surface patterns, and refusal lists are free to learn from — copy with attribution if you find them useful.
+This is a personal design system. The taste is mine. The tokens, surface patterns, and refusal lists are free to learn from; copy with attribution if you find them useful.
 
-— cc · Dublin · MMXXVI · ◆
+cc - Dublin - MMXXVI
