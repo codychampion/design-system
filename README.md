@@ -2,7 +2,7 @@
 
 Single source of truth for `codychampion/design-system` — the public design-system repo.
 
-<!-- mirror-validated: 2026-05-21 -->
+<!-- mirror-validated: 2026-05-21 persist-credentials-fix -->
 
 ## Edit here
 
