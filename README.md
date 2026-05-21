@@ -2,6 +2,8 @@
 
 Single source of truth for `codychampion/design-system` — the public design-system repo.
 
+<!-- mirror-validated: 2026-05-21 -->
+
 ## Edit here
 
 ```bash
