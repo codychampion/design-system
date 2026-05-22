@@ -65,12 +65,6 @@ Suggested workflow:
 choose surface -> create experiment -> compare variants -> log decision -> update canonical surface
 ```
 
-## Maintenance
-
-The source of truth lives in `satellites/design-system` in the private monorepo. The mirror workflow subtree-splits that directory and publishes this public repo.
-
-Do not use this repo as the canonical editing location, and do not store secrets, tokens, private notes, or unreleased personal material here.
-
 ## What this is not
 
 This is not a general-purpose component library. It is not meant to be neutral, endlessly reusable, or brand-agnostic. It is a personal design language with enough structure to be reused and enough opinion to stay recognizable.
